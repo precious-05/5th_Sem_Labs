@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Corner</title>
+
+
+    <style>
+        body{
+            margin: 0%;
+            padding: 0%;
+            background-color: aliceblue;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        img.banner{
+            width: 100%;
+            height: 320px;
+        }
+
+        header a{
+            color: yellow;
+            text-decoration: none;
+            border: 2px solid yellow ;
+            font-size: 20px;
+            padding: 8px 20px;
+            /* top-bottom = 12px, left-right = 20px */
+            margin: 4px; /* adds the space around each anchor */
+
+        }
+
+        header a:hover
+        {
+            background-color: yellow;
+            color: rgb(188, 50, 50);         /* red text on hover */
+            box-shadow: 0 0 10px rgb(226, 132, 8); /* glowing border */
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div>
+        <img src="p1.jpg" alt="Sorry! The image could not be loaded" class="banner">
+    </div>
+    <header style="background-color: rgb(165, 47, 47); padding: 15px; margin-top: -2px; text-align: center">
+        <h1 style="color: yellow; text-shadow: 2px 2px 10px rgb(226, 132, 8); ">Pizza Menu</h1>
+        <br>
+        <a href="menu.html" target="_blank">Home</a>
+        <a href="pizza_menu.jpg"target="_blank">Menu</a>
+        <a href="deals.html"target="_blank">Deals</a>
+        <a href="#contact"target="_blank">Contact</a>
+    </header>
+
+     <!-- footer section for contact details -->
+  <footer id="contact" style="bottom: 0; position:fixed;  background-color: rgb(165, 47, 47);
+  color: yellow; width:100%">
+    <h2 style="font-weight: bold ; font-size:x-large">Contact Us</h2>
+    <p >Email: pizzacorner@example.com</p>
+    <p>Phone: +92 3899 7990</p>
+    <p>Address: 148 Pizza Street, Layyah City</p>
+  </footer>
+</body>
+</html>

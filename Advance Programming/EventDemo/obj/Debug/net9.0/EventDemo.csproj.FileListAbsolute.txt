@@ -1,0 +1,15 @@
+I:\5th_Sem_Labs\Advance Programming\EventDemo\bin\Debug\net9.0\EventDemo.exe
+I:\5th_Sem_Labs\Advance Programming\EventDemo\bin\Debug\net9.0\EventDemo.deps.json
+I:\5th_Sem_Labs\Advance Programming\EventDemo\bin\Debug\net9.0\EventDemo.runtimeconfig.json
+I:\5th_Sem_Labs\Advance Programming\EventDemo\bin\Debug\net9.0\EventDemo.dll
+I:\5th_Sem_Labs\Advance Programming\EventDemo\bin\Debug\net9.0\EventDemo.pdb
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.GeneratedMSBuildEditorConfig.editorconfig
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.AssemblyInfoInputs.cache
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.AssemblyInfo.cs
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.sourcelink.json
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.dll
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\refint\EventDemo.dll
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.pdb
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\EventDemo.genruntimeconfig.cache
+I:\5th_Sem_Labs\Advance Programming\EventDemo\obj\Debug\net9.0\ref\EventDemo.dll
