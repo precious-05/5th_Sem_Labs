@@ -8,6 +8,7 @@ USE eemcDB;
 --    with following columns and datatypes: 
 --    sid (INT), name (VARCHAR(50)), contact (CHAR(10)), 
 --    faculty (VARCHAR(50)), college_name (VARCHAR(50))  (DDL)
+
 CREATE TABLE student_info (
    sid INT,
    name VARCHAR(50),
