@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>forms</title>
+    <style>
+      body {
+        background-color: antiquewhite;
+        margin: 0;
+      }
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        border-radius: 10px;
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-top: 2px;
+        border: 1px solid #ffd7c9;
+        background: #f5f9d3;
+        width: 400px;
+        margin: 20px auto;
+      }
+      form label {
+        display: block; /* placing the each label on a new line */
+        margin: 5px 0 3px; /* spacing above and below */
+      }
+
+      header{
+        margin-bottom: -20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header style="background-color: rgb(228, 228, 54)">
+      <h1>Forms in HTML</h1>
+    </header>
+    <form action="/submit" method="post">
+      <label for="username">Username</label>
+      <!-- For mn hm id dty hn taa k pta lgy knsi input k ly use ho rha ha-->
+      <br />
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Username"
+        title="Enter Your Name. It should at least consist of 3 alphabets"
+        pattern="[A-Za-z\s]{3,}"
+        required
+      />
+
+      <br />
+      <!--  PASSWORD -->
+      <label>Password</label>
+      <br />
+      <input
+        type="password"
+        name="pwd"
+        id="pwd"
+        minlength="4"
+        maxlength="12"
+        required
+      />
+      <br />
+
+      <!-- AGE -->
+      <label for="age">Age</label> <br />
+      <input
+        type="number"
+        name="age"
+        id="age"
+        placeholder="Enter your age"
+        min="1"
+        max="100"
+        size="30"
+      />
+
+      <!--  EMAIL -->
+      <br />
+      <label for="email">Email</label>
+      <br />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Enter your email"
+        required
+      />
+     
+
+      <br />
+      <label for="radio">Gender</label>
+      <!-- Names for radio lables should be same -->
+      <input type="radio" name="gender" id="gender" />
+      <br />
+      <label for="radio">Female</label>
+      <!-- Names for radio lables should be same -->
+      <input type="radio" name="gender" id="gender" />
+      <br />
+
+      <!--   HOBBIES CHECKBOX  -->
+      <label for="Sports">HOBBIES</label>
+      <input type="checkbox" name="hobby" id="Sports" required />
+      <br />
+      <label for="Sports">Gardening</label>
+      <input type="checkbox" name="hobby" id="Sports" />
+      <br />
+      <label for="Sports">Painting</label>
+      <input type="checkbox" name="hobby" id="Sports" />
+
+      <!--   UPLOAD FILES  -->
+         <br>
+      <label for="file" >Upload your CV</label>
+      <br />
+      <br>
+      <input type="file" name="file" id="file" />
+
+      <br />
+      <br>
+      <!--   DATE AND TIME -->
+      <label for="date" >Enter Year</label>
+      <br />
+      <input type="date" name="date" id="date" />
+      
+      <br />
+      <br>
+      <label for="color">Color Picker</label>
+      <br>
+      <input type="color">
+      <br>
+
+      <label for="">Text Area</label>
+      <br>
+      <input type="textarea" cols="20" rows="40">
+
+
+      <!-- DROP-DOWN -->
+       <br>
+       <br>
+      <select name="country" id="country">
+        <option value="PAKISTAN">PAKISTAN</option>
+        <option value="INDIA">INDIA</option>
+        <option value="AFGHANISTAN">AFGHANISTAN</option>
+        <option value="USA">USA</option>
+
+      </select>
+
+
+
+
+      <!-- SUBMIT -->
+      <br />
+      <br />
+      <input type="submit" value="Submit" />
+      <br />
+      <br />
+
+      <!--   RESET BUTTON  -->
+      <input type="reset" name="reset" id="reset" />
+    </form>
+  </body>
+</html>

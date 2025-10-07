@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3rd Assignment</title>
+    <style>
+      /* ---------- General Body Styling ---------- */
+      body {
+        margin: 0; /* removes the default margin of the browser */
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif; /* set font */
+        background-color: #f9f9f9; /* light background */
+        text-align: center; /* center align text by default */
+      }
+
+      /* ---------- Header Styling ---------- */
+      header {
+        background-color: #4caf50; /* green background */
+        color: white; /* white text */
+        padding: 20px; /* SPACING inside header */
+        text-align: center; /* center align header content */
+        width: 100%;
+      }
+
+      header h1 {
+      
+        font-size: 40px; 
+        text-shadow: 2px 2px 5px #222; 
+        transition: color 0.3s ease;
+      }
+
+      header h1:hover {
+        color: yellow;
+      }
+
+      h2,h3 {
+        font-size: 40px; /* heading size */
+        text-shadow: 2px 2px 5px #222; /* adds soft shadow */
+        transition: color 0.3s ease; /* smooth hover color transition */
+      }
+      h2,h3:hover{
+         font-size: 40px; 
+        text-shadow: 2px 2px 5px #222; 
+        transition: color 0.3s ease;
+      }
+
+      /* ---------- Lists Styling ---------- */
+      ol,
+      ul {
+        list-style-position: inside; /* bullets/numbers appear inside the box */
+        text-align: center; /* center align list items */
+        display: inline-block; /* make the list behave like a block but stay inline */
+        margin: 20px auto; /* center the list with margin */
+        padding: 10px; /* space inside list container */
+        background: #fff; /* white background */
+        border: 2px solid #ddd; /* light border */
+        border-radius: 10px; /* rounded corners */
+      }
+
+      dl {
+        display: inline-block; /* center the description list block */
+        text-align: left; /* keep terms and definitions left aligned */
+        background: #fff;
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        margin: 20px auto;
+      }
+
+      /* ---------- Table Styling ---------- */
+      table {
+        border-collapse: collapse; /* removing the double borders */
+        margin: 20px auto; /* center the table */
+        width: 80%; /* table width */
+        background: #fff;
+      }
+
+      th,
+      td {
+        border: 2px solid #4caf50; /* green borders */
+        padding: 15px; /* spacing inside the cells */
+        text-align: center; 
+      }
+
+      th {
+        background: #4caf50; /* Setting the background for headings */
+        color: white; /* white text for headings */
+      }
+
+      /* ---------- Image Styling ---------- */
+      img {
+        display: block; /* makes the image block level */
+        margin: 20px auto; /* the image wil be centered */
+        border: 4px solid #4caf50; /* border around image */
+        border-radius: 10px; /* rounded corners */
+       
+      }
+
+      /* ---------- Form Styling ---------- */
+      form {
+        background: #fff;
+        padding: 20px;
+        width: 300px;
+        margin: 20px auto; /* center the form */
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        text-align: left;
+      }
+
+      form label {
+        display: block; /* each label on a new line */
+        margin: 10px 0 5px; /* spacing above and below */
+      }
+
+      form input[type="text"],
+      form input[type="email"] {
+        width: 100%; /* take full width */
+        padding: 8px;
+        margin-bottom: 10px; /* spacing between inputs */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      form input[type="submit"] {
+        background: #4caf50; /* green button */
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%; /* full width button */
+        border-radius: 5px;
+      }
+
+      form input[type="submit"]:hover {
+        background: darkgreen; /* darker button on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Favorites and Daily Routine</h1>
+    </header>
+
+    <!-- ========== Part A ========== -->
+    <!-- ==========  LISTS  =========-->
+    <section>
+      <h2>Lists</h2>
+      <h3>Favorite Subjects</h3>
+      <ol type="i">
+        <li>Mathematics</li>
+        <li>Computer Science</li>
+        <li>Statistics</li>
+        <li>Database Systems</li>
+        <li>Web Technologies</li>
+      </ol>
+
+      <h3>My Hobbies</h3>
+      <ul type="square">
+        <li>Reading Books</li>
+        <li>Cooking</li>
+        <li>Coding</li>
+        <li>Traveling</li>
+      </ul>
+
+      <h3>Computer Terms Descriptions</h3>
+      <dl>
+        <dt>HTML</dt>
+        <dd>HyperText Markup Language used to structure web pages</dd>
+
+        <dt>CSS</dt>
+        <dd>Cascading Style Sheets used to style web pages</dd>
+
+        <dt>JavaScript</dt>
+        <dd>Programming language used to make web pages interactive</dd>
+      </dl>
+    </section>
+
+    <!-- Row Span means ek cell ko neeche wali rows ke sath merge karna
+          Column Span means ek cell ko side ke columns ke sath merge karna -->
+    <section>
+      <h2>Weekly Study Timetable</h2>
+      <table>
+        <tr>
+          <th>Day</th>
+          <th>9AM - 11AM</th>
+          <th>11AM - 1PM</th>
+          <th>2PM - 4PM</th>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td rowspan="2">Mathematics</td>
+          <!-- Mon/Tue both days mathematics lectures-->
+          <td>Computer Science</td>
+          <td>Statistics</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td colspan="2">Database Systems</td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>Web Tech</td>
+          <td>Computer Science</td>
+          <td>Statistics</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Image/Hyperlinks/Forms -->
+    <section>
+      <h3>Reading Book</h3>
+      <img src="E9.jpg" alt="image not found" />
+      <h3>Wikipedia</h3>
+      <p>
+        Visit my favorite website:
+        <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>
+      </p>
+
+      <h3>Admission Form</h3>
+      <form>
+        <label for="name">Name</label>
+        <br />
+        <input type="text" name="name" placeholder="Enter Your Name" />
+        <br />
+        <br />
+        <label for="email">Email:</label><br />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your Email"
+        /><br /><br />
+        <input type="submit" value="submit" />
+      </form>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forms</title>
+</head>
+<body>
+    <form action="/submit"  method="post">
+        <label>Username</label>
+        <input type="text" id="username"  name="username" placeholder="Username"  
+        title="Enter Your Name. It should at least consist of 3 alphabets"
+        pattern="[A-Za-z/s]{3,}"  required>
+        <br>
+
+        <input type="submit"  value="Submit">
+
+    </form>
+</body>
+</html>

@@ -265,7 +265,7 @@ SELECT MIN(salary) FROM Employees;
 SELECT first_name,last_name FROM Employees WHERE salary=(SELECT MAX(salary) From Employees);
 
 -- 41. Display first_name,last_name,department,postion whose salary is less than average salary of all employees  
-SELECT first_name,last_name,department,position FROM Employees WHERE salary<(SELECT AVG(salary) FROM employee); 
+SELECT first_name,last_name,department,position FROM Employees WHERE salary<(SELECT AVG(salary) FROM Employees); 
 
 
 -- =====================  GROUP BY and HAVING clause  ==========================
@@ -297,4 +297,7 @@ UPDATE Employees
 SET salary = salary * 1.1 WHERE salary > (SELECT AVG(salary) FROM Employees);  
 
 -- 50. Delete the information of employees whose salary is less than average salary of all employees.
- delete from employee where salary < (select avg(salary) from employee); 
+ delete from Employees where salary < (select avg(salary) from Employees); 
+ 
+ 
+ -- DROP DATABASE Company;

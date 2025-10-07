@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>forms</title>
+  </head>
+  <body>
+    <form action="/submit" method="post">
+      <label for="username">Username</label>
+      <!-- For mn hm id dty hn taa k pta lgy knsi input k ly use ho rha ha-->
+      <br />
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Username"
+        title="Enter Your Name. It should at least consist of 3 alphabets"
+        pattern="[A-Za-z\s]{3,}"
+        required
+      />
+
+      <br />
+      <!--  PASSWORD -->
+      <label>Password</label>
+      <br />
+      <input
+        type="password"
+        name="pwd"
+        id="pwd"
+        minlength="4"
+        maxlength="12"
+        required
+      />
+      <br />
+
+      <!-- AGE -->
+      <label for="age">Age</label> <br />
+      <input
+        type="number"
+        name="age"
+        id="age"
+        placeholder="Enter your age"
+        min="1"
+        max="100"
+        size="30"
+      />
+
+   
+
+      <!--  EMAIL -->
+         <label for="email"></label>
+      <!--  SUBMIT BUTTON -->
+
+      <br />
+      <br />
+      <input type="submit" value="Submit" />
+      <br />
+
+      <!--   RESET BUTTON  -->
+      <input type="reset" name="reset" id="reset" />
+    </form>
+  </body>
+</html>
