@@ -1,0 +1,8 @@
+div{
+    width: 200px;
+    height: 200px;
+    /* rgb(red, green, blue*/
+    /*rgb(255,255,255)*/
+    background-color: rgb(238, 129, 89);
+    border: 4px solid blueviolet;
+}

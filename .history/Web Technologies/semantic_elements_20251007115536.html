@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Elements</title>
+    <style>
+
+        /*Removing any previous Formatting*/
+        *{
+            /*margin: 0;*/
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(237, 237, 237);
+            line-height: 1.6;
+        }
+
+        header{
+            color: rgb(125, 0, 183);
+            background: linear-gradient(to left, #ffd606, #a2fefe, #6bc7de, #ffdf6b);
+            padding: 15px;
+            text-align: center;
+        }
+        header h1{
+            font-weight: 1.6 em;
+        }
+
+        header nav{
+            text-decoration: none;
+            color: white;
+            margin-top: 10px;
+        }
+
+        header nav a{
+            padding: 10px;
+            margin: 0 5px;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: 200;
+            color: rgb(94, 0, 175);
+        }
+
+        header nav a:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        footer{
+             color: rgb(125, 0, 183);
+            background: linear-gradient(to left, #ffd606, #d2ffff, #6bc7de, #ffeaa0);
+            
+            padding: 15px;
+            text-align: center;
+        }
+
+        main{
+            display: flex;
+            padding: 20px;
+            margin: 15px;
+        }
+
+        main article{
+            box-shadow: 0 0 8px slateblue;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Machine Learning</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact Us</a>
+
+        </nav>
+    </header>
+
+
+    <main>
+        <article>
+           <h2>Nuts and Bolts of Machine Learning</h2>
+            <p>The <b><span style="color: rgb(255, 0, 0);">nuts and bolts</span></b>of machine learning (ML) refer to its fundamental principles and practical aspects, encompassing 
+                the four main types of learning (supervised, unsupervised, semi-supervised, and reinforcement) and a structured workflow including 
+                data gathering, preparation, model selection, training, evaluation, tuning, and prediction. Key components also include feature engineering,
+                 handling imbalanced datasets, and learning various algorithms like linear regression, decision trees, K-means, and Naive Bayes to build and deploy models that analyze data and make predictions.  </p>
+        </article>
+
+        <aside>
+            <ul>
+                <li><a href="#">Latest News</a></li>
+                <li><a href="#">New Technologies</a></li>
+                <li><a href="#">Innovtions</a></li>
+                <li><a href="#">Global Technologies</a></li>
+            </ul>
+        </aside>
+    </main>
+
+    <footer>
+        <p>@copy, Machine Learning, All Rights Reserved</p>
+    </footer>
+    
+</body>
+</html>
