@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMAGE GRID</title>
+    <style>
+      
+        .image-container{
+            border: 2px solid black;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        
+        
+        }
+        .images img{
+            border: 2px solid rgb(255, 159, 175);
+            width: 100%;
+            object-fit: cover;  
+        }
+        
+        .images{
+            background-color: rgba(62, 160, 212, 0.375);
+            text-align: center;
+            color: white;
+        }
+        
+        
+    </style>
+  </head>
+  <body>
+    <div class="image-container">
+      <div class="images">
+        <img src="e1.jpg" alt="Error" />
+        <div class="overlay-text">
+          <h2 style="font-size: 60px;">Earpod 1ST</h2>
+          <p style="font-size: 60px;">High Quality earpods with best sound quality</p>
+        </div>
+      </div>
+
+      <div class="images">
+        <img src="e2.jpg" alt="Error" />
+        <div class="overlay-text">
+          <h2 style="font-size: 60px;">Earpod 2ND</h2>
+          <p style="font-size: 60px;">High Quality earpods with best sound quality</p>
+        </div>
+      </div>
+
+      <div class="images">
+        <img src="e4.jpg" alt="Error" />
+        <div class="overlay-text">
+          <h2 style="font-size: 60px;">Earpod 3RD</h2>
+          <p style="font-size: 60px;">High Quality earpods with best sound quality</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

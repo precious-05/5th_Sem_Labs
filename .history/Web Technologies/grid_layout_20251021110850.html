@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout</title> <!-- ARRANGES IN HORIZONTAL / VERTICAL -->
+
+    <style>
+        .wrapper{
+            display: grid;
+             border: 2px solid rgb(255, 41, 41);
+             /*grid-template-columns: 200px 200px 300px;*/     /* Here the 100px 100 px means there are 2 columns , and as much as we want*/
+             /*grid-auto-rows: 100px;*/
+             /*grid-template-columns: 1fr 2fr 3fr 8fr;*/  /* fr means free space, It does not need hard coding auto arranges*/ 
+             column-gap: 20px;
+             row-gap: 20px;
+             grid-template-columns: repeat(3,1fr);
+             /*gap: 15px;*/    /*It sets equal gap of row and columns*/
+             /*grid-template-columns: 100px repeat(3, 1fr);*/
+        }
+        .div1{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 204, 0), rgb(0, 255, 174) );
+        }
+
+        .div2{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 89, 0), rgb(13, 0, 255) );
+        }
+
+        .div3{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(155, 2, 122), rgb(167, 255, 227) );
+        }
+         .div4{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(56, 49, 23), rgb(127, 166, 153) );
+            color: white;
+        }
+
+        .div5{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 89, 0), rgb(13, 0, 255) );
+        }
+
+        .div6{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(155, 2, 122), rgb(167, 255, 227) );
+        }
+         .div7{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 204, 0), rgb(0, 255, 174) );
+        }
+
+        .div8{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 89, 0), rgb(13, 0, 255) );
+        }
+
+        .div9{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(155, 2, 122), rgb(167, 255, 227) );
+        }
+
+        .div10{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 115, 225), rgb(255, 181, 147) );
+        }
+    </style>
+</head>
+<body3>
+  <div class="wrapper"> <!-- PARENT DIV--> 
+        <div class="div1">Item 1</div>     <!-- DIV IS A BLOCK ELEMENT -->
+        <div class="div2">Item 2</div> 
+        <div class="div3">Item 3</div>
+        <div class="div4">Item 4</div>     <!-- DIV IS A BLOCK ELEMENT -->
+        <div class="div5">Item 5</div> 
+        <div class="div6">Item 6</div>
+        <div class="div7">Item 7</div>     <!-- DIV IS A BLOCK ELEMENT -->
+        <div class="div8">Item 8</div> 
+        <div class="div9">Item 9</div>
+        <div class="div10">Item 10</div>
+  </div>
+  </body>
+</html>

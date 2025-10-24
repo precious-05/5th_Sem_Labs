@@ -49,14 +49,14 @@ DELIMITER ; */
 
 
 DELIMITER //
-CREATE PROCEDURE fetch_all()
+CREATE PROCEDURE l_join()
 BEGIN
-SELECT * FROM Employee;
+SELECT e.emp_id, e.emp_name, e.position FROM Employee E 
+RIGHT JOIN Department D ON e.dept_id=d.dept_id WHERE e.emp_name REGEXP '^[a-d]';
 END //
 DELIMITER ;
-
-
-CALL fetch_all();
+-- DROP PROCEDURE l_join;
+CALL l_join;
 
 
 DELIMITER //
@@ -108,4 +108,4 @@ WHERE salary>20000;
 
 
 
-
+-- DROP DATABASE Institute;

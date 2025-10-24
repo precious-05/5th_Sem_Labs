@@ -1,0 +1,11 @@
+I:\5th_Sem_Labs\C_Sharp2\bin\Debug\C_Sharp2.exe.config
+I:\5th_Sem_Labs\C_Sharp2\bin\Debug\C_Sharp2.exe
+I:\5th_Sem_Labs\C_Sharp2\bin\Debug\C_Sharp2.pdb
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.csproj.AssemblyReference.cache
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.Form1.resources
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.Properties.Resources.resources
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.csproj.GenerateResource.cache
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.exe
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.pdb
+I:\5th_Sem_Labs\C_Sharp2\obj\Debug\C_Sharp2.exe.config

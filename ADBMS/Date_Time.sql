@@ -141,3 +141,101 @@ SELECT * FROM Emp_time;
 
 DROP TABLE Emp_time;  -- Removes the table permanently
 SELECT * FROM Emp_time;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- ========================================
+-- DATE       → Format: YYYY-MM-DD
+-- DATETIME   → Format: YYYY-MM-DD HH:MI:SS
+-- TIMESTAMP  → Format: YYYY-MM-DD HH:MI:SS
+-- YEAR       → Format: YYYY or YY
+-- TIME       → Format: hh:mm:ss
+
+-- Commonly used functions:
+-- CURDATE() → Returns current date
+-- DATEDIFF(date1, date2) → Returns difference (in days)
+-- TIMEDIFF(time1, time2) → Returns time difference
+
+-- ========================================
+-- PROBLEM 1: ORDERS TABLE IMPLEMENTATION
+-- ========================================
+
+-- 1. Create the Orders table
+
+-- 2. Insert 8 rows into Orders table
+
+-- ========================================
+-- QUERIES & SOLUTIONS
+-- ========================================
+
+-- 3) Retrieve all orders placed on '2023-07-15'
+
+-- 4) Find number of days required to deliver 'Shoes'
+
+-- 5) Find all orders received between '2023-07-15' and '2023-07-25'
+
+-- 6) Find all orders received today
+
+-- 7) Calculate average delivery time (in days)
+
+-- ========================================
+-- NOTE:
+-- MySQL supports only 2 parameters in DATEDIFF(date1, date2)
+-- Returns result in DAYS (date1 - date2)
+-- ========================================
+
+-- 8) Find the number of months required to deliver smartphone
+-- (MySQL will only return days, not months)
+
+-- In MS SQL Server we could use:
+-- SELECT DATEDIFF(month, order_date, delivery_date) AS delivery_months FROM Orders;
+
+-- 9) Find products requiring more than 2 months to deliver
+-- (MySQL version - estimate months using days/30)
+
+-- 10) Find products requiring more than 3 weeks to deliver
+
+-- 11) Find products requiring more than 1 year to deliver
+
+-- ========================================
+-- PROBLEM 2: EMP_TIME TABLE
+-- ========================================
+
+-- i) Create Emp_time table
+
+-- ii) Insert records
+
+-- iii) Select all employees and their total working hours
+
+-- iii) Select all employees and their total working hours
+
+-- iv) Find employees with least working hours
+
+-- v) Find employees with longest working hours
+
+-- vi) Select employee who worked longest hours
+
+-- vii) Find employees who worked more than 7 hours
+
+-- viii) Display employee(s) whose name starts with 'M' and worked more than 7 hours
+
+-- ix) Delete all records (to insert new data later)
+-- table will still exist
+
+-- Removes the table permanently

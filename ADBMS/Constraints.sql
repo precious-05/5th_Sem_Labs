@@ -31,7 +31,6 @@ ALTER TABLE customers
 ALTER address SET DEFAULT 'bhaktapur';
 
 -- 4. INSERTING RECORDS (Testing Constraints)
--- Valid insertions
 INSERT INTO customers 
 VALUES (1, 'ram', 'ram@gmail.com', 22, 'kathmandu');
 
@@ -40,7 +39,7 @@ VALUES (2, 'sita', 'sita@gmail.com', 25, 'pokhara');
 
 -- Violates PRIMARY KEY constraint (duplicate ID)
 INSERT INTO customers 
-VALUES (2, 'gita', 'gita@gmail.com', 26, 'butwal');
+VALUES (2, 'gita', 'gita@gmail.com', 26, 'butwal');          -- CHECK TABLE gita is not added due to constraint voilation
 
 -- Violates NOT NULL constraint (missing 'name')
 INSERT INTO customers (customer_id, email, age, address)
@@ -100,6 +99,8 @@ INSERT INTO orders VALUES (8, 'Laptop', 158000, 6);
 -- View all records in orders table
 SELECT * FROM orders;
 
+
+-- DROP DATABASE customers_db;
 
 
 

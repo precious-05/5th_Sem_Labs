@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMAGE GRID</title>
+    <style>
+        .image-container{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 100px;
+        }
+
+        .images{
+            display: flex;
+        }
+
+        #1{
+            width: 10px;
+            height: 10px;
+        }
+        
+    </style>
+  </head>
+  <body>
+    <div class="image-container">
+      <div class="images">
+        <div id="1">
+          <img src="e1.jpg" alt="Error" />
+          <div class="text-overlay"><h2>Earpod 2ND</h2> <p>High Quality earpods with best sound quality</p></div>
+        </div>
+      </div>
+
+      <div class="images">
+        <div id="2"><img src="e2.jpg" alt="Error" /></div>
+        <div class="text-overlay"><h2>Earpod 2ND</h2> <p>High Quality earpods with best sound quality</p></div>
+      </div>
+      <div class="images">
+        <div id="3"><img src="e4.jpg" alt="Error" /></div>
+        <div class="text-overlay"><h2>Earpod 3RD</h2> <p>High Quality earpods with best sound quality</p></div>
+      </div>
+    </div>
+  </body>
+</html>

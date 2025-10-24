@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout</title> <!-- ARRANGES IN HORIZONTAL / VERTICAL -->
+
+    <style>
+        .wrapper{
+            display: grid;
+             border: 2px solid rgb(255, 41, 41);
+             grid-template-columns: 200px 200px 300px;     /* Here the 100px 100 px means there are 2 columns , and as much as we want*/
+             grid-auto-rows: 100px;
+        }
+        .div1{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 204, 0), rgb(0, 255, 174) );
+        }
+
+        .div2{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(255, 89, 0), rgb(13, 0, 255) );
+        }
+
+        .div3{
+            border: 2px solid rgb(255, 204, 0);
+            background: linear-gradient(to right, rgb(155, 2, 122), rgb(167, 255, 227) );
+        }
+    </style>
+</head>
+<body3>
+  <div class="wrapper"> <!-- PARENT DIV--> 
+        <div class="div1">Item 1</div>     <!-- DIV IS A BLOCK ELEMENT -->
+        <div class="div2">Item 2</div> 
+        <div class="div3">Item 3</div>
+  </div>
+</body3
+</html>
