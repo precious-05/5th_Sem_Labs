@@ -1,0 +1,39 @@
+<input type="number" id="num1" placeholder="Enter your obtained marks">
+
+<button onclick="display()">Calculate</button>
+
+<script>
+    function display(){
+        let num1 = Number(document.getElementById('num1').value);
+        // let num2 = Number(document.getElementById('num2').value);
+        let grade= 'none'
+        // let sum = num1+num2
+        // window.alert("The total sum of both numbers is: " + sum)
+
+
+        if (num1>=90 && num1<101) 
+        {
+            grade= 'A'
+        }
+
+        else if(num1>=80)
+     {
+        grade= 'B'
+     } 
+
+     else if(num1>=60)
+     {
+        grade= 'C'
+     }
+
+     else
+     {
+        console.log("Invalid Number")
+     }
+
+     window.alert(`Your Grade is ${grade}`)
+        
+        
+    }
+
+</script>

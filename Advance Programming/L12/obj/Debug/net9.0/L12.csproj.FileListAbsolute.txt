@@ -1,0 +1,15 @@
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.GeneratedMSBuildEditorConfig.editorconfig
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.AssemblyInfoInputs.cache
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.AssemblyInfo.cs
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.sourcelink.json
+I:\5th_Sem_Labs\Advance Programming\L12\bin\Debug\net9.0\L12.exe
+I:\5th_Sem_Labs\Advance Programming\L12\bin\Debug\net9.0\L12.deps.json
+I:\5th_Sem_Labs\Advance Programming\L12\bin\Debug\net9.0\L12.runtimeconfig.json
+I:\5th_Sem_Labs\Advance Programming\L12\bin\Debug\net9.0\L12.dll
+I:\5th_Sem_Labs\Advance Programming\L12\bin\Debug\net9.0\L12.pdb
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.dll
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\refint\L12.dll
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.pdb
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\L12.genruntimeconfig.cache
+I:\5th_Sem_Labs\Advance Programming\L12\obj\Debug\net9.0\ref\L12.dll

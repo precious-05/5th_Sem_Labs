@@ -1,0 +1,51 @@
+<header style="background-color: black; color: rgb(247, 247, 19)"><h1 style="text-align: center"> Calculator</h1></header>
+
+
+
+
+<h2 style="text-align: center; color: black"> Calculate your results</h2>
+<hr>
+
+<div style="margin: auto 50px; border: 2px solid #ffc935; border-radius: 4px; background-color: #ffff; box-shadow:#ffc935; padding: 50px">
+    <input type="number" id="num1" placeholder="Enter 1st number">
+    <br>
+    <input type="number" id="num2" placeholder="Enter 2nd number">
+    <button onclick="add()"  style="background-color: rgb(218, 50, 50); color: white; font-weight: bold;">Add</button>
+    <button onclick="subtract()"   style="background-color: rgb(218, 50, 50); color: white; font-weight: bold;">Subtract</button>
+    <button onclick="multiply()"   style="background-color: rgb(218, 50, 50); color: white; font-weight: bold;">Multiply</button>
+    <button onclick="divide()"   style="background-color: rgb(218, 50, 50); color: white; font-weight: bold;">Divide</button>
+    <h2 id="result"></h2>
+
+</div>
+
+<script>
+    function add(){
+        let num1 = Number(document.getElementById('num1').value);
+        let num2 = Number(document.getElementById('num2').value);
+        let sum = num1+num2
+        window.alert(`Sum of numbers is: ${sum}`)
+    }
+
+    function subtract(){
+        let num1 = Number(document.getElementById('num1').value);
+        let num2 = Number(document.getElementById('num2').value);
+        let sub = num1-num2
+        window.alert(`Subtraction of numbers is: ${sub}`)
+
+    }
+
+    function multiply(){
+        let num1 = Number(document.getElementById('num1').value);
+        let num2 = Number(document.getElementById('num2').value);
+        let mul = num1*num2
+        window.alert(`Multiplication of numbers is: ${mul}`)
+    }
+
+    function divide(){
+        let num1 = Number(document.getElementById('num1').value);
+        let num2 = Number(document.getElementById('num2').value);
+        let divide = num1/num2
+        window.alert(`Division of numbers is: ${divide}`)
+    }
+
+</script>

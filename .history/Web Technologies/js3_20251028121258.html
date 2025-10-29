@@ -1,0 +1,63 @@
+<header style="background-color: black; color: rgb(247, 247, 19)"><h1 style="text-align: center"> Calculator</h1></header>
+
+
+
+
+<h2 style="text-align: center; color: black"> Calculate your results</h2>
+<hr>
+
+<div style="margin: auto 50px; border: 2px solid #ffc935; border-radius: 4px; background-color: #ffff; box-shadow:#ffc935">
+    <input type="number" id="num1" placeholder="Enter 1st number">
+    <input type="number" id="num2" placeholder="Enter 2nd number">
+    <button onclick="display()"  style="background-color: rgb(218, 50, 50)">Add</button>
+    <button onclick="display()">Subtract</button>
+    <button onclick="display()">Multiply</button>
+    <button onclick="display()">Divide</button>
+
+</div>
+
+<script>
+    function add(){
+        let num1 = Number(document.getElementById('num1').value);
+        let num2 = Number(document.getElementById('num2').value);
+        let grade= 'none'
+        // let sum = num1+num2
+        // window.alert("The total sum of both numbers is: " + sum)
+
+
+        if (num1>=90 && num1<101) 
+        {
+            grade= 'A'
+        }
+
+        else if(num1>=80)
+     {
+        grade= 'B'
+     } 
+
+     else if(num1>=60)
+     {
+        grade= 'C'
+     }
+
+     else
+     {
+        console.log("Invalid Number")
+     }
+
+     window.alert(`Your Grade is ${grade}`)
+    }
+
+    function subtract(){
+
+    }
+
+    function multiply(){
+
+    }
+
+    function divide(){
+
+    }
+
+</script>

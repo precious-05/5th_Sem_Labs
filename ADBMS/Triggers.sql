@@ -37,6 +37,7 @@ CREATE TABLE Orders (
 );
 
 
+
 -- Step 4:
 -- Create a trigger named "check_inventory_level" on the "Items" table.
 -- The trigger will execute AFTER an UPDATE event.
@@ -89,7 +90,7 @@ END;
 
 -- Step 5:
 -- Update inventory levels of some items to test the trigger.
--- For example, reduce Item A’s stock below its minimum level 
+-- For example, reduce Item A's stock below its minimum level 
 -- to check if the trigger generates a new order automatically.
 UPDATE Items
 SET InventoryLevel = 3
@@ -150,57 +151,3 @@ SELECT * FROM Items;
 
 
 
--- Trigger ek automatic program hota hai jo tab chalta hai jab koi specific event (INSERT, UPDATE, DELETE) kisi table par hoti hai
--- Agar hmary "Items" table mn kisi product ka stock update hota hai, aur hm chahen k agar stock 5 se kam ho jaye to automatically
--- "Orders" table mn ek new order record insert ho jaye to ye kaam trigger karega
-
--- Step 1:
--- Create a table named "Items" to store item details such as 
--- item ID, name, inventory level, and minimum stock level.
-
--- Step 2:
--- Insert some sample records into the "Items" table to represent 
--- the current stock levels and minimum required levels of items.
-
--- Step 3:
--- Create another table named "Orders" to store records of 
--- automatically generated orders whenever stock falls below 
--- the minimum level.
-
--- Step 4:
--- Create a trigger named "check_inventory_level" on the "Items" table.
--- The trigger will execute AFTER an UPDATE event.
--- It will compare the current inventory level with the minimum level.
--- If the inventory falls below the minimum level, 
--- it will automatically insert a new order record into the "Orders" table.
-
--- ROW LEVEL TRIGGER
--- NEW.InventoryLevel → us row ka updated inventory level
--- NEW.MinimumLevel → us row ka updated minimum level
--- NEW.ItemID → usi row ka ItemID (jo Items table me already hai)
--- CURDATE() is a built-in MySQL function that returns the current date (today’s date) from the system.
-
--- Step 5:
--- Update inventory levels of some items to test the trigger.
--- For example, reduce Item A’s stock below its minimum level 
--- to check if the trigger generates a new order automatically.
-
--- Item A falls below minimum level
--- Item B remains above minimum level
-
--- Step 6:
--- Display all records from the "Orders" table using a SELECT statement 
--- to verify that the trigger worked correctly.
-
--- ======================= DISCUSSION =========================
--- After updating Item A’s stock, the trigger automatically inserted 
--- a new record into the "Orders" table because its inventory 
--- was below the defined minimum level.
--- For Item B, no order was created since its inventory was still above the minimum level.
-
--- ======================= CONCLUSION =========================
--- Triggers help automate repetitive or conditional tasks in a database.
--- They ensure data integrity and can perform actions such as generating 
--- alerts, inserting logs, or maintaining consistency across tables.
-
--- *********************** THE END ****************************
