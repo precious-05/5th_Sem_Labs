@@ -1,0 +1,50 @@
+﻿@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4 auth">
+            @if (IsAuthenticated)
+            {
+                <a href="javascript:void(0)" @onclick="Logout" class="btn btn-outline-danger btn-sm">
+                    Logout @CurrentUser
+                </a>
+            }
+            else
+            {
+                <a href="/login" class="btn btn-primary btn-sm">Login</a>
+            }
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private bool IsAuthenticated => !string.IsNullOrEmpty(CurrentUser);
+    private string CurrentUser = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Check if user is in URL (simple auth)
+        var uri = NavigationManager.Uri;
+        if (uri.Contains("user="))
+        {
+            var userParam = System.Web.HttpUtility.ParseQueryString(new Uri(uri).Query)["user"];
+            CurrentUser = userParam ?? string.Empty;
+        }
+    }
+
+    private void Logout()
+    {
+        CurrentUser = string.Empty;
+        NavigationManager.NavigateTo("/login", true);
+    }
+
+    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+}

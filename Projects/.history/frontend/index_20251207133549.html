@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThyroScan Pro | AI-Powered Thyroid Diagnosis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="pulse"></div>
+            <span>Loading ThyroScan Pro...</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-stethoscope heartbeat"></i>
+                <div class="logo-text">
+                    <h1>ThyroScan<span class="gradient-text">Pro</span></h1>
+                    <p class="tagline">AI-Powered Thyroid Diagnosis</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="predict.html" class="nav-link">
+                    <i class="fas fa-brain"></i>
+                    <span>Predict</span>
+                </a>
+                <a href="history.html" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="#features" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span>Features</span>
+                </a>
+                <a href="#about" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="predict.html" class="btn-primary">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Start Analysis</span>
+                </a>
+            </div>
+            
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>HIPAA Compliant</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="gradient-text">Advanced AI</span> for<br>
+                    Thyroid Disease<br>
+                    <span class="highlight">Prediction & Analysis</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Leveraging Machine Learning with 83% accuracy on 300,000+ clinical records 
+                    for early detection of thyroid disorders.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card pulse">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h3>83<span class="percent">%</span></h3>
+                            <p>Prediction Accuracy</p>
+                        </div>
+                    </div>
+                    <div class="stat-card pulse">
+                        <i class="fas fa-database"></i>
+                        <div>
+                            <h3>300<span class="k">K+</span></h3>
+                            <p>Clinical Records</p>
+                        </div>
+                    </div>
+                    <div class="stat-card pulse">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>< 2<span class="sec">s</span></h3>
+                            <p>Analysis Time</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-actions">
+                    <a href="predict.html" class="btn-glow">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Start Free Analysis</span>
+                    </a>
+                    <a href="#features" class="btn-outline">
+                        <i class="fas fa-play"></i>
+                        <span>View Features</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="floating-card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Real-time Analysis</h4>
+                            <p>Instant Results</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-preview">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&auto=format&fit=crop" alt="Medical Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Slider Section -->
+    <section class="slider-section" id="features">
+        <div class="section-header">
+            <h2 class="section-title">Advanced Thyroid Imaging</h2>
+            <p class="section-subtitle">Visual analysis and diagnostic support through medical imaging</p>
+        </div>
+        
+        <div class="swiper-container">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="slide-card">
+                            <div class="slide-image">
+                                <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&auto=format&fit=crop" alt="Thyroid Ultrasound">
+                                <div class="slide-overlay">
+                                    <h3>Ultrasound Imaging</h3>
+                                    <p>High-resolution thyroid nodule detection</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <i class="fas fa-wave-square"></i>
+                                <h4>Ultrasound Analysis</h4>
+                                <p>AI-powered nodule detection and characterization</p>
+                                <a href="#" class="slide-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="slide-card">
+                            <div class="slide-image">
+                                <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&auto=format&fit=crop" alt="Thyroid Scan">
+                                <div class="slide-overlay">
+                                    <h3>Nuclear Scan</h3>
+                                    <p>Functional thyroid assessment</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <i class="fas fa-atom"></i>
+                                <h4>Nuclear Medicine</h4>
+                                <p>Radioactive iodine uptake and scan analysis</p>
+                                <a href="#" class="slide-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="slide-card">
+                            <div class="slide-image">
+                                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&auto=format&fit=crop" alt="Medical Dashboard">
+                                <div class="slide-overlay">
+                                    <h3>Anatomical View</h3>
+                                    <p>Thyroid gland structure</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <i class="fas fa-lungs"></i>
+                                <h4>Anatomy Guide</h4>
+                                <p>Detailed thyroid anatomy and physiology</p>
+                                <a href="#" class="slide-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide">
+                        <div class="slide-card">
+                            <div class="slide-image">
+                                <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=800&auto=format&fit=crop" alt="Medical Lab">
+                                <div class="slide-overlay">
+                                    <h3>Laboratory Analysis</h3>
+                                    <p>Blood test and biomarker analysis</p>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <i class="fas fa-flask"></i>
+                                <h4>Lab Tests</h4>
+                                <p>Comprehensive thyroid function tests</p>
+                                <a href="#" class="slide-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="swiper-button-next">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="swiper-button-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2 class="section-title">Why Choose ThyroScan Pro?</h2>
+            <p class="section-subtitle">Comprehensive thyroid analysis powered by artificial intelligence</p>
+        </div>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI-Powered Analysis</h3>
+                <p>Advanced machine learning algorithms trained on 300,000+ clinical records</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> 83% Prediction Accuracy</li>
+                    <li><i class="fas fa-check"></i> Real-time Processing</li>
+                    <li><i class="fas fa-check"></i> Continuous Learning</li>
+                </ul>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Visual Analytics</h3>
+                <p>Interactive charts and graphs for comprehensive data visualization</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Risk Assessment Charts</li>
+                    <li><i class="fas fa-check"></i> Trend Analysis</li>
+                    <li><i class="fas fa-check"></i> Comparative Reports</li>
+                </ul>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure & Private</h3>
+                <p>HIPAA compliant data protection with end-to-end encryption</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Patient Data Encryption</li>
+                    <li><i class="fas fa-check"></i> Secure Cloud Storage</li>
+                    <li><i class="fas fa-check"></i> Audit Trail</li>
+                </ul>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-medical-alt"></i>
+                </div>
+                <h3>Comprehensive Reports</h3>
+                <p>Detailed PDF reports with medical recommendations</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Printable Reports</li>
+                    <li><i class="fas fa-check"></i> Doctor Consultation Notes</li>
+                    <li><i class="fas fa-check"></i> Follow-up Recommendations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="about">
+        <div class="section-header">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simple 3-step process for thyroid health analysis</p>
+        </div>
+        
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <h3>Enter Clinical Data</h3>
+                <p>Input patient's clinical parameters including age, TSH levels, family history, and other relevant factors</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI Analysis</h3>
+                <p>Our machine learning model processes the data using logistic regression algorithm with 83% accuracy</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Get Results</h3>
+                <p>Receive comprehensive report with risk percentage, visual charts, and medical recommendations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <div class="cta-content">
+                <h2>Ready to Analyze Your Thyroid Health?</h2>
+                <p>Get instant AI-powered analysis with 83% accuracy. No registration required.</p>
+                
+                <div class="cta-stats">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h3>1,250+</h3>
+                            <p>Successful Analyses</p>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-thumbs-up"></i>
+                        <div>
+                            <h3>94%</h3>
+                            <p>User Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="predict.html" class="btn-cta">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Start Free Analysis Now</span>
+                </a>
+            </div>
+            
+            <div class="cta-image">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop" alt="Doctor Consultation">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-stethoscope"></i>
+                    <div>
+                        <h3>ThyroScan<span>Pro</span></h3>
+                        <p>AI-Powered Thyroid Diagnosis</p>
+                    </div>
+                </div>
+                <p class="footer-description">
+                    Advanced machine learning system for thyroid disease prediction and analysis.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-researchgate"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="predict.html"><i class="fas fa-brain"></i> Predict</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Technology</h4>
+                <div class="tech-stack">
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">Scikit-learn</span>
+                    <span class="tech-badge">MongoDB</span>
+                    <span class="tech-badge">Plotly</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">HTML/CSS</span>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> support@thyroscan.ai</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Medical AI Research Center</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 ThyroScan Pro. All rights reserved. | Academic Project - University Semester</p>
+            <p class="disclaimer">
+                <i class="fas fa-exclamation-triangle"></i>
+                This tool is for educational and research purposes only. Not for medical diagnosis.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

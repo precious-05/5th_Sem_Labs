@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History - ThyroScan AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+
+    
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h1>ThyroScan <span class="ai-text">AI</span></h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="predict.html"><i class="fas fa-brain"></i> Predict</a>
+                <a href="history.html" class="active"><i class="fas fa-history"></i> History</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+            
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">
+                    <span class="gradient-text">Prediction</span> History
+                </h1>
+                <p class="page-subtitle">
+                    Track and manage all your previous thyroid risk assessments and analyses
+                </p>
+                <div class="header-stats">
+                    <div class="header-stat">
+                        <i class="fas fa-database"></i>
+                        <span id="totalPredictions">Loading...</span>
+                    </div>
+                    <div class="header-stat">
+                        <i class="fas fa-chart-pie"></i>
+                        <span id="avgRiskScore">--</span>
+                    </div>
+                    <div class="header-stat">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="lastUpdated">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main History Section -->
+    <section class="history-main">
+        <div class="container">
+            <!-- Controls & Filters -->
+            <div class="history-controls">
+                <div class="controls-left">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="historySearch" placeholder="Search predictions...">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="filterRisk" class="filter-select">
+                            <option value="">All Risk Levels</option>
+                            <option value="low">Low Risk (0-30%)</option>
+                            <option value="medium">Medium Risk (31-69%)</option>
+                            <option value="high">High Risk (70-100%)</option>
+                        </select>
+                        
+                        <select id="filterDate" class="filter-select">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                        
+                        <select id="filterPrediction" class="filter-select">
+                            <option value="">All Predictions</option>
+                            <option value="benign">Benign Only</option>
+                            <option value="malignant">Malignant Only</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="controls-right">
+                    <button id="refreshHistory" class="btn-secondary btn-icon">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                    
+                    <button id="exportHistory" class="btn-secondary btn-icon">
+                        <i class="fas fa-file-export"></i>
+                        Export
+                    </button>
+                    
+                    <button id="clearHistory" class="btn-danger btn-icon">
+                        <i class="fas fa-trash-alt"></i>
+                        Clear All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="history-summary">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="totalCount">0</h3>
+                        <p>Total Predictions</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="benignCount">0</h3>
+                        <p>Benign Cases</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="malignantCount">0</h3>
+                        <p>Malignant Cases</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="avgRisk">0%</h3>
+                        <p>Average Risk</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Content -->
+            <div class="history-content">
+                <!-- List View -->
+                <div class="history-view-toggle">
+                    <button class="view-toggle-btn active" data-view="list">
+                        <i class="fas fa-list"></i>
+                        List View
+                    </button>
+                    <button class="view-toggle-btn" data-view="grid">
+                        <i class="fas fa-th-large"></i>
+                        Grid View
+                    </button>
+                </div>
+
+                <!-- History List (Default View) -->
+                <div class="history-list active" id="listView">
+                    <div class="history-table-header">
+                        <div class="header-cell">Date & Time</div>
+                        <div class="header-cell">Patient Info</div>
+                        <div class="header-cell">Risk Score</div>
+                        <div class="header-cell">Prediction</div>
+                        <div class="header-cell">Key Factors</div>
+                        <div class="header-cell">Actions</div>
+                    </div>
+                    
+                    <div class="history-table-body" id="historyTableBody">
+                        <!-- Loading State -->
+                        <div class="loading-state" id="historyLoading">
+                            <div class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                            <p>Loading prediction history...</p>
+                        </div>
+                        
+                        <!-- Empty State (Hidden initially) -->
+                        <div class="empty-state hidden" id="historyEmpty">
+                            <div class="empty-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <h3>No Prediction History</h3>
+                            <p>Make your first prediction to see history here</p>
+                            <a href="predict.html" class="btn-primary">
+                                <i class="fas fa-brain"></i>
+                                Make First Prediction
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="history-pagination hidden" id="historyPagination">
+                        <button class="pagination-btn" id="prevPage" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="page-numbers" id="pageNumbers"></div>
+                        <button class="pagination-btn" id="nextPage">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid View (Hidden initially) -->
+                <div class="history-grid hidden" id="gridView">
+                    <div class="grid-container" id="historyGrid">
+                        <!-- Cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div class="history-analytics">
+                <div class="analytics-header">
+                    <h3>
+                        <i class="fas fa-chart-line"></i>
+                        Risk Trends Analysis
+                    </h3>
+                    <p>Visual overview of your prediction history</p>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="analytics-card-header">
+                            <h4>Risk Distribution</h4>
+                            <select id="distributionPeriod" class="small-select">
+                                <option value="all">All Time</option>
+                                <option value="month">Last Month</option>
+                                <option value="week">Last Week</option>
+                            </select>
+                        </div>
+                        <div class="distribution-chart" id="distributionChart">
+                            <!-- Chart will be created by JavaScript -->
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-pie"></i>
+                                <p>Risk distribution chart will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="analytics-card-header">
+                            <h4>Risk Over Time</h4>
+                            <select id="trendPeriod" class="small-select">
+                                <option value="month">Last Month</option>
+                                <option value="quarter">Last 3 Months</option>
+                                <option value="year">Last Year</option>
+                            </select>
+                        </div>
+                        <div class="trend-chart" id="trendChart">
+                            <!-- Chart will be created by JavaScript -->
+                            <div class="chart-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Risk trend chart will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detail Modal -->
+    <div class="detail-modal hidden" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container large-modal">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-file-medical-alt"></i>
+                    Prediction Details
+                </h2>
+                <button class="modal-close" id="closeDetailModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="detail-header">
+                    <div class="detail-risk-score">
+                        <div class="detail-risk-circle">
+                            <div class="score-circle">
+                                <div class="circle-progress">
+                                    <svg width="120" height="120">
+                                        <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="6"/>
+                                        <circle cx="60" cy="60" r="54" fill="none" stroke="url(#gradient)" 
+                                                stroke-width="6" stroke-linecap="round" 
+                                                stroke-dasharray="339" stroke-dashoffset="239"/>
+                                    </svg>
+                                    <div class="score-content">
+                                        <span id="detailRiskPercentage" class="score-value">0%</span>
+                                        <span class="score-label">Risk</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-risk-info">
+                            <h3 id="detailPrediction">Prediction</h3>
+                            <p class="detail-date" id="detailDate">Date: --</p>
+                            <div class="detail-badges">
+                                <span class="detail-badge" id="detailRiskLevel">--</span>
+                                <span class="detail-badge" id="detailConfidence">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-tabs">
+                    <button class="tab-btn active" data-tab="parameters">
+                        <i class="fas fa-clipboard-list"></i>
+                        Clinical Parameters
+                    </button>
+                    <button class="tab-btn" data-tab="factors">
+                        <i class="fas fa-key"></i>
+                        Risk Factors
+                    </button>
+                    <button class="tab-btn" data-tab="recommendations">
+                        <i class="fas fa-clipboard-check"></i>
+                        Recommendations
+                    </button>
+                    <button class="tab-btn" data-tab="report">
+                        <i class="fas fa-file-pdf"></i>
+                        Full Report
+                    </button>
+                </div>
+
+                <div class="tab-content active" id="parametersTab">
+                    <div class="parameters-grid">
+                        <div class="parameter-section">
+                            <h4>Basic Information</h4>
+                            <div class="parameter-list">
+                                <div class="parameter-item">
+                                    <span class="param-label">Age</span>
+                                    <span class="param-value" id="detailAge">--</span>
+                                </div>
+                                <div class="parameter-item">
+                                    <span class="param-label">Gender</span>
+                                    <span class="param-value" id="detailGender">--</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-section">
+                            <h4>Hormone Levels</h4>
+                            <div class="parameter-list">
+                                <div class="parameter-item">
+                                    <span class="param-label">TSH Level</span>
+                                    <span class="param-value" id="detailTSH">--</span>
+                                </div>
+                                <div class="parameter-item">
+                                    <span class="param-label">T3 Level</span>
+                                    <span class="param-value" id="detailT3">--</span>
+                                </div>
+                                <div class="parameter-item">
+                                    <span class="param-label">T4 Level</span>
+                                    <span class="param-value" id="detailT4">--</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-section">
+                            <h4>Nodule & Risk</h4>
+                            <div class="parameter-list">
+                                <div class="parameter-item">
+                                    <span class="param-label">Nodule Size</span>
+                                    <span class="param-value" id="detailNodule">--</span>
+                                </div>
+                                <div class="parameter-item">
+                                    <span class="param-label">Cancer Risk Score</span>
+                                    <span class="param-value" id="detailCancerRisk">--</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="parameter-section">
+                            <h4>Risk Factors</h4>
+                            <div class="parameter-list">
+                                <div class="parameter-item" id="detailFactorsList">
+                                    <!-- Risk factors will be populated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="factorsTab">
+                    <div class="factors-analysis">
+                        <h4>Top Contributing Factors</h4>
+                        <div class="factors-chart" id="detailFactorsChart">
+                            <!-- Chart will be populated -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="recommendationsTab">
+                    <div class="recommendations-list">
+                        <h4>Medical Recommendations</h4>
+                        <ul id="detailRecommendations">
+                            <!-- Recommendations will be populated -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="reportTab">
+                    <div class="report-preview">
+                        <h4>Full Report Preview</h4>
+                        <div class="report-content" id="reportContent">
+                            <!-- Report will be generated -->
+                        </div>
+                        <div class="report-actions">
+                            <button class="btn-secondary" id="printReport">
+                                <i class="fas fa-print"></i>
+                                Print Report
+                            </button>
+                            <button class="btn-primary" id="downloadReport">
+                                <i class="fas fa-download"></i>
+                                Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal hidden" id="clearConfirmModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container small-modal">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Confirm Action
+                </h2>
+            </div>
+            
+            <div class="modal-content">
+                <div class="confirmation-icon">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <h3>Clear All History?</h3>
+                <p>This action will permanently delete all your prediction history. This cannot be undone.</p>
+                
+                <div class="confirmation-actions">
+                    <button class="btn-secondary" id="cancelClear">
+                        Cancel
+                    </button>
+                    <button class="btn-danger" id="confirmClear">
+                        Yes, Clear All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>ThyroScan <span class="ai-text">AI</span></h3>
+                    </div>
+                    <p class="footer-tagline">
+                        ML-Powered Thyroid Disease Prediction System
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-researchgate"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="predict.html"><i class="fas fa-chevron-right"></i> Predict</a></li>
+                        <li><a href="history.html"><i class="fas fa-chevron-right"></i> History</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> API Reference</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Research Papers</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> alina.insights@gmail.com</p>
+                        <p><i class="fas fa-university"></i> Web Technologies Project</p>
+                        <p><i class="fas fa-graduation-cap"></i> Medical AI Research Division</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="tech-stack">
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">Scikit-learn</span>
+                    <span class="tech-badge">MongoDB</span>
+                    <span class="tech-badge">Plotly.js</span>
+                </div>
+                
+                <div class="copyright">
+                    <p>&copy; 2024 ThyroScan AI - University Semester Project</p>
+                    <p class="version">Version 2.0 | Model Accuracy: 83%</p>
+                </div>
+                
+                <div class="disclaimer-note">
+                    <p>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Disclaimer:</strong> For educational and research purposes only. Not a substitute for professional medical diagnosis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+       <!-- Scripts -->
+    <!-- Chart.js Library for Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main Script -->
+    <script src="js/main.js"></script>
+    
+    <!-- History Script -->
+    <script src="js/history.js" type="module"></script>
+    
+</body>
+</html>

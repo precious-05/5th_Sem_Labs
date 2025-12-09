@@ -1,18 +1,18 @@
 # ------------------------------------------------------------
 #  FCFS (First Come, First Serve) Scheduling Algorithm
 # ------------------------------------------------------------
-# 🔹 Basic Idea:
+#  Basic Idea:
 #   The process that arrives first gets the CPU first.
 #   There is no preemption — once a process starts, it runs till it finishes.
 
-# 🔹 Working:
+#  Working:
 #   1. Sort processes by their arrival time.
 #   2. CPU executes them in that order.
 #   3. Waiting Time (WT) = Start Time - Arrival Time
 #   4. Turnaround Time (TAT) = Completion Time - Arrival Time
 #   5. Average WT and TAT are calculated for performance.
 #
-# 🔹 Characteristics:
+#  Characteristics:
 #   - Non-preemptive algorithm
 #   - Simple and fair in small systems
 #   - Problem: Causes “Convoy Effect” (short jobs wait for long ones)

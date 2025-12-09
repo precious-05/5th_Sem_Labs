@@ -1,0 +1,1 @@
+-- OLAP only availaible in Enterprise version

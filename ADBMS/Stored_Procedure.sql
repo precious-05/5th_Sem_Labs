@@ -62,12 +62,12 @@ CALL l_join;
 DELIMITER //
 CREATE PROCEDURE fetch_all_emp()
 BEGIN
-SELECT emp_name,salary FROM Employee WHERE position='Accountant' OR salary>1000;
+SELECT * FROM Employee;
 END //
 DELIMITER ;
 
 CALL fetch_all_emp();
-
+DROP PROCEDURE fetch_all_emp;
 
 
 -- Queries Using Parameters
@@ -81,7 +81,8 @@ DELIMITER ;
 
 CALL emp_proc('Accountant', 1000);
 
-DROP PROCEDURE fetch_all_emp; 
+
+
 
 
 

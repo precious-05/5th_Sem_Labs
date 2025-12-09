@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History | ThyroScan Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="pulse"></div>
+            <span>Loading History Module...</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-stethoscope heartbeat"></i>
+                <div class="logo-text">
+                    <h1>ThyroScan<span class="gradient-text">Pro</span></h1>
+                    <p class="tagline">AI-Powered Thyroid Diagnosis</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="predict.html" class="nav-link">
+                    <i class="fas fa-brain"></i>
+                    <span>Predict</span>
+                </a>
+                <a href="history.html" class="nav-link active">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="index.html#features" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span>Features</span>
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="predict.html" class="btn-primary">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>New Prediction</span>
+                </a>
+            </div>
+            
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- History Header -->
+    <section class="history-header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Prediction History</span>
+            </div>
+            
+            <h1 class="page-title">
+                <i class="fas fa-history"></i>
+                Prediction History & Analytics
+            </h1>
+            <p class="page-subtitle">
+                View and analyze all previous thyroid cancer risk assessments with detailed insights
+            </p>
+        </div>
+    </section>
+
+    <!-- History Dashboard -->
+    <section class="history-dashboard">
+        <div class="container">
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalPredictions">0</h3>
+                        <p>Total Predictions</p>
+                    </div>
+                    <div class="stat-trend">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>12% increase</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-injured"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="malignantCount">0</h3>
+                        <p>Malignant Cases</p>
+                    </div>
+                    <div class="stat-badge risk-high">High Risk</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="benignCount">0</h3>
+                        <p>Benign Cases</p>
+                    </div>
+                    <div class="stat-badge risk-low">Low Risk</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="avgRisk">0%</h3>
+                        <p>Average Risk Score</p>
+                    </div>
+                    <div class="stat-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="avgRiskBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="history-controls">
+                <div class="control-group">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search predictions...">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="filterRisk">
+                            <option value="">All Risk Levels</option>
+                            <option value="low">Low Risk (0-30%)</option>
+                            <option value="moderate">Moderate (31-70%)</option>
+                            <option value="high">High Risk (71-100%)</option>
+                        </select>
+                        
+                        <select id="filterPrediction">
+                            <option value="">All Predictions</option>
+                            <option value="Malignant">Malignant</option>
+                            <option value="Benign">Benign</option>
+                        </select>
+                        
+                        <select id="filterDate">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="action-group">
+                    <button id="refreshHistory" class="btn-secondary">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Refresh</span>
+                    </button>
+                    
+                    <button id="exportHistory" class="btn-outline">
+                        <i class="fas fa-download"></i>
+                        <span>Export CSV</span>
+                    </button>
+                    
+                    <button id="clearHistory" class="btn-danger">
+                        <i class="fas fa-trash"></i>
+                        <span>Clear All</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="history-table-container">
+                <table id="historyTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>
+                                <i class="fas fa-calendar"></i>
+                                Date & Time
+                            </th>
+                            <th>
+                                <i class="fas fa-user"></i>
+                                Patient Info
+                            </th>
+                            <th>
+                                <i class="fas fa-chart-line"></i>
+                                Risk Score
+                            </th>
+                            <th>
+                                <i class="fas fa-diagnoses"></i>
+                                Prediction
+                            </th>
+                            <th>
+                                <i class="fas fa-chart-pie"></i>
+                                Confidence
+                            </th>
+                            <th>
+                                <i class="fas fa-cogs"></i>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- Data will be loaded by JavaScript -->
+                    </tbody>
+                </table>
+                
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loader-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p>Loading prediction history...</p>
+                </div>
+                
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>No Prediction History</h3>
+                    <p>Make your first prediction to see history here</p>
+                    <a href="predict.html" class="btn-primary">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Make First Prediction</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section class="analytics-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Analytics & Insights
+                </h2>
+                <p class="section-subtitle">Visual analysis of prediction patterns and risk distribution</p>
+            </div>
+            
+            <div class="analytics-grid">
+                <!-- Risk Distribution Chart -->
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-chart-pie"></i>
+                            Risk Distribution
+                        </h3>
+                        <div class="chart-legend">
+                            <span class="legend-item low"><i class="fas fa-circle"></i> Low</span>
+                            <span class="legend-item moderate"><i class="fas fa-circle"></i> Moderate</span>
+                            <span class="legend-item high"><i class="fas fa-circle"></i> High</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="riskDistributionChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Trend Analysis -->
+                <div class="analytics-card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-chart-line"></i>
+                            Trend Analysis
+                        </h3>
+                        <select id="trendPeriod" class="trend-select">
+                            <option value="week">Last 7 Days</option>
+                            <option value="month">Last 30 Days</option>
+                            <option value="year">Last Year</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Risk Factors Heatmap -->
+                <div class="analytics-card full-width">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-fire"></i>
+                            Top Risk Factors
+                        </h3>
+                        <div class="heatmap-info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Higher intensity indicates stronger correlation</span>
+                        </div>
+                    </div>
+                    <div class="heatmap-container">
+                        <div class="heatmap" id="riskHeatmap">
+                            <!-- Heatmap will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed View Modal -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-file-medical-alt"></i>
+                    Prediction Details
+                </h3>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="detail-view">
+                    <!-- Details will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn-secondary close-modal">
+                    <i class="fas fa-times"></i>
+                    <span>Close</span>
+                </button>
+                <button class="btn-primary" id="printReport">
+                    <i class="fas fa-print"></i>
+                    <span>Print Report</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-stethoscope"></i>
+                    <div>
+                        <h3>ThyroScan<span>Pro</span></h3>
+                        <p>AI-Powered Thyroid Diagnosis</p>
+                    </div>
+                </div>
+                <p class="footer-description">
+                    Advanced machine learning system for thyroid disease prediction and analysis.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Access</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="predict.html"><i class="fas fa-brain"></i> Predict</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Data Management</h4>
+                <div class="data-info">
+                    <p><i class="fas fa-database"></i> MongoDB Storage</p>
+                    <p><i class="fas fa-shield-alt"></i> Encrypted Data</p>
+                    <p><i class="fas fa-clock"></i> Real-time Sync</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 ThyroScan Pro. All rights reserved. | Academic Project - University Semester</p>
+            <p class="disclaimer">
+                <i class="fas fa-exclamation-triangle"></i>
+                This tool is for educational and research purposes only. Not for medical diagnosis.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/history.js"></script>
+</body>
+</html>

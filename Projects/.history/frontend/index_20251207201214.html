@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThyroScan AI - AI-Powered Thyroid Diagnosis</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Swiper.js CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+</head>
+<body>
+    <!-- Navigation - Modernized -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>ThyroScan <span class="ai-text">AI</span></h1>
+                    <p class="logo-subtitle">Medical Intelligence</p>
+                </div>
+            </div>
+            
+            <div class="nav-menu">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                        <div class="nav-link-indicator"></div>
+                    </a>
+                    <a href="predict.html" class="nav-link">
+                        <i class="fas fa-brain"></i>
+                        <span>Predict</span>
+                        <div class="nav-link-indicator"></div>
+                    </a>
+                    <a href="history.html" class="nav-link">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                        <div class="nav-link-indicator"></div>
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                        <div class="nav-link-indicator"></div>
+                    </a>
+                </div>
+                
+                <div class="nav-actions">
+                    <div class="theme-toggle">
+                        <div class="theme-toggle-inner">
+                            <i class="fas fa-sun"></i>
+                            <div class="theme-toggle-slider"></div>
+                            <i class="fas fa-moon"></i>
+                        </div>
+                    </div>
+                    <a href="predict.html" class="btn-primary btn-sm">
+                        <i class="fas fa-play-circle"></i>
+                        Start Analysis
+                    </a>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Redesigned -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="animated-grid">
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+                <div class="grid-line"></div>
+            </div>
+            <div class="floating-elements">
+                <div class="floating-element el-1"><i class="fas fa-dna"></i></div>
+                <div class="floating-element el-2"><i class="fas fa-heartbeat"></i></div>
+                <div class="floating-element el-3"><i class="fas fa-microscope"></i></div>
+                <div class="floating-element el-4"><i class="fas fa-brain"></i></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text-content">
+                    <div class="hero-badges">
+                        <div class="badge badge-ai">
+                            <i class="fas fa-robot"></i>
+                            <span>AI-Powered</span>
+                        </div>
+                        <div class="badge badge-medical">
+                            <i class="fas fa-user-md"></i>
+                            <span>Medical Grade</span>
+                        </div>
+                        <div class="badge badge-accuracy">
+                            <i class="fas fa-chart-line"></i>
+                            <span>83% Accuracy</span>
+                        </div>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        <span class="title-line">Advanced Thyroid</span>
+                        <span class="title-line highlight">Disease Detection</span>
+                        <span class="title-line">with Artificial Intelligence</span>
+                    </h1>
+                    
+                    <p class="hero-description">
+                        State-of-the-art machine learning platform for early detection and risk assessment 
+                        of thyroid disorders using 13 clinical parameters. Trusted by medical professionals worldwide.
+                    </p>
+                    
+                    <div class="hero-actions">
+                        <a href="predict.html" class="btn-primary btn-hero">
+                            <div class="btn-content">
+                                <i class="fas fa-play-circle"></i>
+                                <span>Start Free Analysis</span>
+                            </div>
+                            <div class="btn-glow"></div>
+                        </a>
+                        
+                        <a href="#how-it-works" class="btn-secondary btn-hero">
+                            <div class="btn-content">
+                                <i class="fas fa-play"></i>
+                                <span>See How It Works</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">300K+</div>
+                            <div class="stat-label">Medical Records</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <div class="stat-number">< 2s</div>
+                            <div class="stat-label">Analysis Time</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <div class="stat-number">HIPAA</div>
+                            <div class="stat-label">Compliant</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="visual-container">
+                        <div class="dashboard-preview">
+                            <div class="dashboard-header">
+                                <div class="dashboard-title">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Thyroid Analysis Dashboard</span>
+                                </div>
+                                <div class="dashboard-badge">Live</div>
+                            </div>
+                            
+                            <div class="dashboard-content">
+                                <div class="chart-container">
+                                    <div class="chart-placeholder">
+                                        <div class="chart-bar" style="height: 70%;"></div>
+                                        <div class="chart-bar" style="height: 90%;"></div>
+                                        <div class="chart-bar" style="height: 45%;"></div>
+                                        <div class="chart-bar" style="height: 80%;"></div>
+                                        <div class="chart-bar" style="height: 60%;"></div>
+                                    </div>
+                                    <div class="chart-label">Risk Probability Analysis</div>
+                                </div>
+                                
+                                <div class="dashboard-stats">
+                                    <div class="dashboard-stat">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-bullseye"></i>
+                                        </div>
+                                        <div class="stat-details">
+                                            <div class="stat-value">83%</div>
+                                            <div class="stat-name">Accuracy</div>
+                                        </div>
+                                    </div>
+                                    <div class="dashboard-stat">
+                                        <div class="stat-icon">
+                                            <i class="fas fa-bolt"></i>
+                                        </div>
+                                        <div class="stat-details">
+                                            <div class="stat-value">1.8s</div>
+                                            <div class="stat-name">Avg. Time</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-footer">
+                                <div class="ai-status">
+                                    <div class="status-indicator active"></div>
+                                    <span>AI Model Active</span>
+                                </div>
+                                <div class="next-action">
+                                    <a href="predict.html" class="btn-action">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
+    </section>
+
+    <!-- Features Section - Redesigned -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">
+                    <div class="label-line"></div>
+                    <span>Why Choose Us</span>
+                    <div class="label-line"></div>
+                </div>
+                <h2 class="section-title">
+                    Advanced Medical AI
+                    <span class="title-gradient">Platform</span>
+                </h2>
+                <p class="section-description">
+                    Combining cutting-edge artificial intelligence with medical expertise to deliver 
+                    reliable thyroid health assessments you can trust.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="feature-icon-bg"></div>
+                    </div>
+                    <h3 class="feature-title">Deep Learning Model</h3>
+                    <p class="feature-description">
+                        Advanced neural networks trained on 300,000+ medical records for precise thyroid disorder predictions.
+                    </p>
+                    <div class="feature-accuracy">
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 83%;"></div>
+                        </div>
+                        <span>83% Accuracy</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-icon-bg"></div>
+                    </div>
+                    <h3 class="feature-title">HIPAA Compliant</h3>
+                    <p class="feature-description">
+                        Enterprise-grade security with end-to-end encryption and strict compliance with medical privacy regulations.
+                    </p>
+                    <div class="feature-tags">
+                        <span class="tag">Secure</span>
+                        <span class="tag">Private</span>
+                        <span class="tag">Encrypted</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="feature-icon-bg"></div>
+                    </div>
+                    <h3 class="feature-title">Real-Time Analysis</h3>
+                    <p class="feature-description">
+                        Get instant risk assessments and detailed reports in less than 2 seconds after data submission.
+                    </p>
+                    <div class="feature-highlight">
+                        <i class="fas fa-clock"></i>
+                        <span>Average Response: 1.8 seconds</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="feature-icon-bg"></div>
+                    </div>
+                    <h3 class="feature-title">Visual Analytics</h3>
+                    <p class="feature-description">
+                        Comprehensive risk analysis with interactive visualizations and personalized medical recommendations.
+                    </p>
+                    <div class="feature-badge">
+                        <i class="fas fa-eye"></i>
+                        <span>Interactive Reports</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works - Redesigned -->
+    <section class="process-section" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">
+                    <div class="label-line"></div>
+                    <span>Our Process</span>
+                    <div class="label-line"></div>
+                </div>
+                <h2 class="section-title">
+                    Simple
+                    <span class="title-gradient">3-Step</span>
+                    Analysis
+                </h2>
+                <p class="section-description">
+                    From data input to AI-powered diagnosis, our streamlined process delivers accurate results in minutes.
+                </p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="step-line"></div>
+                
+                <div class="step">
+                    <div class="step-number">
+                        <span>01</span>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3 class="step-title">Enter Clinical Data</h3>
+                        <p class="step-description">
+                            Input patient's clinical parameters including age, hormone levels, TSH, T3, T4, and other risk factors.
+                        </p>
+                    </div>
+                    <div class="step-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">
+                        <span>02</span>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="step-title">AI Processing</h3>
+                        <p class="step-description">
+                            Our machine learning model analyzes the data to assess thyroid malignancy risk with 83% accuracy.
+                        </p>
+                    </div>
+                    <div class="step-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">
+                        <span>03</span>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-file-medical-alt"></i>
+                        </div>
+                        <h3 class="step-title">Receive Results</h3>
+                        <p class="step-description">
+                            Get detailed risk assessment with visualizations, explanations, and medical recommendations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="process-cta">
+                <a href="predict.html" class="btn-primary btn-large">
+                    <div class="btn-content">
+                        <i class="fas fa-play"></i>
+                        <span>Start Your Analysis Now</span>
+                    </div>
+                    <div class="btn-glow"></div>
+                </a>
+                <p class="cta-note">
+                    <i class="fas fa-lock"></i>
+                    <span>Your data is secure and private. No registration required.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials - Redesigned -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">
+                    <div class="label-line"></div>
+                    <span>Testimonials</span>
+                    <div class="label-line"></div>
+                </div>
+                <h2 class="section-title">
+                    Trusted by
+                    <span class="title-gradient">Medical Professionals</span>
+                </h2>
+                <p class="section-description">
+                    See what healthcare providers and researchers say about ThyroScan AI.
+                </p>
+            </div>
+            
+            <div class="testimonials-container">
+                <div class="testimonials-slider">
+                    <div class="swiper testimonials-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <div class="quote-icon">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-text">
+                                            "ThyroScan AI has revolutionized how we conduct initial thyroid screenings. 
+                                            The accuracy is impressive and it integrates seamlessly into our clinical workflow."
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="fas fa-user-md"></i>
+                                        </div>
+                                        <div class="author-details">
+                                            <h4 class="author-name">Dr. Sarah Johnson</h4>
+                                            <p class="author-title">Endocrinologist, Mayo Medical Center</p>
+                                            <div class="author-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <div class="quote-icon">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-text">
+                                            "As a research tool, ThyroScan AI provides valuable insights that accelerate our studies. 
+                                            The visualization features are exceptional and presentation-ready."
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="fas fa-flask"></i>
+                                        </div>
+                                        <div class="author-details">
+                                            <h4 class="author-name">Prof. Michael Chen</h4>
+                                            <p class="author-title">Medical Researcher, Stanford University</p>
+                                            <div class="author-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="testimonial-content">
+                                        <div class="quote-icon">
+                                            <i class="fas fa-quote-left"></i>
+                                        </div>
+                                        <p class="testimonial-text">
+                                            "The interface is intuitive and the results are presented in a clinically useful format. 
+                                            This tool has become an essential part of our diagnostic process."
+                                        </p>
+                                    </div>
+                                    <div class="testimonial-author">
+                                        <div class="author-avatar">
+                                            <i class="fas fa-stethoscope"></i>
+                                        </div>
+                                        <div class="author-details">
+                                            <h4 class="author-name">Dr. Robert Williams</h4>
+                                            <p class="author-title">General Practitioner & Clinical Director</p>
+                                            <div class="author-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-pagination"></div>
+                        
+                        <div class="swiper-button-next">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="swiper-button-prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">
+                    Ready to Experience
+                    <span class="title-gradient">AI-Powered Diagnosis?</span>
+                </h2>
+                <p class="cta-description">
+                    Join thousands of medical professionals using ThyroScan AI for accurate, 
+                    fast, and reliable thyroid health assessments.
+                </p>
+                
+                <div class="cta-actions">
+                    <a href="predict.html" class="btn-primary btn-large btn-cta">
+                        <div class="btn-content">
+                            <i class="fas fa-rocket"></i>
+                            <span>Start Free Analysis</span>
+                        </div>
+                        <div class="btn-glow"></div>
+                    </a>
+                    
+                    <a href="about.html" class="btn-secondary btn-large">
+                        <div class="btn-content">
+                            <i class="fas fa-book"></i>
+                            <span>Learn More</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No credit card required</span>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free for individual use</span>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>HIPAA compliant</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Redesigned -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <div class="logo-icon">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            <div class="logo-text">
+                                <h3>ThyroScan <span class="ai-text">AI</span></h3>
+                                <p class="logo-subtitle">Medical Intelligence Platform</p>
+                            </div>
+                        </div>
+                        <p class="footer-description">
+                            Advanced AI-powered thyroid disease prediction system for medical 
+                            professionals and researchers worldwide.
+                        </p>
+                        
+                        <div class="footer-social">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-researchgate"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="link-group">
+                            <h4 class="link-group-title">Platform</h4>
+                            <ul class="link-list">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="predict.html">Predict</a></li>
+                                <li><a href="history.html">History</a></li>
+                                <li><a href="about.html">About</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="link-group">
+                            <h4 class="link-group-title">Resources</h4>
+                            <ul class="link-list">
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">API Reference</a></li>
+                                <li><a href="#">Research Papers</a></li>
+                                <li><a href="#">Case Studies</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="link-group">
+                            <h4 class="link-group-title">Legal</h4>
+                            <ul class="link-list">
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                                <li><a href="#">Cookie Policy</a></li>
+                                <li><a href="#">GDPR Compliance</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="link-group">
+                            <h4 class="link-group-title">Contact</h4>
+                            <ul class="link-list contact-list">
+                                <li>
+                                    <i class="fas fa-envelope"></i>
+                                    <span>support@thyroscanai.com</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-university"></i>
+                                    <span>University Semester Project</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Medical AI Research Division</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <div class="tech-stack">
+                        <span class="tech-label">Powered by:</span>
+                        <span class="tech-badge">FastAPI</span>
+                        <span class="tech-badge">Scikit-learn</span>
+                        <span class="tech-badge">TensorFlow</span>
+                        <span class="tech-badge">MongoDB</span>
+                        <span class="tech-badge">Plotly.js</span>
+                    </div>
+                    
+                    <div class="copyright">
+                        <p>&copy; 2024 ThyroScan AI - University Semester Project. All rights reserved.</p>
+                        <p class="version">Version 2.1.0 | Model Accuracy: 83%</p>
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <p>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Disclaimer:</strong> For educational and research purposes only. 
+                            Not a substitute for professional medical diagnosis or treatment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <!-- Swiper.js JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    
+    <!-- Plotly.js for charts -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    
+    <!-- Our JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+    
+    <!-- Initialize Swiper for testimonials -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Testimonials Swiper
+            const testimonialSwiper = new Swiper('.testimonials-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    }
+                }
+            });
+            
+            // Theme toggle functionality
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-theme');
+                    
+                    // Update icon
+                    const sunIcon = this.querySelector('.fa-sun');
+                    const moonIcon = this.querySelector('.fa-moon');
+                    
+                    if (document.body.classList.contains('dark-theme')) {
+                        sunIcon.style.opacity = '0.5';
+                        moonIcon.style.opacity = '1';
+                    } else {
+                        sunIcon.style.opacity = '1';
+                        moonIcon.style.opacity = '0.5';
+                    }
+                });
+            }
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (mobileMenuBtn && navMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    this.querySelector('i').classList.toggle('fa-bars');
+                    this.querySelector('i').classList.toggle('fa-times');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

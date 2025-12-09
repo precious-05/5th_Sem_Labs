@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "69351cb056a6f932748ebd20"
+  },
+  "user_data": {
+    "Age": 44,
+    "Family_History": 0,
+    "Radiation_Exposure": 0,
+    "Iodine_Deficiency": 0,
+    "Smoking": 0,
+    "Obesity": 0,
+    "Diabetes": 0,
+    "TSH_Level": 2.5,
+    "T3_Level": 1.2,
+    "T4_Level": 8,
+    "Nodule_Size": 1.5,
+    "Thyroid_Cancer_Risk": 2,
+    "Gender_Male": 1
+  },
+  "prediction": "Benign",
+  "risk_percentage": 48.5,
+  "timestamp": {
+    "$date": "2025-12-07T11:20:32.934Z"
+  },
+  "disease_type": "thyroid"
+}]

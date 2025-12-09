@@ -1,0 +1,12 @@
+I:\5th_Sem_Labs\paint_app_2\bin\Debug\paint_app_2.exe.config
+I:\5th_Sem_Labs\paint_app_2\bin\Debug\paint_app_2.exe
+I:\5th_Sem_Labs\paint_app_2\bin\Debug\paint_app_2.pdb
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.csproj.AssemblyReference.cache
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.Form1.resources
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.Properties.Resources.resources
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.csproj.GenerateResource.cache
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.exe
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.pdb
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app_2.exe.config
+I:\5th_Sem_Labs\paint_app_2\obj\Debug\paint_app.Form1.resources

@@ -1,0 +1,108 @@
+﻿@page "/"
+@using HealthMateLite.Services
+@using HealthMateLite.Models
+@inject HealthDataService DataService
+@inject NavigationManager Navigation
+
+<PageTitle>Health Mate - Dashboard</PageTitle>
+
+<div class="dashboard-container">
+    <div class="welcome-section">
+        <h1>🏥 Welcome to Health Mate</h1>
+        <p class="lead">Your simple health tracking companion</p>
+    </div>
+
+    @if (IsAuthenticated)
+    {
+        <div class="quick-stats">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3>@recentMetrics.Count</h3>
+                        <p>Recent Entries</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3>@medications.Count</h3>
+                        <p>Medications</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3>@GetAverageSleep(recentMetrics)</h3>
+                        <p>Avg Sleep (hrs)</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <h3>@GetLatestWeight(recentMetrics)</h3>
+                        <p>Latest Weight</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="/health-metrics" class="action-card">
+                        <h4>➕ Add Health Entry</h4>
+                        <p>Record your daily health metrics</p>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="/medications" class="action-card">
+                        <h4>💊 Manage Medications</h4>
+                        <p>Add or remove your medications</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <h3>Please login to continue</h3>
+            <p>Use the login button in top right corner to access your health data.</p>
+            <a href="/login" class="btn btn-primary mt-3">Go to Login</a>
+        </div>
+    }
+</div>
+
+@code {
+    private bool IsAuthenticated => !string.IsNullOrEmpty(CurrentUser);
+    private string CurrentUser = string.Empty;
+    private List<HealthMetric> recentMetrics = new();
+    private List<Medication> medications = new();
+
+    protected override void OnInitialized()
+    {
+        // Check if user is in URL (simple auth)
+        var uri = Navigation.Uri;
+        if (uri.Contains("user="))
+        {
+            var userParam = System.Web.HttpUtility.ParseQueryString(new Uri(uri).Query)["user"];
+            CurrentUser = userParam ?? string.Empty;
+            
+            if (!string.IsNullOrEmpty(CurrentUser))
+            {
+                recentMetrics = DataService.GetHealthMetrics(CurrentUser).Take(5).ToList();
+                medications = DataService.GetMedications(CurrentUser);
+            }
+        }
+    }
+
+    private string GetAverageSleep(List<HealthMetric> metrics)
+    {
+        if (metrics.Count == 0) return "0";
+        return metrics.Average(m => m.SleepHours).ToString("F1");
+    }
+
+    private string GetLatestWeight(List<HealthMetric> metrics)
+    {
+        var latest = metrics.FirstOrDefault();
+        return latest != null ? $"{latest.Weight} kg" : "N/A";
+    }
+}

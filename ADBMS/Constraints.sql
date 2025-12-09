@@ -21,6 +21,7 @@ CREATE TABLE customers (
 ALTER TABLE customers 
 ADD UNIQUE (email);
 
+
 -- Ensure Age must be greater than 18
 ALTER TABLE customers 
 ADD CHECK (age>18);

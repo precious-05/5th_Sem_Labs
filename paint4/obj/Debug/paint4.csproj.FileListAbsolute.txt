@@ -1,0 +1,11 @@
+I:\5th_Sem_Labs\paint4\bin\Debug\paint4.exe.config
+I:\5th_Sem_Labs\paint4\bin\Debug\paint4.exe
+I:\5th_Sem_Labs\paint4\bin\Debug\paint4.pdb
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.csproj.AssemblyReference.cache
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.Form1.resources
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.Properties.Resources.resources
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.csproj.GenerateResource.cache
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.exe
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.pdb
+I:\5th_Sem_Labs\paint4\obj\Debug\paint4.exe.config

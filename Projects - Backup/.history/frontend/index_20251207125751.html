@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThyroScan AI | Advanced Thyroid Prediction System</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3067/3067256.png">
+    
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Plotly for Charts -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    
+    <!-- AOS for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-pulse">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+            </div>
+            <div class="loading-text">
+                <h3>ThyroScan AI</h3>
+                <p>Initializing Medical AI System...</p>
+                <div class="loading-progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Alert Bar -->
+    <div class="alert-bar">
+        <div class="container">
+            <div class="alert-content">
+                <i class="fas fa-flask"></i>
+                <span><strong>Research Tool:</strong> This AI system is for educational purposes. Always consult healthcare professionals for medical advice.</span>
+            </div>
+            <button class="alert-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <div class="icon-pulse"></div>
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>ThyroScan<span class="ai-badge">AI</span></h1>
+                    <p class="logo-tag">Medical Intelligence System</p>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="nav-menu">
+                <div class="nav-links">
+                    <a href="#home" class="nav-link active" data-aos="fade-down" data-aos-delay="100">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#predict" class="nav-link" data-aos="fade-down" data-aos-delay="200">
+                        <i class="fas fa-brain"></i>
+                        <span>Predict</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#history" class="nav-link" data-aos="fade-down" data-aos-delay="300">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#about" class="nav-link" data-aos="fade-down" data-aos-delay="400">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+
+                <!-- Stats Badge -->
+                <div class="nav-stats" data-aos="fade-down" data-aos-delay="500">
+                    <div class="stat-badge">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <span class="stat-value">83%</span>
+                            <span class="stat-label">Accuracy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="mobile-logo">
+                <i class="fas fa-heartbeat"></i>
+                <h3>ThyroScan AI</h3>
+            </div>
+            <button class="mobile-close" id="mobileClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="#home" class="mobile-nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#predict" class="mobile-nav-link">
+                <i class="fas fa-brain"></i>
+                <span>Predict</span>
+            </a>
+            <a href="#history" class="mobile-nav-link">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </a>
+            <a href="#about" class="mobile-nav-link">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+        </div>
+        <div class="mobile-footer">
+            <div class="mobile-stats">
+                <div class="mobile-stat">
+                    <i class="fas fa-bolt"></i>
+                    <span>83% Accuracy</span>
+                </div>
+                <div class="mobile-stat">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Data</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Slider -->
+    <section id="home" class="hero-section">
+        <!-- Background Pattern -->
+        <div class="hero-pattern"></div>
+        
+        <!-- Main Hero Content -->
+        <div class="container">
+            <div class="hero-content">
+                <!-- Left Column -->
+                <div class="hero-left" data-aos="fade-right" data-aos-duration="800">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i>
+                        <span>AI-Powered Medical Diagnosis</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        Advanced <span class="highlight">Thyroid Cancer</span> Risk Prediction
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Leveraging machine learning algorithms trained on 300,000+ medical records to provide accurate thyroid malignancy risk assessment with 83% predictive accuracy.
+                    </p>
+                    
+                    <!-- Hero Stats -->
+                    <div class="hero-stats-grid">
+                        <div class="hero-stat" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>83%</h4>
+                                <p>Accuracy Rate</p>
+                            </div>
+                        </div>
+                        <div class="hero-stat" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="stat-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>300K+</h4>
+                                <p>Data Records</p>
+                            </div>
+                        </div>
+                        <div class="hero-stat" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>< 2s</h4>
+                                <p>Analysis Time</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <div class="hero-actions">
+                        <a href="#predict" class="btn-primary btn-glow" data-aos="fade-up" data-aos-delay="400">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Start Free Analysis</span>
+                            <div class="btn-shine"></div>
+                        </a>
+                        
+                        <a href="#about" class="btn-secondary" data-aos="fade-up" data-aos-delay="500">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Learn More</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Image Slider -->
+                <div class="hero-right" data-aos="fade-left" data-aos-duration="800">
+                    <div class="hero-slider-container">
+                        <div class="swiper hero-slider">
+                            <div class="swiper-wrapper">
+                                <!-- Slide 1 -->
+                                <div class="swiper-slide">
+                                    <div class="slide-card">
+                                        <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                                            <div class="slide-overlay"></div>
+                                        </div>
+                                        <div class="slide-content">
+                                            <h4>Advanced AI Analysis</h4>
+                                            <p>Real-time thyroid risk assessment using machine learning algorithms</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 2 -->
+                                <div class="swiper-slide">
+                                    <div class="slide-card">
+                                        <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                                            <div class="slide-overlay"></div>
+                                        </div>
+                                        <div class="slide-content">
+                                            <h4>Medical Research</h4>
+                                            <p>Based on extensive medical research and clinical studies</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Slide 3 -->
+                                <div class="swiper-slide">
+                                    <div class="slide-card">
+                                        <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');">
+                                            <div class="slide-overlay"></div>
+                                        </div>
+                                        <div class="slide-content">
+                                            <h4>Clinical Parameters</h4>
+                                            <p>13 clinical parameters analyzed for comprehensive assessment</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Slider Navigation -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Elements -->
+                    <div class="floating-elements">
+                        <div class="float-card float-1" data-aos="fade-left" data-aos-delay="200">
+                            <i class="fas fa-shield-alt"></i>
+                            <h5>HIPAA Compliant</h5>
+                            <p>Secure & Private</p>
+                        </div>
+                        <div class="float-card float-2" data-aos="fade-left" data-aos-delay="400">
+                            <i class="fas fa-user-md"></i>
+                            <h5>Clinical Grade</h5>
+                            <p>Medical Accuracy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+            <span>Scroll to Explore</span>
+            <div class="indicator-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <div class="features-bar">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>AI Powered</h4>
+                    <p>Machine Learning Algorithms</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Real-time</h4>
+                    <p>Instant Results</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h4>Detailed Analysis</h4>
+                    <p>Comprehensive Reports</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>Secure Data</h4>
+                    <p>Privacy Protected</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prediction Section -->
+    <section id="predict" class="predict-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <i class="fas fa-calculator"></i>
+                    <span>AI Prediction Tool</span>
+                </div>
+                <h2 class="section-title">Thyroid Risk Calculator</h2>
+                <p class="section-subtitle">Enter clinical parameters for comprehensive AI analysis</p>
+            </div>
+            
+            <!-- Prediction Container -->
+            <div class="predict-container">
+                <!-- Left Side - Form -->
+                <div class="predict-form-container" data-aos="fade-right" data-aos-duration="800">
+                    <div class="form-card">
+                        <div class="form-header">
+                            <div class="form-title">
+                                <i class="fas fa-clipboard-check"></i>
+                                <h3>Clinical Parameters</h3>
+                            </div>
+                            <div class="form-steps">
+                                <div class="step-indicator active">
+                                    <span>1</span>
+                                    <p>Basic Info</p>
+                                </div>
+                                <div class="step-indicator">
+                                    <span>2</span>
+                                    <p>Lab Results</p>
+                                </div>
+                                <div class="step-indicator">
+                                    <span>3</span>
+                                    <p>Risk Factors</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Form -->
+                        <form id="thyroidForm">
+                            <!-- Basic Information -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">
+                                    <i class="fas fa-user-md"></i>
+                                    Patient Information
+                                </h4>
+                                
+                                <div class="form-grid">
+                                    <!-- Age -->
+                                    <div class="form-group">
+                                        <label for="Age">
+                                            <i class="fas fa-birthday-cake"></i>
+                                            Age (Years)
+                                        </label>
+                                        <div class="input-with-slider">
+                                            <input type="number" id="Age" min="0" max="120" step="1" required 
+                                                   placeholder="Enter patient age">
+                                            <div class="slider-container">
+                                                <input type="range" class="form-slider" min="0" max="120" value="45">
+                                                <div class="slider-values">
+                                                    <span>0</span>
+                                                    <span>120</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="input-hint">
+                                            <i class="fas fa-info-circle"></i>
+                                            Patient's age in years
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Gender -->
+                                    <div class="form-group">
+                                        <label>
+                                            <i class="fas fa-venus-mars"></i>
+                                            Gender
+                                        </label>
+                                        <div class="gender-selector">
+                                            <div class="gender-option active" data-value="1">
+                                                <div class="gender-icon">
+                                                    <i class="fas fa-male"></i>
+                                                </div>
+                                                <span>Male</span>
+                                            </div>
+                                            <div class="gender-option" data-value="0">
+                                                <div class="gender-icon">
+                                                    <i class="fas fa-female"></i>
+                                                </div>
+                                                <span>Female</span>
+                                            </div>
+                                            <select id="Gender_Male" required style="display: none;">
+                                                <option value="1">Male</option>
+                                                <option value="0">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Risk Score -->
+                                    <div class="form-group">
+                                        <label for="Thyroid_Cancer_Risk">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            Cancer Risk Score
+                                        </label>
+                                        <div class="risk-score-wrapper">
+                                            <select id="Thyroid_Cancer_Risk" required>
+                                                <option value="0">0 - Very Low</option>
+                                                <option value="1">1 - Low</option>
+                                                <option value="2" selected>2 - Moderate</option>
+                                                <option value="3">3 - High</option>
+                                                <option value="4">4 - Very High</option>
+                                            </select>
+                                            <div class="risk-visual">
+                                                <div class="risk-bar">
+                                                    <div class="risk-segment low"></div>
+                                                    <div class="risk-segment medium active"></div>
+                                                    <div class="risk-segment high"></div>
+                                                </div>
+                                                <div class="risk-labels">
+                                                    <span>Low</span>
+                                                    <span>Medium</span>
+                                                    <span>High</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Laboratory Results -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">
+                                    <i class="fas fa-flask"></i>
+                                    Laboratory Results
+                                </h4>
+                                
+                                <div class="form-grid">
+                                    <!-- TSH Level -->
+                                    <div class="form-group">
+                                        <label for="TSH_Level">
+                                            <i class="fas fa-tint"></i>
+                                            TSH Level (mIU/L)
+                                        </label>
+                                        <div class="input-with-range">
+                                            <input type="number" id="TSH_Level" min="0" max="100" step="0.1" required 
+                                                   placeholder="e.g., 2.5">
+                                            <div class="normal-range">
+                                                <span class="range-label">Normal Range:</span>
+                                                <span class="range-value">0.4 - 4.0 mIU/L</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- T3 Level -->
+                                    <div class="form-group">
+                                        <label for="T3_Level">
+                                            <i class="fas fa-atom"></i>
+                                            T3 Level (pg/mL)
+                                        </label>
+                                        <div class="input-with-range">
+                                            <input type="number" id="T3_Level" min="0" max="20" step="0.1" required 
+                                                   placeholder="e.g., 1.2">
+                                            <div class="normal-range">
+                                                <span class="range-label">Normal Range:</span>
+                                                <span class="range-value">2.3 - 4.2 pg/mL</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- T4 Level -->
+                                    <div class="form-group">
+                                        <label for="T4_Level">
+                                            <i class="fas fa-flask"></i>
+                                            T4 Level (μg/dL)
+                                        </label>
+                                        <div class="input-with-range">
+                                            <input type="number" id="T4_Level" min="0" max="30" step="0.1" required 
+                                                   placeholder="e.g., 8.0">
+                                            <div class="normal-range">
+                                                <span class="range-label">Normal Range:</span>
+                                                <span class="range-value">0.8 - 1.8 μg/dL</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Nodule Size -->
+                                    <div class="form-group">
+                                        <label for="Nodule_Size">
+                                            <i class="fas fa-ruler"></i>
+                                            Nodule Size (cm)
+                                        </label>
+                                        <div class="input-with-range">
+                                            <input type="number" id="Nodule_Size" min="0" max="10" step="0.1" required 
+                                                   placeholder="e.g., 1.5">
+                                            <div class="nodule-info">
+                                                <i class="fas fa-info-circle"></i>
+                                                Thyroid nodule diameter
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Risk Factors -->
+                            <div class="form-section">
+                                <h4 class="form-section-title">
+                                    <i class="fas fa-dna"></i>
+                                    Risk Factors
+                                </h4>
+                                
+                                <div class="risk-factors-grid">
+                                    <!-- Family History -->
+                                    <div class="risk-factor">
+                                        <input type="checkbox" id="Family_History" value="1" class="risk-checkbox">
+                                        <label for="Family_History">
+                                            <div class="risk-icon">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            <div class="risk-content">
+                                                <h5>Family History</h5>
+                                                <p>Thyroid disease in family</p>
+                                            </div>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Radiation Exposure -->
+                                    <div class="risk-factor">
+                                        <input type="checkbox" id="Radiation_Exposure" value="1" class="risk-checkbox">
+                                        <label for="Radiation_Exposure">
+                                            <div class="risk-icon">
+                                                <i class="fas fa-radiation"></i>
+                                            </div>
+                                            <div class="risk-content">
+                                                <h5>Radiation Exposure</h5>
+                                                <p>History of radiation treatment</p>
+                                            </div>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Iodine Deficiency -->
+                                    <div class="risk-factor">
+                                        <input type="checkbox" id="Iodine_Deficiency" value="1" class="risk-checkbox">
+                                        <label for="Iodine_Deficiency">
+                                            <div class="risk-icon">
+                                                <i class="fas fa-utensils"></i>
+                                            </div>
+                                            <div class="risk-content">
+                                                <h5>Iodine Deficiency</h5>
+                                                <p>Dietary iodine insufficiency</p>
+                                            </div>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Smoking -->
+                                    <div class="risk-factor">
+                                        <input type="checkbox" id="Smoking" value="1" class="risk-checkbox">
+                                        <label for="Smoking">
+                                            <div class="risk-icon">
+                                                <i class="fas fa-smoking"></i>
+                                            </div>
+                                            <div class="risk-content">
+                                                <h5>Smoking History</h5>
+                                                <p>Current or former smoker</p>
+                                            </div>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Obesity -->
+                                    <div class="risk-factor">
+                                        <input type="checkbox" id="Obesity" value="1" class="risk-checkbox">
+                                        <label for="Obesity">
+                                            <div class="risk-icon">
+                                                <i class="fas fa-weight"></i>
+                                            </div>
+                                            <div class="risk-content">
+                                                <h5>Obesity</h5>
+                                                <p>BMI ≥ 30</p>
+                                            </div>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Diabetes -->
+                                    <div class="risk-factor">
+                                        <input type="checkbox" id="Diabetes" value="1" class="risk-checkbox">
+                                        <label for="Diabetes">
+                                            <div class="risk-icon">
+                                                <i class="fas fa-syringe"></i>
+                                            </div>
+                                            <div class="risk-content">
+                                                <h5>Diabetes Mellitus</h5>
+                                                <p>Type 1 or Type 2 diabetes</p>
+                                            </div>
+                                            <div class="checkmark"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Form Actions -->
+                            <div class="form-actions">
+                                <button type="button" id="resetBtn" class="btn-outline">
+                                    <i class="fas fa-redo"></i>
+                                    <span>Reset Form</span>
+                                </button>
+                                <button type="submit" id="predictBtn" class="btn-primary btn-glow">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Analyze with AI</span>
+                                    <div class="btn-shine"></div>
+                                    <div class="loading-spinner">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                    </div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Results/Guide -->
+                <div class="predict-results-container">
+                    <!-- Quick Guide (Initially Visible) -->
+                    <div class="guide-card" id="quickGuide" data-aos="fade-left" data-aos-delay="200">
+                        <div class="guide-header">
+                            <div class="guide-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Quick Guide</h3>
+                        </div>
+                        <div class="guide-steps">
+                            <div class="guide-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>Enter Clinical Data</h5>
+                                    <p>Fill patient information and lab results</p>
+                                </div>
+                            </div>
+                            <div class="guide-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>AI Analysis</h5>
+                                    <p>Our ML model processes the data</p>
+                                </div>
+                            </div>
+                            <div class="guide-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>Get Results</h5>
+                                    <p>Receive comprehensive risk assessment</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="guide-footer">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>All data is processed securely and anonymously</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Card (Hidden Initially) -->
+                    <div class="results-card hidden" id="resultsCard" data-aos="fade-left">
+                        <div class="results-header">
+                            <div class="results-title">
+                                <div class="results-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <div>
+                                    <h3>Analysis Results</h3>
+                                    <p class="results-subtitle">Thyroid Cancer Risk Assessment</p>
+                                </div>
+                            </div>
+                            <button id="closeResults" class="close-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="results-content">
+                            <!-- Risk Score -->
+                            <div class="risk-score-display">
+                                <div class="risk-circle-container">
+                                    <div class="risk-circle" id="riskCircle">
+                                        <svg viewBox="0 0 36 36" class="circular-chart">
+                                            <path class="circle-bg"
+                                                d="M18 2.0845
+                                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                            <path class="circle"
+                                                stroke-dasharray="0, 100"
+                                                d="M18 2.0845
+                                                  a 15.9155 15.9155 0 0 1 0 31.831
+                                                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                            <text x="18" y="20.35" class="percentage" id="riskPercentage">0%</text>
+                                        </svg>
+                                    </div>
+                                    <div class="risk-info">
+                                        <h4 id="predictionText">Assessment</h4>
+                                        <p id="confidenceText">Confidence: --%</p>
+                                        <div class="risk-label" id="riskLabel">--</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Risk Meter -->
+                                <div class="risk-meter">
+                                    <div class="meter-labels">
+                                        <span class="meter-label low">Low</span>
+                                        <span class="meter-label moderate">Moderate</span>
+                                        <span class="meter-label high">High</span>
+                                    </div>
+                                    <div class="meter-track">
+                                        <div class="meter-fill" id="meterFill"></div>
+                                        <div class="meter-pointer" id="meterPointer">
+                                            <div class="pointer-arrow"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Chart Container -->
+                            <div class="chart-container">
+                                <div class="chart-header">
+                                    <h4>
+                                        <i class="fas fa-chart-bar"></i>
+                                        Risk Factor Analysis
+                                    </h4>
+                                </div>
+                                <div id="chartContainer"></div>
+                            </div>
+                            
+                            <!-- Key Factors -->
+                            <div class="key-factors">
+                                <h4>
+                                    <i class="fas fa-key"></i>
+                                    Key Risk Factors
+                                </h4>
+                                <div class="factors-list" id="factorsList">
+                                    <!-- Factors will be populated by JS -->
+                                </div>
+                            </div>
+                            
+                            <!-- Recommendations -->
+                            <div class="recommendations">
+                                <h4>
+                                    <i class="fas fa-clipboard-check"></i>
+                                    Recommendations
+                                </h4>
+                                <div class="recommendations-list" id="recommendationsList">
+                                    <!-- Recommendations will be populated by JS -->
+                                </div>
+                            </div>
+                            
+                            <!-- Results Actions -->
+                            <div class="results-actions">
+                                <button id="saveReportBtn" class="btn-outline">
+                                    <i class="fas fa-download"></i>
+                                    <span>Download Report</span>
+                                </button>
+                                <button id="newPredictionBtn" class="btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    <span>New Analysis</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="history-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <i class="fas fa-history"></i>
+                    <span>Analysis History</span>
+                </div>
+                <h2 class="section-title">Previous Predictions</h2>
+                <p class="section-subtitle">Track and review your previous AI analyses</p>
+            </div>
+            
+            <!-- History Controls -->
+            <div class="history-controls" data-aos="fade-up" data-aos-delay="100">
+                <div class="controls-left">
+                    <button id="refreshHistory" class="btn-outline">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Refresh</span>
+                    </button>
+                    <div class="filter-group">
+                        <label for="historyLimit">
+                            <i class="fas fa-filter"></i>
+                            Show:
+                        </label>
+                        <select id="historyLimit" class="select-input">
+                            <option value="5">Last 5</option>
+                            <option value="10" selected>Last 10</option>
+                            <option value="20">Last 20</option>
+                            <option value="50">Last 50</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="controls-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="historySearch" placeholder="Search predictions...">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- History Table -->
+            <div class="history-table-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="table-responsive">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="table-header">
+                                        <i class="fas fa-calendar"></i>
+                                        <span>Date & Time</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <i class="fas fa-user"></i>
+                                        <span>Age</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <i class="fas fa-venus-mars"></i>
+                                        <span>Gender</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Risk Score</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <i class="fas fa-diagnoses"></i>
+                                        <span>Prediction</span>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="table-header">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>Details</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <tr id="historyLoading">
+                                <td colspan="6">
+                                    <div class="loading-state">
+                                        <div class="loading-spinner"></div>
+                                        <span>Loading history...</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Empty State -->
+                <div id="historyEmpty" class="empty-state hidden">
+                    <div class="empty-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h4>No Prediction History</h4>
+                    <p>Make your first prediction to see history here</p>
+                    <a href="#predict" class="btn-primary">
+                        <i class="fas fa-calculator"></i>
+                        <span>Make First Prediction</span>
+                    </a>
+                </div>
+                
+                <!-- Table Footer -->
+                <div class="table-footer">
+                    <div class="table-info">
+                        <span id="historyCount">0</span> predictions found
+                    </div>
+                    <div class="table-pagination">
+                        <button class="pagination-btn prev" disabled>
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="page-info">Page 1 of 1</span>
+                        <button class="pagination-btn next" disabled>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About System</span>
+                </div>
+                <h2 class="section-title">About ThyroScan AI</h2>
+                <p class="section-subtitle">Learn about our technology, research, and mission</p>
+            </div>
+            
+            <!-- About Cards -->
+            <div class="about-cards" data-aos="fade-up" data-aos-delay="100">
+                <!-- Card 1 -->
+                <div class="about-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI Technology</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Utilizes Logistic Regression algorithm trained on 300,000+ anonymized medical records with 83% accuracy for thyroid malignancy prediction.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> 13 Clinical Parameters Analyzed</li>
+                            <li><i class="fas fa-check"></i> Real-time Risk Calculation</li>
+                            <li><i class="fas fa-check"></i> Feature Importance Analysis</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="about-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Data Privacy</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>All predictions are completely anonymized and processed securely. No personal health information is stored or transmitted.</p>
+                        <div class="privacy-badges">
+                            <span class="privacy-badge">
+                                <i class="fas fa-lock"></i>
+                                HIPAA Compliant
+                            </span>
+                            <span class="privacy-badge">
+                                <i class="fas fa-user-shield"></i>
+                                Data Anonymized
+                            </span>
+                            <span class="privacy-badge">
+                                <i class="fas fa-server"></i>
+                                Secure Processing
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="about-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Academic Project</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>This system is developed as a university semester project for educational purposes in artificial intelligence and healthcare applications.</p>
+                        <div class="project-info">
+                            <div class="info-item">
+                                <i class="fas fa-university"></i>
+                                <div>
+                                    <strong>University Project</strong>
+                                    <span>Semester Research</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-code"></i>
+                                <div>
+                                    <strong>Open Source</strong>
+                                    <span>Educational Use</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Technology Stack -->
+            <div class="tech-stack" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="tech-title">
+                    <i class="fas fa-layer-group"></i>
+                    Technology Stack
+                </h3>
+                <div class="tech-items">
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="tech-info">
+                            <h5>FastAPI</h5>
+                            <p>Backend Framework</p>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="tech-info">
+                            <h5>Scikit-learn</h5>
+                            <p>ML Library</p>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="tech-info">
+                            <h5>MongoDB</h5>
+                            <p>Database</p>
+                        </div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="tech-info">
+                            <h5>Plotly.js</h5>
+                            <p>Visualization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Disclaimer -->
+            <div class="disclaimer-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="disclaimer-header">
+                    <div class="disclaimer-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <h3>Important Disclaimer</h3>
+                        <p>Read this before using the system</p>
+                    </div>
+                </div>
+                <div class="disclaimer-content">
+                    <p><strong>This tool is for educational and research purposes only.</strong> It is not a substitute for professional medical diagnosis, advice, or treatment. Always consult qualified healthcare professionals for medical advice. The predictions provided by this system should be considered as supplementary information and not as definitive medical diagnosis.</p>
+                    <div class="disclaimer-footer">
+                        <i class="fas fa-stethoscope"></i>
+                        <span>For Medical Emergencies, Contact Healthcare Professionals Immediately</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div>
+                            <h3>ThyroScan <span>AI</span></h3>
+                            <p>Advanced Thyroid Prediction System</p>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        An AI-powered system for thyroid cancer risk assessment using machine learning algorithms for educational and research purposes.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Documentation">
+                            <i class="fas fa-book"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Contact">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links-grid">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <a href="#home">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                        <a href="#predict">
+                            <i class="fas fa-calculator"></i>
+                            Predict
+                        </a>
+                        <a href="#history">
+                            <i class="fas fa-history"></i>
+                            History
+                        </a>
+                        <a href="#about">
+                            <i class="fas fa-info-circle"></i>
+                            About
+                        </a>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <a href="#">
+                            <i class="fas fa-book-medical"></i>
+                            Medical Guidelines
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i>
+                            Research Data
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-download"></i>
+                            Download Report
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-question-circle"></i>
+                            FAQ
+                        </a>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h4>Legal</h4>
+                        <a href="#">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy Policy
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-file-contract"></i>
+                            Terms of Use
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-balance-scale"></i>
+                            Disclaimer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 ThyroScan AI - University Semester Project | Developed for Medical AI Research</p>
+                </div>
+                <div class="footer-version">
+                    <div class="version-badge">
+                        <i class="fas fa-code-branch"></i>
+                        Version 1.0.0
+                    </div>
+                    <div class="accuracy-badge">
+                        <i class="fas fa-bullseye"></i>
+                        Model Accuracy: 83%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

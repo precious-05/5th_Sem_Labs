@@ -1,0 +1,11 @@
+I:\5th_Sem_Labs\paint3\bin\Debug\paint3.exe.config
+I:\5th_Sem_Labs\paint3\bin\Debug\paint3.exe
+I:\5th_Sem_Labs\paint3\bin\Debug\paint3.pdb
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.csproj.AssemblyReference.cache
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.Form1.resources
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.Properties.Resources.resources
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.csproj.GenerateResource.cache
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.exe
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.pdb
+I:\5th_Sem_Labs\paint3\obj\Debug\paint3.exe.config

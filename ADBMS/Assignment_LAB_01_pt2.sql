@@ -5,7 +5,6 @@
 SELECT id, last_name, first_name, initial, areacode, phone, balance FROM customer
 ORDER BY balance DESC, last_name ASC;
 
-
 -- =========================================
 -- Question 3
 -- Retrieve the id and name of all vendors. 
@@ -17,7 +16,6 @@ SELECT id, name AS vendor_name FROM vendor;
 -- Retrieve the description and price of all products. 
 -- Calculate quantity - minimum_quantity AS surplus and sort surplus from highest to lowest.
 SELECT description, price, quantity - minimum_quantity AS surplus FROM product ORDER BY surplus DESC;
-
 
 -- =========================================
 -- Question 5
@@ -62,6 +60,7 @@ LEFT JOIN INVOICE i ON c.id = i.customer_id
 GROUP BY c.id, c.first_name, c.last_name;
 
 
+
 -- =========================================
 -- Question 11
 -- Retrieve the total number of products each vendor sells.
@@ -102,3 +101,6 @@ SELECT id, CONCAT(first_name, ' ', last_name) AS customer_name, balance
 FROM customer
 ORDER BY balance DESC
 LIMIT 3;
+
+
+

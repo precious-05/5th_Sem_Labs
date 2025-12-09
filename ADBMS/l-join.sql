@@ -1,37 +1,38 @@
 CREATE DATABASE CompanyDB;
 USE CompanyDB;
 
+-- Departments table (create first because other tables reference it)
+CREATE TABLE Departments (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+
 -- Employees table
-CREATE TABLE Employees(
+CREATE TABLE Employees (
     emp_id INT PRIMARY KEY,
     name VARCHAR(50),
     dept_id INT,
-    salary INT
-);
-
--- Departments table
-CREATE TABLE Departments(
-	 dept_id INT PRIMARY KEY,
-     dept_name VARCHAR(50)
+    salary INT,
+	FOREIGN KEY (dept_id) REFERENCES Departments(dept_id)
 );
 
 -- Projects table
 CREATE TABLE Projects (
     proj_id INT PRIMARY KEY,
     proj_name VARCHAR(50),
-    dept_id INT
+    dept_id INT,
+   FOREIGN KEY (dept_id) REFERENCES Departments(dept_id)
 );
 
-
--- EmployeeProjects table (which employees are assigned to projects)
+-- EmployeeProjects table (junction table for many-to-many between Employees and Projects)
 CREATE TABLE EmployeeProjects (
     emp_id INT,
     proj_id INT,
     role VARCHAR(50),
-    PRIMARY KEY (emp_id, proj_id)
+    PRIMARY KEY (emp_id, proj_id),
+    FOREIGN KEY (emp_id) REFERENCES Employees(emp_id),
+    FOREIGN KEY (proj_id) REFERENCES Projects(proj_id)
 );
-
-
 
 -- Insert Departments
 INSERT INTO Departments VALUES
@@ -60,37 +61,29 @@ INSERT INTO EmployeeProjects VALUES
 (103, 202, 'Tester'),
 (104, 203, 'Auditor');
 
-
-
--- 1.Show each employee's name along with their department name
-SELECT employees.name, departments.dept_name
-FROM employees 
-LEFT JOIN departments
-ON employees.dept_id=departments.dept_id;
+-- Queries remain the same
+-- 1. Show each employee's name along with their department name
+SELECT e.name, d.dept_name
+FROM Employees e
+LEFT JOIN Departments d ON e.dept_id = d.dept_id;
 
 -- 2. Show all departments and the employees who work in them (include departments even if they don't have any employees)
 SELECT d.dept_name, e.name
-FROM employees e
-RIGHT JOIN departments d
-ON e.dept_id = d.dept_id;
+FROM Departments d
+LEFT JOIN Employees e ON e.dept_id = d.dept_id;
 
 -- 3. Show all projects and the employees assigned to them.
-SELECT  p.proj_name,e.name
-FROM  projects p
-LEFT JOIN employees e
-ON p.dept_id=e.dept_id;
+SELECT p.proj_name, e.name
+FROM Projects p
+LEFT JOIN Employees e ON p.dept_id = e.dept_id;
 
 -- 4. Show all employees and the projects they are working on (if no project is assigned, still show the employee).
-SELECT e.name,p.proj_name
-FROM employees e
-LEFT JOIN projects p
-ON e.dept_id=p.dept_id;
-
+SELECT e.name, p.proj_name
+FROM Employees e
+LEFT JOIN Projects p ON e.dept_id = p.dept_id;
 
 -- 5. Show all departments with the projects under them (include departments even if they don’t have any projects).
 SELECT d.dept_name, p.proj_name
-FROM departments d
-LEFT JOIN projects p
-ON d.dept_id=p.dept_id;
-
+FROM Departments d
+LEFT JOIN Projects p ON d.dept_id = p.dept_id;
 

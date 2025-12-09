@@ -1,0 +1,11 @@
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.csproj.AssemblyReference.cache
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.Form1.resources
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.Properties.Resources.resources
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.csproj.GenerateResource.cache
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\GDI\bin\Debug\GDI.exe.config
+I:\5th_Sem_Labs\GDI\bin\Debug\GDI.exe
+I:\5th_Sem_Labs\GDI\bin\Debug\GDI.pdb
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.exe
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.pdb
+I:\5th_Sem_Labs\GDI\obj\Debug\GDI.exe.config
