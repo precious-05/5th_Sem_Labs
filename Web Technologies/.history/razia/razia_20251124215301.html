@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - Job Portal</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f4f7ff;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #4b79ff, #6579ff);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #ffe58a;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: url("https://images.unsplash.com/photo-1521791136064-7986c2920216")
+            center/cover no-repeat;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero h2 {
+            font-size: 50px;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 10px black;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 450px;
+            text-shadow: 0 4px 10px black;
+        }
+
+        .btn {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 12px 25px;
+            background: #ffe58a;
+            color: black;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #ffcf33;
+        }
+
+        /* Jobs Section */
+        .section-title {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 30px;
+            color: #3645d7;
+        }
+
+        .jobs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 40px 70px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+        .job-card h3 {
+            margin-top: 0;
+            color: #3946e8;
+        }
+
+        .job-card p {
+            color: #555;
+        }
+
+        .apply-btn {
+            background: #4b79ff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Articles */
+        .articles {
+            padding: 20px 70px 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+
+        .article {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .article:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .article img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-content h4 {
+            color: #4b5aff;
+        }
+
+        /* Footer */
+        footer {
+            background: #3946e8;
+            padding: 25px;
+            color: white;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CareerHub</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#jobs">Jobs</a>
+        <a href="#articles">Articles</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Find Your Dream Job Today</h2>
+    <p>Explore thousands of job opportunities from top companies. Build your future with CareerHub.</p>
+    <a href="#jobs" class="btn">Browse Jobs</a>
+</section>
+
+<h2 class="section-title" id="jobs">Latest Job Openings</h2>
+
+<section class="jobs">
+    <div class="job-card">
+        <h3>Frontend Developer</h3>
+        <p>Company: Google</p>
+        <p>Location: Pakistan (Remote)</p>
+        <a class="apply-btn">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+        <h3>UI/UX Designer</h3>
+        <p>Company: Microsoft</p>
+        <p>Location: Karachi</p>
+        <a class="apply-btn">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+        <h3>Python Developer</h3>
+        <p>Company: Amazon</p>
+        <p>Location: Islamabad</p>
+        <a class="apply-btn">Apply Now</a>
+    </div>
+</section>
+
+<h2 class="section-title" id="articles">Career Articles</h2>
+
+<section class="articles">
+
+    <div class="article">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="">
+        <div class="article-content">
+            <h4>How to Build a Strong CV</h4>
+            <p>A powerful CV is your first impression. Learn how to create a professional, modern resume.</p>
+        </div>
+    </div>
+
+    <div class="article">
+        <img src="https://images.unsplash.com/photo-1488998427799-e3362cec87c3" alt="">
+        <div class="article-content">
+            <h4>Top Interview Tips</h4>
+            <p>Master the art of professional interviews and boost your confidence with expert tips.</p>
+        </div>
+    </div>
+
+    <div class="article">
+        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692" alt="">
+        <div class="article-content">
+            <h4>Best Skills for 2025</h4>
+            <p>Learn which skills companies value the most in the modern tech world.</p>
+        </div>
+    </div>
+
+</section>
+
+<footer>
+    © 2025 CareerHub Job Portal | Designed by Mr. Web Developer (ChatGPT 😊)
+</footer>
+
+</body>
+</html>

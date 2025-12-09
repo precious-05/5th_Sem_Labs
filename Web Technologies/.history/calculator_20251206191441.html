@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pastel Scientific Calculator</title>
+<style>
+    *{
+        margin:0; padding:0; box-sizing:border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    body{
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(160deg,#ffb7d5,#c8d9ff,#b8fff3);
+    }
+    .container{
+        width: 400px;
+        padding-top:0px;
+        padding-left: 530px;
+        padding-right:30px;
+
+        border-radius:30px;
+        background:#ffffff80;
+        backdrop-filter: blur(20px);
+        border:2px solid #ffffff60;
+        box-shadow:0 10px 30px rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .header{
+        text-align:center;
+        font-size:1.5rem;
+        font-weight:700;
+        color:#ff5fa2;
+        letter-spacing:1px;
+    }
+    .credit{
+        text-align:center;
+        margin-top:15px;
+        font-size:0.95rem;
+        color:#555;
+        font-weight:500;
+    }
+    #angleToggle {
+        cursor: pointer;
+        background: #d7e3ff;
+        color: #2a4fb9;
+        border: none;
+        border-radius: 15px;
+        padding: 6px 12px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        align-self: center;
+        user-select: none;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        transition: background 0.3s ease;
+    }
+    #angleToggle:hover {
+        background: #a6bfff;
+    }
+    .display{
+        width:100%;
+        height:80px;
+        border:none;
+        padding:20px;
+        font-size:1.7rem;
+        border-radius:20px;
+        background:#ffffffd9;
+        outline:none;
+        color:#333;
+        font-weight:600;
+        box-shadow:inset 0 0 15px rgba(0,0,0,0.1);
+        text-align: right;
+    }
+    .btn-grid{
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:15px;
+    }
+    button{
+        padding:15px;
+        border:none;
+        font-size:1rem;
+        border-radius:18px;
+        background:#ffe3ef;
+        color:#444;
+        cursor:pointer;
+        transition:0.2s;
+        font-weight:600;
+        box-shadow:0 6px 12px rgba(0,0,0,0.1);
+        user-select: none;
+    }
+    button:hover{
+        transform:scale(1.08);
+        box-shadow:0 10px 18px rgba(0,0,0,0.15);
+    }
+    .op{
+        background:#ffd3e0;
+        color:#d4006f;
+        font-weight:700;
+    }
+    .pastel-blue{ background:#d7e3ff; color:#2a4fb9; }
+    .pastel-green{ background:#d4fff2; color:#0f8a6c; }
+    .pastel-purple{ background:#e9d6ff; color:#7a3ac1; }
+    .equal{
+        background:#ff5fa2;
+        color:white;
+        font-weight:700;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Scientific Calculator</div>
+        
+        <button id="angleToggle" title="Toggle between Degrees and Radians">Mode: DEG</button>
+        <input type="text" id="display" class="display" disabled />
+
+        <div class="btn-grid">
+            <button onclick="clearDisplay()" class="op">C</button>
+            <button onclick="del()" class="op">DEL</button>
+            <button onclick="insert('(')" class="pastel-purple">(</button>
+            <button onclick="insert(')')" class="pastel-purple">)</button>
+            <button onclick="insert('%')" class="pastel-purple">%</button>
+
+            <button onclick="insert('sin(')" class="pastel-blue">sin</button>
+            <button onclick="insert('cos(')" class="pastel-blue">cos</button>
+            <button onclick="insert('tan(')" class="pastel-blue">tan</button>
+            <button onclick="insert('log(')" class="pastel-green">log</button>
+            <button onclick="insert('ln(')" class="pastel-green">ln</button>
+
+            <button onclick="insert('asin(')" class="pastel-blue">asin</button>
+            <button onclick="insert('acos(')" class="pastel-blue">acos</button>
+            <button onclick="insert('atan(')" class="pastel-blue">atan</button>
+            <button onclick="insert('sqrt(')" class="pastel-green">√</button>
+            <button onclick="insert('^')" class="pastel-purple">^</button>
+
+            <button onclick="insert('7')">7</button>
+            <button onclick="insert('8')">8</button>
+            <button onclick="insert('9')">9</button>
+            <button onclick="insert('/')" class="pastel-purple">÷</button>
+            <button onclick="scientific('!')" class="pastel-purple">n!</button>
+
+            <button onclick="insert('4')">4</button>
+            <button onclick="insert('5')">5</button>
+            <button onclick="insert('6')">6</button>
+            <button onclick="insert('*')" class="pastel-purple">×</button>
+            <button onclick="insert('pi')" class="pastel-green">π</button>
+
+            <button onclick="insert('1')">1</button>
+            <button onclick="insert('2')">2</button>
+            <button onclick="insert('3')">3</button>
+            <button onclick="insert('-')" class="pastel-purple">−</button>
+            <button onclick="insert('e')" class="pastel-green">e</button>
+
+            <button onclick="insert('0')" class="wide">0</button>
+            <button onclick="insert('.')">.</button>
+            <button onclick="calculate()" class="equal">=</button>
+            <button onclick="insert('+')" class="pastel-purple">+</button>
+        </div>
+
+        <div class="credit">Designed & Developed by <b>Alina Liaquat</b></div>
+    </div>
+
+<script>
+    const display = document.getElementById('display');
+    const angleToggle = document.getElementById('angleToggle');
+    let angleMode = 'DEG'; // or RAD
+
+    angleToggle.addEventListener('click', () => {
+        angleMode = angleMode === 'DEG' ? 'RAD' : 'DEG';
+        angleToggle.textContent = `Mode: ${angleMode}`;
+    });
+
+    function insert(value){
+        if(value === 'pi') {
+            display.value += Math.PI.toFixed(8);
+        } else if(value === 'e') {
+            display.value += Math.E.toFixed(8);
+        } else {
+            display.value += value;
+        }
+    }
+
+    function clearDisplay(){
+        display.value = '';
+    }
+
+    function del(){
+        display.value = display.value.slice(0,-1);
+    }
+
+    function scientific(func){
+        try {
+            if(func === '!'){
+                let val = evalExpression(display.value);
+                display.value = factorial(val);
+            }
+        } catch {
+            display.value = 'Error';
+        }
+    }
+
+    function calculate(){
+        try {
+            let expr = display.value;
+
+            // Replace '^' with '**' for exponentiation
+            expr = expr.replace(/\^/g, '**');
+
+            // Replace scientific functions with JS Math functions:
+            expr = expr.replace(/sin\(/g, 'trigWrap("sin",');
+            expr = expr.replace(/cos\(/g, 'trigWrap("cos",');
+            expr = expr.replace(/tan\(/g, 'trigWrap("tan",');
+            expr = expr.replace(/asin\(/g, 'trigWrap("asin",');
+            expr = expr.replace(/acos\(/g, 'trigWrap("acos",');
+            expr = expr.replace(/atan\(/g, 'trigWrap("atan",');
+
+            expr = expr.replace(/log\(/g, 'Math.log10(');
+            expr = expr.replace(/ln\(/g, 'Math.log(');
+            expr = expr.replace(/sqrt\(/g, 'Math.sqrt(');
+
+            // Evaluate expression
+            let result = eval(expr);
+            display.value = tidyNumber(result);
+        } catch (e) {
+            display.value = 'Error';
+        }
+    }
+
+    function evalExpression(expr) {
+        // For factorial, need to evaluate the current expression safely
+        expr = expr.replace(/\^/g, '**');
+
+        expr = expr.replace(/sin\(/g, 'trigWrap("sin",');
+        expr = expr.replace(/cos\(/g, 'trigWrap("cos",');
+        expr = expr.replace(/tan\(/g, 'trigWrap("tan",');
+        expr = expr.replace(/asin\(/g, 'trigWrap("asin",');
+        expr = expr.replace(/acos\(/g, 'trigWrap("acos",');
+        expr = expr.replace(/atan\(/g, 'trigWrap("atan",');
+
+        expr = expr.replace(/log\(/g, 'Math.log10(');
+        expr = expr.replace(/ln\(/g, 'Math.log(');
+        expr = expr.replace(/sqrt\(/g, 'Math.sqrt(');
+
+        return eval(expr);
+    }
+
+    function factorial(n){
+        n = Number(n);
+        if(!Number.isInteger(n) || n < 0) throw new Error('Factorial only for non-negative integers');
+        if(n === 0 || n === 1) return 1;
+        let result = 1;
+        for(let i=2; i<=n; i++) result *= i;
+        return result;
+    }
+
+    function tidyNumber(n){
+        if(typeof n !== 'number' || !isFinite(n)) return n;
+        return Math.round(n * 1e12)/1e12;
+    }
+
+    function trigWrap(func, val) {
+        if(typeof val !== 'number') {
+            val = Number(val);
+            if(isNaN(val)) throw new Error('Invalid input');
+        }
+        if(['sin','cos','tan'].includes(func)) {
+            if(angleMode === 'DEG') {
+                val = val * Math.PI / 180;
+            }
+            return Math[func](val);
+        } else {
+            // inverse trig functions
+            let res = Math[func](val);
+            if(angleMode === 'DEG') {
+                res = res * 180 / Math.PI;
+            }
+            return res;
+        }
+    }
+</script>
+</body>
+</html>

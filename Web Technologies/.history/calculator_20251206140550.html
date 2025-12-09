@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scientific Calculator — Aurora Glass Theme</title>
+  <style>
+    :root{
+      --bg: #04060c;
+      --glass1: rgba(255,255,255,0.05);
+      --glass2: rgba(255,255,255,0.03);
+      --neon1: #8cfaff;
+      --neon2: #a37bff;
+      --neon3: #5df2c2;
+      --text: #e9f2ff;
+      --muted: #8ea6c8;
+      font-family: "Poppins", sans-serif;
+    }
+    body{
+      margin:0;
+      background: radial-gradient(circle at 30% 20%,rgba(140,250,255,0.08),transparent 60%),
+                  radial-gradient(circle at 70% 80%,rgba(163,123,255,0.08),transparent 60%),
+                  #04060c;
+      display:flex;align-items:center;justify-content:center;height:100vh;color:var(--text);
+    }
+    .calculator{
+      width:380px;max-width:94vw;
+      background: var(--glass1);
+      backdrop-filter: blur(14px) saturate(160%);
+      border-radius:22px;
+      padding:22px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 1px rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.07);
+      display:flex;flex-direction:column;gap:15px;
+    }
+
+    .header{
+      display:flex;justify-content:space-between;align-items:center;
+    }
+    .brand{display:flex;gap:12px;align-items:center;}
+    .logo{
+      width:48px;height:48px;border-radius:12px;
+      background: linear-gradient(135deg,var(--neon2),var(--neon1));
+      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+      color:#fff;box-shadow:0 0 16px rgba(163,123,255,0.7);
+    }
+    .title{font-size:15px;font-weight:600}
+    .subtitle{font-size:11px;color:var(--muted)}
+
+    .display{
+      background: var(--glass2);
+      border-radius:14px;
+      padding:18px;
+      min-height:90px;
+      display:flex;flex-direction:column;gap:8px;
+      box-shadow: inset 0 -8px 20px rgba(0,0,0,0.4);
+    }
+    .expression{font-size:15px;color:var(--muted);min-height:20px;word-break:break-all;}
+    .output{font-size:30px;font-weight:700;text-align:right;}
+
+    .pad{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+
+    button.key{
+      padding:12px;font-size:15px;
+      border:0;border-radius:12px;
+      background: rgba(255,255,255,0.04);
+      color:var(--text);font-weight:600;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      cursor:pointer;
+      transition:0.18s ease;
+    }
+    button.key:hover{
+      background: rgba(255,255,255,0.08);
+      box-shadow:0 0 16px var(--neon1);
+    }
+    button.eq{
+      background: linear-gradient(135deg,var(--neon3),var(--neon2));
+      color:#000;font-weight:700;box-shadow:0 0 15px var(--neon3);
+    }
+    button.clear{background: linear-gradient(135deg,#ff6b7b,#ff4658);color:#fff;}
+
+    .wide{grid-column:span 2;}
+
+    .footer{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;}
+  </style>
+</head>
+<body>
+  <main class="calculator">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">SC</div>
+        <div>
+          <div class="title">Scientific Calculator</div>
+          <div class="subtitle">Aurora Glass — Developed by Alina Liaquat</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="display" id="display">
+      <div class="expression" id="expression"></div>
+      <div class="output" id="result">0</div>
+    </div>
+
+    <div class="pad" id="pad">
+      <button class="key" data-value="mc">MC</button>
+      <button class="key" data-value="mr">MR</button>
+      <button class="key" data-value="mplus">M+</button>
+      <button class="key" data-value="mminus">M-</button>
+      <button class="key" data-value="(">(</button>
+      <button class="key" data-value=")">)</button>
+
+      <button class="key" data-value="sin(">sin</button>
+      <button class="key" data-value="cos(">cos</button>
+      <button class="key" data-value="tan(">tan</button>
+      <button class="key" data-value="ln(">ln</button>
+      <button class="key" data-value="log(">log</button>
+      <button class="key" data-value="sqrt(">√</button>
+
+      <button class="key" data-value="7">7</button>
+      <button class="key" data-value="8">8</button>
+      <button class="key" data-value="9">9</button>
+      <button class="key" data-value="/">÷</button>
+      <button class="key" data-value="%">%</button>
+      <button class="key clear" data-value="C">C</button>
+
+      <button class="key" data-value="4">4</button>
+      <button class="key" data-value="5">5</button>
+      <button class="key" data-value="6">6</button>
+      <button class="key" data-value="*">×</button>
+      <button class="key" data-value="^">xʸ</button>
+      <button class="key" data-value="del">⌫</button>
+
+      <button class="key" data-value="1">1</button>
+      <button class="key" data-value="2">2</button>
+      <button class="key" data-value="3">3</button>
+      <button class="key" data-value="-">−</button>
+      <button class="key eq" data-value="=">=</button>
+
+      <button class="key wide" data-value="0">0</button>
+      <button class="key" data-value=".">.</button>
+      <button class="key" data-value="+">+</button>
+      <button class="key" data-value="pi">π</button>
+      <button class="key" data-value="e">e</button>
+    </div>
+
+    <div class="footer">
+      <div>Keyboard supported</div>
+      <div>© Aurora UI</div>
+    </div>
+  </main>
+
+  <script>
+    const exprEl = document.getElementById('expression');
+    const resEl = document.getElementById('result');
+    let expression = '';
+
+    document.getElementById('pad').addEventListener('click', e=>{
+      const btn = e.target.closest('button');
+      if(!btn) return;
+      const v = btn.dataset.value;
+      if(v==='C'){expression='';resEl.textContent='0';exprEl.textContent='';return;}
+      if(v==='del'){expression=expression.slice(0,-1);exprEl.textContent=expression;return;}
+      if(v==='='){
+        try{
+          const out = Function(`return (${expression.replace('^','**')})`)();
+          resEl.textContent = out;
+          expression = String(out);
+          exprEl.textContent = expression;
+        }catch{
+          resEl.textContent='Error';
+        }
+        return;
+      }
+      expression += v;
+      exprEl.textContent = expression;
+    });
+  </script>
+</body>
+</html>

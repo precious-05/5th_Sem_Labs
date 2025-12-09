@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerHub - Job Portal</title>
+
+    <style>
+        /* Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #eef2ff;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #4b79ff, #6d8aff);
+            padding: 22px 55px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 32px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd36b;
+            letter-spacing: 1px;
+        }
+
+        /* Hero */
+        .hero {
+            height: 75vh;
+            background: 
+              linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
+              url("https://images.unsplash.com/photo-1521791136064-7986c2920216") 
+              center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 70px;
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 60px;
+            max-width: 600px;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 470px;
+            margin-top: 10px;
+            animation: fadeIn 1.8s ease forwards;
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 14px 35px;
+            background: #ffd36b;
+            color: black;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        
+
+       
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-top: 70px;
+            font-size: 35px;
+            font-weight: 700;
+            color: #3d4bef;
+        }
+
+        /* Jobs */
+        .jobs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 40px 70px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            border-left: 6px solid #4b79ff;
+        }
+
+       
+
+        .job-card h3 {
+            color: #4b79ff;
+            margin-bottom: 10px;
+        }
+
+        .apply-btn {
+            margin-top: 15px;
+            background: #4b79ff;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+        }
+
+        .apply-btn:hover {
+            background: #355aff;
+        }
+
+        /* Articles */
+        .articles {
+            padding: 20px 70px 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 35px;
+        }
+
+        .article {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transition: 0.3s;
+        }
+
+        .article:hover {
+            transform: scale(1.04);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .article img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-content h4 {
+            color: #4b79ff;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .article-content p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #444;
+            text-align: justify;
+        }
+
+        /* Footer */
+        footer {
+            background: #4b5aff;
+            padding: 25px;
+            color: white;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CareerHub</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#jobs">Jobs</a>
+        <a href="#articles">Articles</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Build Your Future With The Right Opportunity</h2>
+    <p>Discover top job openings, career advice, and tools to help you grow professionally. Your future starts here.</p>
+    <a href="#jobs" class="btn">Explore Jobs</a>
+</section>
+
+<h2 class="section-title" id="jobs">Latest Job Openings</h2>
+
+<section class="jobs">
+
+    <div class="job-card">
+        <h3>Frontend Developer</h3>
+        <p>Company: Google</p>
+        <p>Location: Remote</p>
+        <p>Salary: $80k - $120k</p>
+        <a class="apply-btn">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+        <h3>UI/UX Designer</h3>
+        <p>Company: Microsoft</p>
+        <p>Location: Karachi</p>
+        <p>Salary: Rs 150,000 - 300,000</p>
+        <a class="apply-btn">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+        <h3>Python Developer</h3>
+        <p>Company: Amazon</p>
+        <p>Location: Islamabad</p>
+        <p>Salary: $90k - $150k</p>
+        <a class="apply-btn">Apply Now</a>
+    </div>
+
+    <div class="job-card">
+        <h3>Data Analyst</h3>
+        <p>Company: Meta (Facebook)</p>
+        <p>Location: Lahore</p>
+        <p>Salary: Rs 180,000 - 320,000</p>
+        <a class="apply-btn">Apply Now</a>
+    </div>
+
+</section>
+
+<h2 class="section-title" id="articles">Career Articles</h2>
+
+<section class="articles">
+
+    <div class="article">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="">
+        <div class="article-content">
+            <h4>How to Build a Strong CV</h4>
+            <p>
+                A strong CV is your gateway to professional success. It should clearly highlight your expertise,
+                strengths, and achievements in a clean and organized layout. Recruiters spend only a few seconds
+                scanning CVs, so formatting matters a lot. Use bullet points, professional fonts, and avoid long
+                paragraphs. Tailor your CV to each job application and mention measurable achievements such as
+                "increased sales by 40%" or "optimized system performance by 30%". Adding relevant keywords will
+                help your CV pass through automated Applicant Tracking Systems (ATS). Be honest, be clear, and
+                make every word count.
+            </p>
+        </div>
+    </div>
+
+    <div class="article">
+        <img src="https://images.unsplash.com/photo-1488998427799-e3362cec87c3" alt="">
+        <div class="article-content">
+            <h4>Top Interview Tips for Beginners</h4>
+            <p>
+                Interview preparation is essential for landing your dream job. Start by understanding the company,
+                its mission, and the role you're applying for. Practice common interview questions such as 
+                “Tell me about yourself”, “Why should we hire you?”, and “Explain your strengths and weaknesses”.
+                Speak confidently, maintain eye contact, and always dress professionally. Bring a printed copy of
+                your CV. Employers appreciate candidates with good communication skills and a positive attitude.
+                After the interview, send a polite thank-you email. This small gesture sets you apart from others.
+            </p>
+        </div>
+    </div>
+
+    <div class="article">
+        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692" alt="">
+        <div class="article-content">
+            <h4>Skills You Must Learn in 2025</h4>
+            <p>
+                The job market is rapidly evolving, and companies now demand modern skills. In 2025, the most
+                valuable skills include artificial intelligence, data science, cloud computing, blockchain,
+                UI/UX designing, and advanced cybersecurity. Soft skills such as communication, teamwork,
+                creativity, and adaptability are equally important. Learning these skills will significantly
+                increase your employability. Stay updated by joining online courses, workshops, and tech
+                communities. Continuous learning is the key to long-term career success.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<footer>
+    © 2025 CareerHub Job Portal | Designed By Razia Kalsoom
+</footer>
+
+</body>
+</html>

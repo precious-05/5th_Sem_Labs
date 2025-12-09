@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Hub - Operating Systems Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Resources Reference:
+           - Font Awesome Icons: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
+           - Google Fonts: Segoe UI (system font)
+           - CSS Techniques: CSS Grid, Flexbox, CSS Variables, CSS Animations, Transitions
+           - Design Inspiration: Modern web design trends with gradient headers and card-based layouts
+        */
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--light);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image Slider */
+        .slider-section {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            height: 500px;
+        }
+
+        .slider {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            animation: slideAnimation 20s infinite;
+        }
+
+        .slide {
+            width: 25%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 30px;
+        }
+
+        .slide-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Articles Section */
+        .articles-section {
+            padding: 80px 0;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .article-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .article-card:hover .article-img img {
+            transform: scale(1.1);
+        }
+
+        .article-content {
+            padding: 20px;
+        }
+
+        .article-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .article-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #999;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        /* Article Slider */
+        .article-slider-section {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .article-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .article-slides {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: articleSlideAnimation 18s infinite;
+        }
+
+        .article-slide {
+            width: 33.33%;
+            padding: 0 20px;
+        }
+
+        .article-slide-content {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .article-slide-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .article-slide-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .article-slide-content:hover .article-slide-img img {
+            transform: scale(1.05);
+        }
+
+        .article-slide-text {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-slide-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .article-slide-text p {
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CSS-only Slider Animations */
+        @keyframes slideAnimation {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(0); }
+            25% { transform: translateX(-25%); }
+            45% { transform: translateX(-25%); }
+            50% { transform: translateX(-50%); }
+            70% { transform: translateX(-50%); }
+            75% { transform: translateX(-75%); }
+            95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes articleSlideAnimation {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(0); }
+            33% { transform: translateX(-33.33%); }
+            63% { transform: translateX(-33.33%); }
+            66% { transform: translateX(-66.66%); }
+            97% { transform: translateX(-66.66%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Pulsing animation for call-to-action */
+        .pulse {
+            animation: pulseAnimation 2s infinite;
+        }
+
+        @keyframes pulseAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Hover effects for interactive elements */
+        .interactive-card {
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .interactive-card:hover:before {
+            left: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .slider-container {
+                height: 300px;
+            }
+
+            .slide-content {
+                padding: 20px;
+            }
+
+            .slide-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .article-slider {
+                height: 600px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .article-slider {
+                height: 700px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <h1>OS Hub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#articles">Articles</a></li>
+                    <li><a href="#types">OS Types</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h2>Explore the World of Operating Systems</h2>
+            <p>Discover how different operating systems power our devices and shape our digital experiences.</p>
+            <a href="#articles" class="btn pulse">Explore Articles</a>
+        </div>
+    </section>
+
+    <!-- Image Slider Section -->
+    <section class="slider-section" id="types">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Operating Systems</h2>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Windows OS">
+                        <div class="slide-content">
+                            <h3>Windows</h3>
+                            <p>The most popular desktop OS with a user-friendly interface and extensive software compatibility.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="macOS">
+                        <div class="slide-content">
+                            <h3>macOS</h3>
+                            <p>Apple's elegant and powerful operating system known for its stability and seamless integration with Apple devices.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Linux">
+                        <div class="slide-content">
+                            <h3>Linux</h3>
+                            <p>An open-source OS favored by developers for its flexibility, security, and customization options.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Android">
+                        <div class="slide-content">
+                            <h3>Android</h3>
+                            <p>The world's most popular mobile OS, powering billions of smartphones and tablets globally.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="articles-section" id="articles">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Articles</h2>
+            </div>
+            <div class="articles-grid">
+                <article class="article-card interactive-card">
+                    <div class="article-img">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Operating System Evolution">
+                    </div>
+                    <div class="article-content">
+                        <h3>The Evolution of Operating Systems</h3>
+                        <p>Explore how operating systems have transformed from simple batch processing systems to sophisticated platforms that power our modern digital world.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> March 15, 2023</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="article-card interactive-card">
+                    <div class="article-img">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Mobile OS Comparison">
+                    </div>
+                    <div class="article-content">
+                        <h3>iOS vs Android: A Comprehensive Comparison</h3>
+                        <p>Dive into the key differences between the two dominant mobile operating systems and understand their strengths and weaknesses.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> April 2, 2023</span>
+                            <span><i class="far fa-clock"></i> 10 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="article-card interactive-card">
+                    <div class="article-img">
+                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Linux Distributions">
+                    </div>
+                    <div class="article-content">
+                        <h3>Top Linux Distributions for Beginners</h3>
+                        <p>Discover the most user-friendly Linux distributions that make the transition from Windows or macOS smooth and enjoyable.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> April 18, 2023</span>
+                            <span><i class="far fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Slider Section -->
+    <section class="article-slider-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>In-Depth Analysis</h2>
+            </div>
+            <div class="article-slider">
+                <div class="article-slides">
+                    <div class="article-slide">
+                        <div class="article-slide-content interactive-card">
+                            <div class="article-slide-img">
+                                <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Linux Kernel">
+                            </div>
+                            <div class="article-slide-text">
+                                <h3>Understanding the Linux Kernel</h3>
+                                <p>The Linux kernel is the core component of the Linux operating system. It acts as an intermediary between the computer's hardware and the software applications running on the system. This article explores the architecture, functionality, and development process of the Linux kernel.</p>
+                                <a href="#" class="btn">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-slide">
+                        <div class="article-slide-content interactive-card">
+                            <div class="article-slide-img">
+                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Windows Architecture">
+                            </div>
+                            <div class="article-slide-text">
+                                <h3>Windows Architecture: A Deep Dive</h3>
+                                <p>Microsoft Windows has evolved significantly since its initial release in 1985. This article examines the architectural changes through different versions, from the early days of Windows 1.0 to the modern Windows 11. We'll explore the kernel mode, user mode, and executive services.</p>
+                                <a href="#" class="btn">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-slide">
+                        <div class="article-slide-content interactive-card">
+                            <div class="article-slide-img">
+                                <img src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="macOS Features">
+                            </div>
+                            <div class="article-slide-text">
+                                <h3>macOS: The UNIX Powerhouse</h3>
+                                <p>Built on a UNIX foundation, macOS combines the power of a command-line environment with an elegant graphical interface. This article explores the Darwin core, Cocoa and Carbon application frameworks, and the security features that make macOS a favorite among creative professionals.</p>
+                                <a href="#" class="btn">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About OS Hub</h3>
+                    <p>OS Hub is dedicated to providing comprehensive information about various operating systems, their features, and how they impact our digital lives.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#articles">Articles</a></li>
+                        <li><a href="#types">OS Types</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Popular Topics</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Windows 11</a></li>
+                        <li><a href="#">macOS Ventura</a></li>
+                        <li><a href="#">Linux Distributions</a></li>
+                        <li><a href="#">Mobile OS Comparison</a></li>
+                        <li><a href="#">Operating System Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Digital City</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+                    <p><i class="fas fa-envelope"></i> info@oshub.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 OS Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

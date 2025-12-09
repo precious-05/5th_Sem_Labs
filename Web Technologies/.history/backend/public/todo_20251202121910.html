@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Task Manager</title>
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      --success: #10b981;
+      --danger: #ef4444;
+      --radius: 12px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,#071028 0%, #071028 60%, #041023 100%);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      font-size:16px;
+    }
+
+    .app {
+      width:100%;
+      max-width:720px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.7);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    header{
+      padding:20px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      background: linear-gradient(90deg, rgba(124,58,237,0.12), rgba(6,182,212,0.06));
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+
+    .logo {
+      width:48px;
+      height:48px;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:white;
+      font-size:20px;
+      box-shadow: 0 6px 18px rgba(124,58,237,0.18);
+    }
+
+    header h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:0.2px;
+      line-height:1;
+    }
+    header p{margin:0;font-size:13px;color:var(--muted)}
+
+    .content{
+      padding:20px;
+      display:grid;
+      gap:18px;
+    }
+
+    .input-row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .task-input{
+      flex:1;
+      padding:12px 14px;
+      background:var(--glass);
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03);
+      outline:none;
+      color:inherit;
+      font-size:15px;
+      box-shadow: inset 0 -6px 14px rgba(0,0,0,0.35);
+    }
+    .task-input::placeholder{ color: #9fb0c9 }
+
+    .btn-add{
+      padding:10px 14px;
+      border-radius:10px;
+      background: linear-gradient(180deg,var(--accent),#5b21b6);
+      color:white;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      box-shadow: 0 8px 18px rgba(92,33,192,0.18);
+    }
+    .btn-add:active{ transform:translateY(1px) }
+
+    .meta {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .list-wrap{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border-radius:10px;
+      padding:12px;
+      min-height:80px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    ul.task-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .task-item{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px;
+      border-radius:10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.015);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .task-item:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(2,6,23,0.6) }
+
+    .checkbox{
+      width:18px;
+      height:18px;
+      border-radius:6px;
+      background:transparent;
+      border:2px solid rgba(255,255,255,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      flex-shrink:0;
+    }
+    .checkbox.checked{
+      background: linear-gradient(180deg,var(--success), #059669);
+      border-color: rgba(255,255,255,0.06);
+      color:white;
+      font-weight:700;
+      font-size:12px;
+    }
+
+    .task-text{
+      flex:1;
+      word-break:break-word;
+      font-size:15px;
+      color: #e6eef8;
+    }
+
+    .task-text.done{
+      text-decoration: line-through;
+      opacity:0.6;
+      color: #9fb0c9;
+    }
+
+    .task-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .btn{
+      border:0;
+      padding:8px 10px;
+      border-radius:8px;
+      cursor:pointer;
+      background:transparent;
+      color:var(--muted);
+      font-weight:600;
+      font-size:13px;
+    }
+
+    .btn.delete{
+      color:var(--danger);
+    }
+
+    .empty{
+      text-align:center;
+      color:var(--muted);
+      padding:14px 10px;
+      font-size:14px;
+    }
+
+    footer{
+      padding:12px 20px;
+      border-top:1px solid rgba(255,255,255,0.02);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    @media (max-width:520px){
+      header{padding:14px}
+      .content{padding:14px}
+      .logo{width:44px;height:44px;font-size:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="app" role="application" aria-label="Simple Task Manager">
+    <header>
+      <div class="logo" aria-hidden="true">TM</div>
+      <div>
+        <h1>Task Manager</h1>
+        <p>Add tasks quickly — press Enter or click Add.</p>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="input-row" role="region" aria-label="Add new task">
+        <input id="taskInput" class="task-input" type="text" placeholder="Type a task (e.g. Buy groceries)" aria-label="Task description" />
+        <button id="addBtn" class="btn-add" aria-label="Add task">Add</button>
+      </div>
+
+      <div class="meta" aria-hidden="true">
+        <div id="count">0 tasks</div>
+        <div>Press Enter to add • Click task checkbox to mark done</div>
+      </div>
+
+      <div class="list-wrap" id="listWrap">
+        <ul id="taskList" class="task-list" aria-live="polite"></ul>
+        <div id="emptyState" class="empty">No tasks yet — add your first task!</div>
+      </div>
+    </main>
+
+    <footer>
+      <div id="leftInfo">Simple local task list</div>
+      <div id="rightInfo">Made with ❤</div>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const input = document.getElementById('taskInput');
+      const addBtn = document.getElementById('addBtn');
+      const list = document.getElementById('taskList');
+      const empty = document.getElementById('emptyState');
+      const count = document.getElementById('count');
+
+      let tasks = []; // in-memory list. To persist, extend with localStorage.
+
+      function updateUI(){
+        list.innerHTML = '';
+        if(tasks.length === 0){
+          empty.style.display = 'block';
+        } else {
+          empty.style.display = 'none';
+        }
+
+        tasks.forEach((t, idx) => {
+          const li = document.createElement('li');
+          li.className = 'task-item';
+          li.dataset.index = idx;
+
+          // checkbox
+          const chk = document.createElement('button');
+          chk.className = 'checkbox' + (t.done ? ' checked' : '');
+          chk.setAttribute('aria-label', t.done ? 'Mark task as not done' : 'Mark task as done');
+          chk.title = t.done ? 'Undo' : 'Done';
+          chk.innerHTML = t.done ? '✓' : '';
+          chk.addEventListener('click', () => {
+            tasks[idx].done = !tasks[idx].done;
+            updateUI();
+          });
+
+          // text
+          const text = document.createElement('div');
+          text.className = 'task-text' + (t.done ? ' done' : '');
+          text.textContent = t.text;
+
+          // actions (delete)
+          const actions = document.createElement('div');
+          actions.className = 'task-actions';
+
+          const del = document.createElement('button');
+          del.className = 'btn delete';
+          del.setAttribute('aria-label', 'Delete task');
+          del.textContent = 'Delete';
+          del.addEventListener('click', () => {
+            tasks.splice(idx, 1);
+            updateUI();
+          });
+
+          actions.appendChild(del);
+
+          li.appendChild(chk);
+          li.appendChild(text);
+          li.appendChild(actions);
+          list.appendChild(li);
+        });
+
+        count.textContent = tasks.length + (tasks.length === 1 ? ' task' : ' tasks');
+      }
+
+      function addTask(){
+        const val = input.value.trim();
+        if(!val){
+          input.value = '';
+          input.focus();
+          return;
+        }
+        // create task obj
+        tasks.unshift({ text: val, done: false, created: Date.now() });
+        input.value = '';
+        input.focus();
+        updateUI();
+      }
+
+      // events
+      addBtn.addEventListener('click', addTask);
+      input.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter') addTask();
+      });
+
+      // optional: focus input on load
+      window.addEventListener('load', () => input.focus());
+
+      // initial UI render
+      updateUI();
+    })();
+  </script>
+</body>
+</html>

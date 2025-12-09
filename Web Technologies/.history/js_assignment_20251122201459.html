@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics</title>
+    <style>
+        body { font-family: Arial; 
+            
+             margin: 0;
+             background-color: #f3f3f3;
+            }
+        h2 { color: darkblue; }
+        .output { 
+            background: #f0f0f0; 
+            padding: 10px; 
+            margin-top: 10px; 
+            border-radius: 5px;
+        }
+        button {
+            padding: 6px 12px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header style="background-color: blueviolet; padding: 20px;" ><h1 style="text-align: center; color:beige">JavaScript Assignment</h1></header>
+     <!--------------------------- 1. DATA TYPES --------------------------->
+     <h2>Declare Data Types</h2>
+     <button onclick="dataTypes()">Run Code</button>    <!--  onclick() is event listener  -->
+     <div id="output1"  class="output"></div>
+
+      <!--------------------------- 2. TERNARY --------------------------->
+      <h2>Check Minor or Adult using Ternary Operator</h2>
+      <button onclick="checkAge()">Run Code</button>
+      <div id="output2"  class="output"></div>
+
+       <!--------------------------- 3. LOGICAL OPERATORS --------------------------->
+    <h2>AND - OR - NOT Operators</h2>
+    <button onclick="logicCheck()">Run Code</button>
+    <div id="output3" class="output"></div>
+
+     <!---------------------------  4. FOR LOOP --------------------------->
+    <h2> Print 1 to 10 Using For Loop</h2>
+    <button onclick="loopTen()">Run Code</button>
+    <div id="output4" class="output"></div>
+
+
+    <!---------------------------  5. DO-WHILE --------------------------->
+    <h2> Even - Odd from 1 to 20 (Do While Loop)</h2>
+    <button onclick="evenOdd()">Run Code</button>
+    <div id="output5" class="output"></div>
+
+
+
+
+    <script>
+        // ------------------ 1. DATA TYPES ------------------
+        function dataTypes()
+        {
+            let newString = "JavaScript Assignment";
+            let myNumber = 100;
+            let newBoolean = true;
+            let FruitsArray= ["Apple", "Banana", "Cherry"];
+            document.getElementById("output1").innerHTML=
+            "String: "+ newString + "<br>" +
+            "Number: "+ myNumber + "<br>" +
+            "Boolean Value: " + newBoolean + "<br>" +
+            "Array of Fruits: " + FruitsArray ;
+
+        }
+
+
+        //  -----------------    Age Checking -----------------
+        function checkAge()
+        {
+            let age = prompt("Enter Your Age: ");
+            let result = (age>=18)? "You are an adult" : "You are a Minor";
+            document.getElementById("output2").innerHTML=result;
+        }
+
+            
+        // ----------------   Logical Operators ------------------
+        function logicCheck()
+        {
+            
+        }
+
+
+
+    </script>
+
+    
+</body>
+</html>
