@@ -1,0 +1,106 @@
+/* Background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #2a2a72, #009ffd);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glassmorphic container */
+.container {
+    width: 380px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Title */
+.title {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Form Inputs */
+.input-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    transition: 0.3s ease;
+    backdrop-filter: blur(6px);
+}
+
+.input-group input::placeholder {
+    color: #e0e0e0;
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.03);
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    color: #2a2a72;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.4s ease;
+}
+
+.btn:hover {
+    background: #f1f1f1;
+    transform: translateY(-3px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 420px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+}
