@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaming Hub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #1c1c1c, #3a3a3a);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #ff4b2b;
+      color: #fff;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #ff416c;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Gaming Hub 🎮</h1>
+  <p>Play Tic Tac Toe and Snake, track your scores, and compete!</p>
+
+  <div>
+    <button onclick="goToLogin()">Login</button>
+    <button onclick="goToSignup()">Sign Up</button>
+  </div>
+
+  <script>
+    function goToLogin() {
+      window.location.href = "pages/login.html"; // update path if needed
+    }
+
+    function goToSignup() {
+      window.location.href = "pages/signup.html"; // update path if needed
+    }
+  </script>
+</body>
+</html>

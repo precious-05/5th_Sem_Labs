@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake Game</title>
+  <link rel="stylesheet" href="../css/snake.css">
+</head>
+<body>
+
+  <div class="game-container">
+    <h2>Player: <span id="username">User</span></h2>
+    <h3>Score: <span id="score">0</span></h3>
+
+    <canvas id="game" width="400" height="400"></canvas>
+
+    <p id="status"></p>
+
+    <button onclick="restartGame()">Restart</button>
+    <button onclick="goBack()">Back to Dashboard</button>
+  </div>
+
+  <script src="../js/snake.js"></script>
+</body>
+</html>

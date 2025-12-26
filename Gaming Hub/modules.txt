@@ -1,0 +1,23 @@
+npm init -y
+npm install express 
+npm install mongoose 
+npm install cors
+npm install bcryptjs
+npm install -g serve
+
+
+Globally Instal Nodemon:
+npm install -g nodemon
+Verification: nodemon -v
+
+
+Run project:
+cd backend
+nodemon server.js
+
+cd backend
+npm run dev
+
+
+
+

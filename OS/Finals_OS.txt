@@ -1,0 +1,7 @@
+Page Replacement 
+Deadlock Avoidance and Recovery Algorithm 
+DeadLoCK detector
+Address translation Converter (Physical to logical ,Logical to Physical)
+IPC 
+Banker Deadlock Avoidance 
+Demand Paging Demo Algorithm 

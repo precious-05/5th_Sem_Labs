@@ -1,0 +1,10 @@
+Student Registeration:
+---------------------------
+student Name
+Student FatherName
+Student ID Card Number
+Student Age
+Student Email 
+Student Phone Number
+Student Home Address
+

@@ -1,0 +1,11 @@
+I:\5th_Sem_Labs\Tabs\bin\Debug\Tabs.exe.config
+I:\5th_Sem_Labs\Tabs\bin\Debug\Tabs.exe
+I:\5th_Sem_Labs\Tabs\bin\Debug\Tabs.pdb
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.csproj.AssemblyReference.cache
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.Form1.resources
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.Properties.Resources.resources
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.csproj.GenerateResource.cache
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.exe
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.pdb
+I:\5th_Sem_Labs\Tabs\obj\Debug\Tabs.exe.config

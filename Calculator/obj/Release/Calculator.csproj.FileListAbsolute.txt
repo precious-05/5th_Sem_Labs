@@ -1,0 +1,10 @@
+I:\5th_Sem_Labs\Calculator\bin\Release\Calculator.exe.config
+I:\5th_Sem_Labs\Calculator\bin\Release\Calculator.exe
+I:\5th_Sem_Labs\Calculator\bin\Release\Calculator.pdb
+I:\5th_Sem_Labs\Calculator\obj\Release\Calculator.csproj.AssemblyReference.cache
+I:\5th_Sem_Labs\Calculator\obj\Release\Calculator.Form1.resources
+I:\5th_Sem_Labs\Calculator\obj\Release\Calculator.Properties.Resources.resources
+I:\5th_Sem_Labs\Calculator\obj\Release\Calculator.csproj.GenerateResource.cache
+I:\5th_Sem_Labs\Calculator\obj\Release\Calculator.csproj.CoreCompileInputs.cache
+I:\5th_Sem_Labs\Calculator\obj\Release\Calculator.exe
+I:\5th_Sem_Labs\Calculator\obj\Release\Calculator.pdb

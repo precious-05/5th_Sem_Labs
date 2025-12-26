@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <p>Logged in as: <span id="adminName">Admin</span></p>
+
+    <table id="usersTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Users will be loaded here -->
+      </tbody>
+    </table>
+
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script src="../js/admin.js"></script>
+</body>
+</html>
