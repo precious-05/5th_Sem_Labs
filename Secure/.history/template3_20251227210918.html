@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual-Theme Premium UI | Light & Dark</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Light Theme Colors */
+            --light-bg: #f8fafc;
+            --light-card: #ffffff;
+            --light-text: #1e293b;
+            --light-text-secondary: #64748b;
+            --light-border: #e2e8f0;
+            --light-shadow: rgba(0, 0, 0, 0.08);
+            --light-accent: #3b82f6;
+            --light-accent-hover: #2563eb;
+            
+            /* Dark Theme Colors */
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --dark-text: #f1f5f9;
+            --dark-text-secondary: #94a3b8;
+            --dark-border: #334155;
+            --dark-shadow: rgba(0, 0, 0, 0.3);
+            --dark-accent: #60a5fa;
+            --dark-accent-hover: #93c5fd;
+            
+            /* Current Theme (Defaults to System Preference) */
+            --bg: var(--light-bg);
+            --card: var(--light-card);
+            --text: var(--light-text);
+            --text-secondary: var(--light-text-secondary);
+            --border: var(--light-border);
+            --shadow: var(--light-shadow);
+            --accent: var(--light-accent);
+            --accent-hover: var(--light-accent-hover);
+        }
+
+        /* Dark Theme Based on System Preference */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: var(--dark-bg);
+                --card: var(--dark-card);
+                --text: var(--dark-text);
+                --text-secondary: var(--dark-text-secondary);
+                --border: var(--dark-border);
+                --shadow: var(--dark-shadow);
+                --accent: var(--dark-accent);
+                --accent-hover: var(--dark-accent-hover);
+            }
+        }
+
+        /* Theme Classes for Manual Toggle */
+        body.dark-theme {
+            --bg: var(--dark-bg);
+            --card: var(--dark-card);
+            --text: var(--dark-text);
+            --text-secondary: var(--dark-text-secondary);
+            --border: var(--dark-border);
+            --shadow: var(--dark-shadow);
+            --accent: var(--dark-accent);
+            --accent-hover: var(--dark-accent-hover);
+        }
+
+        body.light-theme {
+            --bg: var(--light-bg);
+            --card: var(--light-card);
+            --text: var(--light-text);
+            --text-secondary: var(--light-text-secondary);
+            --border: var(--light-border);
+            --shadow: var(--light-shadow);
+            --accent: var(--light-accent);
+            --accent-hover: var(--light-accent-hover);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .theme-btn {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--text);
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            transform: rotate(30deg);
+            box-shadow: 0 6px 20px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .theme-btn .fa-sun { display: none; }
+        .theme-btn .fa-moon { display: inline; }
+
+        body.dark-theme .theme-btn .fa-sun { display: inline; }
+        body.dark-theme .theme-btn .fa-moon { display: none; }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem;
+            background: var(--card);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .theme-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid var(--border);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-size: 2rem;
+            margin: 4rem 0 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text);
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        /* Grid Layout */
+        .ui-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .ui-card {
+            background: var(--card);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ui-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--shadow);
+            border-color: var(--accent);
+        }
+
+        .ui-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .ui-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .demo-area {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+        }
+
+        /* Code Container */
+        .code-container {
+            background: var(--card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.05);
+        }
+
+        .copy-success {
+            position: absolute;
+            top: 15px;
+            right: 100px;
+            background: #10b981;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        pre {
+            color: var(--text);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ========== DUAL THEME CARDS ========== */
+
+        /* Card 1: Gradient Stats Card */
+        .gradient-stats-card {
+            width: 320px;
+            background: var(--card);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+
+        .stats-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stats-value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stats-label {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .stats-change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Card 2: Profile Card with Glass Effect */
+        .profile-glass-card {
+            width: 320px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.light-theme .profile-glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .profile-glass-card:hover .profile-img {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-skills {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .skill-tag {
+            background: var(--accent);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Card 3: Feature Card with Icon Hover */
+        .feature-card {
+            width: 320px;
+            background: var(--card);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .feature-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .feature-link:hover {
+            gap: 0.8rem;
+            color: var(--accent-hover);
+        }
+
+        /* Card 4: Pricing Card */
+        .pricing-card {
+            width: 320px;
+            background: var(--card);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border: 2px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li i {
+            color: #10b981;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ========== DUAL THEME INPUTS ========== */
+
+        /* Input 1: Modern Floating Input */
+        .modern-input-group {
+            position: relative;
+            width: 300px;
+            margin: 1rem 0;
+        }
+
+        .modern-input {
+            width: 100%;
+            padding: 1.2rem 1rem 0.8rem;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            background: var(--card);
+            color: var(--text);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .modern-label {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            padding: 0 0.2rem;
+            background: var(--card);
+        }
+
+        .modern-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .modern-input:focus + .modern-label,
+        .modern-input:not(:placeholder-shown) + .modern-label {
+            top: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: var(--card);
+        }
+
+        /* Input 2: Search with Icon */
+        .search-input-group {
+            position: relative;
+            width: 300px;
+            margin: 1rem 0;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 2rem;
+            background: var(--card);
+            color: var(--text);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .search-input:focus ~ .search-icon {
+            color: var(--accent);
+        }
+
+        /* Input 3: Toggle Switch */
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .toggle-label {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Input 4: Range Slider */
+        .range-group {
+            width: 300px;
+            margin: 2rem 0 1rem;
+        }
+
+        .range-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .range-value {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border);
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 3px solid var(--card);
+            box-shadow: 0 2px 6px var(--shadow);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 3px solid var(--card);
+        }
+
+        /* ========== DUAL THEME IMAGES ========== */
+
+        /* Image 1: Card with Overlay */
+        .image-card-overlay {
+            width: 300px;
+            height: 200px;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .image-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, var(--card), transparent);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .image-card-overlay:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .image-card-overlay:hover .image-card-content {
+            transform: translateY(0);
+        }
+
+        .image-card-title {
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-card-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Image 2: Glass Image */
+        .glass-image-wrapper {
+            width: 300px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-theme .glass-image-wrapper {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .glass-image-wrapper:hover .glass-image {
+            transform: scale(1.05);
+        }
+
+        .glass-image-text {
+            padding: 1.5rem;
+        }
+
+        .glass-image-title {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .glass-image-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .footer-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .ui-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+            
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--card);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <div class="theme-toggle">
+        <button class="theme-btn" id="themeToggle">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Dual-Theme Premium UI</h1>
+            <p class="subtitle">Components that work perfectly in both light and dark themes. Toggle between themes to see the magic!</p>
+            <div class="theme-indicator">
+                <i class="fas fa-palette"></i>
+                <span>Current: <span id="currentTheme">Light Theme</span></span>
+            </div>
+        </header>
+
+        <!-- CARDS SECTION -->
+        <h2 class="section-title"><i class="fas fa-id-card"></i> Dual-Theme Cards</h2>
+        <div class="ui-grid">
+            <!-- Card 1 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-chart-bar"></i> Gradient Stats Card</h3>
+                <p class="ui-desc">Works in both themes with consistent gradient accent</p>
+                <div class="demo-area">
+                    <div class="gradient-stats-card">
+                        <div class="stats-icon-wrapper">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stats-value">24.7k</div>
+                        <div class="stats-label">Active Users</div>
+                        <div class="stats-change">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>18.5% increase</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code1')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success1">Copied!</div>
+                    <pre id="code1"><div class="gradient-stats-card">
+  <div class="stats-icon-wrapper">
+    <i class="fas fa-users"></i>
+  </div>
+  <div class="stats-value">24.7k</div>
+  <div class="stats-label">Active Users</div>
+  <div class="stats-change">
+    <i class="fas fa-arrow-up"></i>
+    <span>18.5% increase</span>
+  </div>
+</div></pre>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-user-tie"></i> Glass Profile Card</h3>
+                <p class="ui-desc">Glassmorphism effect that adapts to theme</p>
+                <div class="demo-area">
+                    <div class="profile-glass-card">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=100" alt="Profile" class="profile-img">
+                        <h3 class="profile-name">Michael Chen</h3>
+                        <p class="profile-role">Product Designer</p>
+                        <div class="profile-skills">
+                            <span class="skill-tag">UI/UX</span>
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">React</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code2')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success2">Copied!</div>
+                    <pre id="code2"><div class="profile-glass-card">
+  <img src="profile.jpg" alt="Profile" class="profile-img">
+  <h3 class="profile-name">Michael Chen</h3>
+  <p class="profile-role">Product Designer</p>
+  <div class="profile-skills">
+    <span class="skill-tag">UI/UX</span>
+    <span class="skill-tag">Figma</span>
+    <span class="skill-tag">React</span>
+  </div>
+</div></pre>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-star"></i> Feature Card</h3>
+                <p class="ui-desc">Icon animation with theme-adaptive colors</p>
+                <div class="demo-area">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Premium Security</h3>
+                        <p class="feature-desc">Enterprise-grade security with 24/7 monitoring and advanced threat protection.</p>
+                        <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code3')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success3">Copied!</div>
+                    <pre id="code3"><div class="feature-card">
+  <div class="feature-icon">
+    <i class="fas fa-shield-alt"></i>
+  </div>
+  <h3 class="feature-title">Premium Security</h3>
+  <p class="feature-desc">Enterprise-grade security...</p>
+  <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
+</div></pre>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-tags"></i> Pricing Card</h3>
+                <p class="ui-desc">Clean pricing card that works in both themes</p>
+                <div class="demo-area">
+                    <div class="pricing-card popular">
+                        <div class="pricing-badge">POPULAR</div>
+                        <h3 class="pricing-title">Pro Plan</h3>
+                        <div class="pricing-price">$29<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Unlimited Projects</li>
+                            <li><i class="fas fa-check"></i> Premium Support</li>
+                            <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                            <li><i class="fas fa-check"></i> Custom Domain</li>
+                        </ul>
+                        <button class="pricing-btn">Get Started</button>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code4')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success4">Copied!</div>
+                    <pre id="code4"><div class="pricing-card popular">
+  <div class="pricing-badge">POPULAR</div>
+  <h3 class="pricing-title">Pro Plan</h3>
+  <div class="pricing-price">$29<span>/month</span></div>
+  <ul class="pricing-features">
+    <li><i class="fas fa-check"></i> Unlimited Projects</li>
+    <li><i class="fas fa-check"></i> Premium Support</li>
+  </ul>
+  <button class="pricing-btn">Get Started</button>
+</div></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- INPUTS SECTION -->
+        <h2 class="section-title"><i class="fas fa-keyboard"></i> Dual-Theme Inputs</h2>
+        <div class="ui-grid">
+            <!-- Input 1 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-edit"></i> Modern Input</h3>
+                <p class="ui-desc">Floating label that works in both themes</p>
+                <div class="demo-area">
+                    <div class="modern-input-group">
+                        <input type="text" class="modern-input" placeholder=" " id="modernName">
+                        <label for="modernName" class="modern-label">Full Name</label>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code5')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success5">Copied!</div>
+                    <pre id="code5"><div class="modern-input-group">
+  <input type="text" class="modern-input" placeholder=" " id="modernName">
+  <label for="modernName" class="modern-label">Full Name</label>
+</div></pre>
+                </div>
+            </div>
+
+            <!-- Input 2 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-search"></i> Search Input</h3>
+                <p class="ui-desc">Search box with icon, adapts to theme</p>
+                <div class="demo-area">
+                    <div class="search-input-group">
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code6')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success6">Copied!</div>
+                    <pre id="code6"><div class="search-input-group">
+  <input type="text" class="search-input" placeholder="Search...">
+  <div class="search-icon">
+    <i class="fas fa-search"></i>
+  </div>
+</div></pre>
+                </div>
+            </div>
+
+            <!-- Input 3 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-toggle-on"></i> Toggle Switch</h3>
+                <p class="ui-desc">Custom toggle switch for both themes</p>
+                <div class="demo-area">
+                    <div class="toggle-group">
+                        <span class="toggle-label">Enable Feature</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code7')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success7">Copied!</div>
+                    <pre id="code7"><div class="toggle-group">
+  <span class="toggle-label">Enable Feature</span>
+  <label class="toggle-switch">
+    <input type="checkbox" checked>
+    <span class="toggle-slider"></span>
+  </label>
+</div></pre>
+                </div>
+            </div>
+
+            <!-- Input 4 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-sliders-h"></i> Range Slider</h3>
+                <p class="ui-desc">Custom range slider for light/dark themes</p>
+                <div class="demo-area">
+                    <div class="range-group">
+                        <div class="range-label">
+                            <span>Volume</span>
+                            <span class="range-value">75%</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="75" class="range-slider" id="volumeSlider">
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code8')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success8">Copied!</div>
+                    <pre id="code8"><div class="range-group">
+  <div class="range-label">
+    <span>Volume</span>
+    <span class="range-value">75%</span>
+  </div>
+  <input type="range" min="0" max="100" value="75" class="range-slider">
+</div></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMAGES SECTION -->
+        <h2 class="section-title"><i class="fas fa-image"></i> Dual-Theme Images</h2>
+        <div class="ui-grid">
+            <!-- Image 1 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-layer-group"></i> Card with Overlay</h3>
+                <p class="ui-desc">Image card with sliding content overlay</p>
+                <div class="demo-area">
+                    <div class="image-card-overlay">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mountain" class="card-image">
+                        <div class="image-card-content">
+                            <h4 class="image-card-title">Mountain View</h4>
+                            <p class="image-card-desc">Beautiful landscape photography</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code9')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success9">Copied!</div>
+                    <pre id="code9"><div class="image-card-overlay">
+  <img src="image.jpg" alt="Mountain" class="card-image">
+  <div class="image-card-content">
+    <h4 class="image-card-title">Mountain View</h4>
+    <p class="image-card-desc">Beautiful landscape</p>
+  </div>
+</div></pre>
+                </div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-glass-whiskey"></i> Glass Image Card</h3>
+                <p class="ui-desc">Glassmorphism effect for images</p>
+                <div class="demo-area">
+                    <div class="glass-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Night Sky" class="glass-image">
+                        <div class="glass-image-text">
+                            <h4 class="glass-image-title">Starry Night</h4>
+                            <p class="glass-image-subtitle">Galaxy photography</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS</span>
+                        <button class="copy-btn" onclick="copyCode('code10')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success10">Copied!</div>
+                    <pre id="code10"><div class="glass-image-wrapper">
+  <img src="image.jpg" alt="Night Sky" class="glass-image">
+  <div class="glass-image-text">
+    <h4 class="glass-image-title">Starry Night</h4>
+    <p class="glass-image-subtitle">Galaxy photography</p>
+  </div>
+</div></pre>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Dual-Theme UI Components • Works Perfectly in <span id="themeText">Light & Dark</span> Themes</p>
+            <p style="margin-top: 0.5rem;">Click the theme toggle button to switch between themes</p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const currentThemeSpan = document.getElementById('currentTheme');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            body.classList.add(savedTheme + '-theme');
+            updateThemeText(savedTheme);
+        } else if (systemPrefersDark) {
+            body.classList.add('dark-theme');
+            updateThemeText('dark');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                body.classList.replace('light-theme', 'dark-theme');
+                localStorage.setItem('theme', 'dark');
+                updateThemeText('dark');
+            } else {
+                body.classList.replace('dark-theme', 'light-theme');
+                localStorage.setItem('theme', 'light');
+                updateThemeText('light');
+            }
+        });
+        
+        function updateThemeText(theme) {
+            const themeName = theme === 'dark' ? 'Dark Theme' : 'Light Theme';
+            currentThemeSpan.textContent = themeName;
+            themeText.textContent = theme === 'dark' ? 'Dark' : 'Light';
+        }
+        
+        // Range Slider Update
+        const volumeSlider = document.getElementById('volumeSlider');
+        const rangeValue = document.querySelector('.range-value');
+        
+        if (volumeSlider && rangeValue) {
+            volumeSlider.addEventListener('input', function() {
+                rangeValue.textContent = this.value + '%';
+            });
+        }
+        
+        // Copy Code Functionality
+        function copyCode(codeId) {
+            const codeElement = document.getElementById(codeId);
+            const codeText = codeElement.textContent;
+            
+            const textArea = document.createElement('textarea');
+            textArea.value = codeText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            const successId = 'success' + codeId.replace('code', '');
+            const successElement = document.getElementById(successId);
+            successElement.style.opacity = '1';
+            
+            setTimeout(() => {
+                successElement.style.opacity = '0';
+            }, 2000);
+        }
+        
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to demo areas
+            const demos = document.querySelectorAll('.demo-area');
+            demos.forEach(demo => {
+                demo.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                demo.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Add focus effects to inputs
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.05)';
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

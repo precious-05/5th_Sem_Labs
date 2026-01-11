@@ -1,0 +1,1759 @@
+import streamlit as st
+import requests
+import pandas as pd
+import plotly.graph_objects as go
+import plotly.express as px
+from datetime import datetime
+import numpy as np
+import time
+import json
+import threading
+import websocket
+import base64
+
+# Page configuration
+st.set_page_config(
+    page_title="MediNomix | AI Medication Safety",
+    page_icon="💊",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Backend URL
+BACKEND_URL = "http://localhost:8000"
+WS_URL = "ws://localhost:8000/ws/dashboard"
+
+# Base64 encoded images for Streamlit compatibility
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+# Medical icon as base64
+medical_icon_base64 = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFiSURBVHic1ZO9SgNBFIVPymAENbYGX8FWtPIlLCwsLCwsLCwsrCx8hdhZ2FhYCLYxP2JjZ2FhIQgTCoXodY2fDnBdb8hFcevJHO7MfHNmuW+Mf5QA1sliEbgCHoE34H2Q8yvghPwQyf3qM5FqwB1wC1wAh0AX2AVawCqwAqwB+0AfOAEegE8X5AqYagJIAFNgAlz4tJ8B58AH8AW8JnzUAyaBYRNAtJ8DXoBnYK7m1VwBq3+mhMGAwzzmz9V8HAvI23xUeRl4iQUcRcL0Yz4eC+gqAGZVvwl0FIAO0IuE9YB2ckACkAD2gP1IwL6KxyYQwVXgFNgFOjYB1Q3gEXgD3oG9mo9HQdfe8vI5h2q13n6AR2DAc6Y08CQDdMFuSbg0e2rnrJkq32ZP7Zz15vtK7s2e2jlv+v+dg8xX9d+u4lVcBSwDe5Usf6YlK8Y3B7fL9Px7dGkAAAAASUVORK5CYII="
+
+# ================================
+# VIBRANT COLOR SCHEME
+# ================================
+
+# Bright, Eye-catching Colors
+COLORS = {
+    'primary': "#D56BFF",           # Vibrant Coral Red
+    'primary_hover': "#F352FF",     # Brighter Red
+    'secondary': '#4ECDC4',         # Turquoise
+    'success': '#1DD1A1',           # Mint Green
+    'warning': '#FF9F43',           # Orange
+    'danger': '#FF3838',            # Bright Red
+    'info': '#54A0FF',              # Sky Blue
+    'purple': '#A29BFE',            # Lavender
+    'yellow': '#FFD32A',            # Sunflower Yellow
+    'pink': '#FD79A8',              # Pink
+    'dark': '#2D3436',              # Charcoal
+    'light': '#FFFFFF',
+    'card_bg': '#FFFFFF',
+    'sidebar_bg': '#F8F9FA',
+    'border': '#E9ECEF',
+    'text_primary': '#2D3436',
+    'text_secondary': "#92C3D4",
+    'text_muted': '#B2BEC3',
+    'shadow': 'rgba(255, 107, 107, 0.15)',
+    'shadow_hover': 'rgba(255, 107, 107, 0.25)',
+    'gradient_primary': 'linear-gradient(135deg, #FF6B6B 0%, #FF9F43 100%)',
+    'gradient_secondary': 'linear-gradient(135deg, #4ECDC4 0%, #54A0FF 100%)',
+    'gradient_success': 'linear-gradient(135deg, #1DD1A1 0%, #10AC84 100%)',
+    'gradient_warning': 'linear-gradient(135deg, #FF9F43 0%, #FFD32A 100%)',
+    'gradient_danger': 'linear-gradient(135deg, #FF3838 0%, #FF6B6B 100%)',
+    'gradient_purple': 'linear-gradient(135deg, #A29BFE 0%, #FD79A8 100%)',
+    'gradient_dark': 'linear-gradient(135deg, #2D3436 0%, #636E72 100%)'
+}
+
+# ================================
+# PREMIUM CSS STYLING
+# ================================
+
+st.markdown(f"""
+<style>
+/* ========== GLOBAL STYLES ========== */
+.stApp {{
+    background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+    color: {COLORS['text_primary']};
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3, h4, h5, h6 {{
+    color: {COLORS['text_primary']} !important;
+    font-weight: 700 !important;
+    margin-bottom: 1rem !important;
+}}
+
+p, span, div {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+/* ========== GLASSMORPHISM CARDS ========== */
+.glass-card {{
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px {COLORS['shadow']};
+    padding: 32px;
+    margin-bottom: 24px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}}
+
+.glass-card:hover {{
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px {COLORS['shadow_hover']};
+    border-color: {COLORS['primary']};
+}}
+
+.glass-card::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: {COLORS['gradient_primary']};
+}}
+
+.glass-card-header {{
+    margin: -32px -32px 24px -32px;
+    padding: 32px;
+    background: {COLORS['gradient_primary']};
+    border-radius: 24px 24px 0 0;
+    position: relative;
+    overflow: hidden;
+}}
+
+.glass-card-header::after {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+}}
+
+@keyframes shimmer {{
+    100% {{ transform: translateX(100%); }}
+}}
+
+.glass-card-header h2 {{
+    color: white !important;
+    margin: 0 !important;
+    font-size: 28px !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}}
+
+/* ========== NEON BUTTONS ========== */
+.neon-btn {{
+    background: {COLORS['gradient_primary']};
+    color: white !important;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-decoration: none;
+    min-height: 56px;
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+    position: relative;
+    overflow: hidden;
+}}
+
+.neon-btn::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
+}}
+
+.neon-btn:hover {{
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+}}
+
+.neon-btn:hover::before {{
+    left: 100%;
+}}
+
+.neon-btn-secondary {{
+    background: {COLORS['gradient_secondary']};
+    box-shadow: 0 4px 20px rgba(78, 205, 196, 0.3);
+}}
+
+.neon-btn-success {{
+    background: {COLORS['gradient_success']};
+    box-shadow: 0 4px 20px rgba(29, 209, 161, 0.3);
+}}
+
+.neon-btn-warning {{
+    background: {COLORS['gradient_warning']};
+    box-shadow: 0 4px 20px rgba(255, 159, 67, 0.3);
+}}
+
+/* ========== NAVIGATION TABS ========== */
+.stTabs [data-baseweb="tab-list"] {{
+    gap: 12px;
+    background: white;
+    padding: 12px;
+    border-radius: 20px;
+    border: 2px solid {COLORS['border']};
+    margin-bottom: 40px;
+    box-shadow: 0 4px 20px {COLORS['shadow']};
+}}
+
+.stTabs [data-baseweb="tab"] {{
+    height: 56px;
+    padding: 0 28px;
+    color: {COLORS['text_secondary']} !important;
+    font-weight: 700;
+    background: transparent !important;
+    border-radius: 14px !important;
+    border: none !important;
+    transition: all 0.3s ease;
+}}
+
+.stTabs [data-baseweb="tab"]:hover {{
+    background: {COLORS['gradient_primary']}20 !important;
+    transform: translateY(-2px);
+}}
+
+.stTabs [aria-selected="true"] {{
+    background: {COLORS['gradient_primary']} !important;
+    color: white !important;
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3) !important;
+    transform: translateY(-2px);
+}}
+
+/* ========== STAT CARDS ========== */
+.stat-card {{
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+    border: 3px solid {COLORS['gradient_primary']};
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}}
+
+.stat-card:hover {{
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 40px {COLORS['shadow_hover']};
+}}
+
+.stat-card::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: {COLORS['gradient_primary']};
+    opacity: 0.1;
+    z-index: 0;
+}}
+
+.stat-icon {{
+    font-size: 56px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    background: {COLORS['gradient_primary']};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 8px rgba(255, 107, 107, 0.3));
+}}
+
+.stat-number {{
+    font-size: 48px;
+    font-weight: 900;
+    margin: 16px 0;
+    position: relative;
+    z-index: 1;
+    background: {COLORS['gradient_primary']};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}}
+
+.stat-label {{
+    color: {COLORS['text_secondary']};
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}}
+
+/* ========== INPUT FIELDS ========== */
+.stTextInput input, .stSelectbox select, .stTextArea textarea {{
+    background: white !important;
+    color: {COLORS['text_primary']} !important;
+    border: 3px solid {COLORS['border']} !important;
+    border-radius: 16px !important;
+    padding: 18px 24px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px {COLORS['shadow']} !important;
+}}
+
+.stTextInput input:focus, .stSelectbox select:focus, .stTextArea textarea:focus {{
+    border-color: {COLORS['primary']} !important;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.2) !important;
+    transform: translateY(-2px);
+}}
+
+.stTextInput input:hover, .stSelectbox select:hover, .stTextArea textarea:hover {{
+    border-color: {COLORS['primary']} !important;
+    transform: translateY(-1px);
+}}
+
+/* ========== GLOWING BADGES ========== */
+.risk-badge {{
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: pulse 2s infinite;
+}}
+
+@keyframes pulse {{
+    0%, 100% {{ opacity: 1; }}
+    50% {{ opacity: 0.8; }}
+}}
+
+.risk-badge::before {{
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 52px;
+    z-index: -1;
+    filter: blur(10px);
+}}
+
+.badge-critical {{
+    background: {COLORS['gradient_danger']};
+    color: white !important;
+}}
+
+.badge-critical::before {{
+    background: {COLORS['gradient_danger']};
+}}
+
+.badge-high {{
+    background: {COLORS['gradient_warning']};
+    color: white !important;
+}}
+
+.badge-high::before {{
+    background: {COLORS['gradient_warning']};
+}}
+
+.badge-medium {{
+    background: {COLORS['gradient_purple']};
+    color: white !important;
+}}
+
+.badge-medium::before {{
+    background: {COLORS['gradient_purple']};
+}}
+
+.badge-low {{
+    background: {COLORS['gradient_success']};
+    color: white !important;
+}}
+
+.badge-low::before {{
+    background: {COLORS['gradient_success']};
+}}
+
+/* ========== METRIC BOXES ========== */
+.metric-box {{
+    background: white;
+    border: 3px solid {COLORS['gradient_secondary']};
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.2);
+}}
+
+.metric-box:hover {{
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(78, 205, 196, 0.3);
+    border-color: {COLORS['secondary']};
+}}
+
+.metric-label {{
+    color: {COLORS['text_secondary']};
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}}
+
+.metric-value {{
+    font-size: 42px;
+    font-weight: 900;
+    background: {COLORS['gradient_secondary']};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}}
+
+/* ========== NEON ALERTS ========== */
+.neon-alert {{
+    border-radius: 20px;
+    padding: 24px;
+    margin: 20px 0;
+    border: 3px solid;
+    background: white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.5s ease;
+}}
+
+@keyframes slideIn {{
+    from {{ transform: translateY(-20px); opacity: 0; }}
+    to {{ transform: translateY(0); opacity: 1; }}
+}}
+
+.neon-alert::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+}}
+
+.alert-success {{
+    border-color: {COLORS['success']};
+}}
+
+.alert-success::before {{
+    background: {COLORS['gradient_success']};
+}}
+
+.alert-warning {{
+    border-color: {COLORS['warning']};
+}}
+
+.alert-warning::before {{
+    background: {COLORS['gradient_warning']};
+}}
+
+.alert-danger {{
+    border-color: {COLORS['danger']};
+}}
+
+.alert-danger::before {{
+    background: {COLORS['gradient_danger']};
+}}
+
+.alert-info {{
+    border-color: {COLORS['info']};
+}}
+
+.alert-info::before {{
+    background: {COLORS['gradient_secondary']};
+}}
+
+.neon-alert-content {{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}}
+
+.neon-alert-icon {{
+    font-size: 36px;
+    min-width: 40px;
+}}
+
+.neon-alert-text {{
+    flex: 1;
+}}
+
+.neon-alert-title {{
+    font-weight: 900;
+    font-size: 20px;
+    margin-bottom: 8px;
+}}
+
+.neon-alert-desc {{
+    color: {COLORS['text_secondary']};
+    font-size: 16px;
+}}
+
+/* ========== TABLES ========== */
+.dataframe {{
+    background: white !important;
+    color: {COLORS['text_primary']} !important;
+    border: 3px solid {COLORS['gradient_secondary']} !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 30px rgba(78, 205, 196, 0.2) !important;
+}}
+
+.dataframe th {{
+    background: {COLORS['gradient_secondary']} !important;
+    color: white !important;
+    font-weight: 900 !important;
+    padding: 20px !important;
+    font-size: 16px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}}
+
+.dataframe td {{
+    padding: 18px 20px !important;
+    border-bottom: 2px solid {COLORS['border']} !important;
+    font-weight: 500 !important;
+}}
+
+.dataframe tr:hover {{
+    background: linear-gradient(90deg, {COLORS['gradient_primary']}10, transparent) !important;
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}}
+
+/* ========== SIDEBAR ========== */
+[data-testid="stSidebar"] {{
+    background: {COLORS['gradient_dark']} !important;
+    border-right: 4px solid {COLORS['primary']} !important;
+}}
+
+[data-testid="stSidebar"] .glass-card {{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}}
+
+/* ========== LOADING ========== */
+.loading-spinner {{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border: 5px solid {COLORS['border']};
+    border-top: 5px solid {COLORS['primary']};
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+    box-shadow: 0 0 20px {COLORS['primary']};
+}}
+
+@keyframes spin {{
+    0% {{ transform: rotate(0deg); }}
+    100% {{ transform: rotate(360deg); }}
+}}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {{
+    width: 12px;
+    height: 12px;
+}}
+
+::-webkit-scrollbar-track {{
+    background: white;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px {COLORS['shadow']};
+}}
+
+::-webkit-scrollbar-thumb {{
+    background: {COLORS['gradient_primary']};
+    border-radius: 6px;
+    box-shadow: 0 0 10px {COLORS['primary']};
+}}
+
+::-webkit-scrollbar-thumb:hover {{
+    background: {COLORS['primary_hover']};
+    box-shadow: 0 0 15px {COLORS['primary']};
+}}
+
+/* ========== EXPANDERS ========== */
+.streamlit-expanderHeader {{
+    background: {COLORS['gradient_primary']} !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    font-weight: 900 !important;
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
+    box-shadow: 0 4px 20px {COLORS['shadow']} !important;
+}}
+
+.streamlit-expanderHeader:hover {{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px {COLORS['shadow_hover']} !important;
+}}
+
+.streamlit-expanderContent {{
+    background: white !important;
+    border: 3px solid {COLORS['gradient_primary']} !important;
+    border-top: none !important;
+    border-radius: 0 0 16px 16px !important;
+    padding: 28px !important;
+    box-shadow: 0 8px 30px {COLORS['shadow']} !important;
+}}
+
+/* ========== METRICS ========== */
+[data-testid="stMetricValue"] {{
+    font-size: 36px !important;
+    font-weight: 900 !important;
+    background: {COLORS['gradient_primary']};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}}
+
+[data-testid="stMetricLabel"] {{
+    color: {COLORS['text_secondary']} !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}}
+
+/* ========== RADIO BUTTONS ========== */
+.stRadio [role="radiogroup"] {{
+    background: white;
+    padding: 16px;
+    border-radius: 20px;
+    border: 3px solid {COLORS['gradient_primary']};
+    box-shadow: 0 4px 20px {COLORS['shadow']};
+}}
+
+.stRadio label {{
+    color: {COLORS['text_primary']} !important;
+    font-weight: 500 !important;
+}}
+
+.stRadio [data-baseweb="radio"] div:first-child {{
+    border: 3px solid {COLORS['border']} !important;
+    background-color: white !important;
+}}
+
+.stRadio [data-baseweb="radio"]:hover div:first-child {{
+    border-color: {COLORS['primary']} !important;
+    transform: scale(1.1);
+}}
+
+.stRadio [aria-checked="true"] div:first-child {{
+    border-color: {COLORS['primary']} !important;
+    background-color: {COLORS['primary']} !important;
+}}
+
+/* ========== FOOTER ========== */
+.neon-footer {{
+    margin-top: 80px;
+    padding: 60px 0;
+    background: {COLORS['gradient_dark']};
+    border-radius: 40px 40px 0 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}}
+
+.neon-footer::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: {COLORS['gradient_primary']};
+    animation: moveLine 3s infinite linear;
+}}
+
+@keyframes moveLine {{
+    0% {{ transform: translateX(-100%); }}
+    100% {{ transform: translateX(100%); }}
+}}
+
+.neon-footer h3 {{
+    color: white !important;
+    font-size: 32px !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}}
+
+.neon-footer p {{
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 18px !important;
+    max-width: 800px;
+    margin: 20px auto;
+}}
+
+/* ========== HERO SECTION ========== */
+.hero-section {{
+    background: {COLORS['gradient_primary']};
+    border-radius: 40px;
+    padding: 80px 40px;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 20px 60px {COLORS['shadow_hover']};
+}}
+
+.hero-section::before {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+    animation: float 20s infinite linear;
+}}
+
+@keyframes float {{
+    0% {{ transform: translateY(0) translateX(0); }}
+    100% {{ transform: translateY(-100px) translateX(-100px); }}
+}}
+
+.hero-title {{
+    color: white !important;
+    font-size: 64px !important;
+    font-weight: 900 !important;
+    margin-bottom: 24px !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}}
+
+.hero-subtitle {{
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 24px !important;
+    max-width: 800px;
+    margin: 0 auto 40px !important;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}}
+
+/* ========== FEATURE CARDS ========== */
+.feature-card {{
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 30px {COLORS['shadow']};
+    height: 100%;
+}}
+
+.feature-card::before {{
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 27px;
+    background: {COLORS['gradient_primary']};
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}}
+
+.feature-card:hover::before {{
+    opacity: 1;
+}}
+
+.feature-card:hover {{
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 20px 50px {COLORS['shadow_hover']};
+}}
+
+.feature-icon {{
+    font-size: 64px;
+    margin-bottom: 24px;
+    background: {COLORS['gradient_primary']};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 8px rgba(255, 107, 107, 0.3));
+}}
+
+.feature-title {{
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: {COLORS['text_primary']};
+}}
+
+.feature-desc {{
+    color: {COLORS['text_secondary']};
+    font-size: 16px;
+    line-height: 1.6;
+}}
+
+/* ========== SEARCH BOX ========== */
+.search-container {{
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 15px 40px {COLORS['shadow']};
+    border: 3px solid {COLORS['gradient_primary']};
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+}}
+
+.search-container::after {{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: {COLORS['gradient_primary']};
+}}
+
+.search-title {{
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: {COLORS['text_primary']};
+}}
+
+.search-subtitle {{
+    color: {COLORS['text_secondary']};
+    font-size: 16px;
+    margin-bottom: 30px;
+}}
+</style>
+""", unsafe_allow_html=True)
+
+# Initialize session state
+if 'search_results' not in st.session_state:
+    st.session_state.search_results = []
+if 'dashboard_data' not in st.session_state:
+    st.session_state.dashboard_data = {}
+if 'selected_risk' not in st.session_state:
+    st.session_state.selected_risk = "all"
+if 'realtime_metrics' not in st.session_state:
+    st.session_state.realtime_metrics = {}
+if 'websocket_connected' not in st.session_state:
+    st.session_state.websocket_connected = False
+if 'active_tab' not in st.session_state:
+    st.session_state.active_tab = "Home"
+
+# ================================
+# REAL-TIME WEBSOCKET MANAGER
+# ================================
+
+class RealTimeWebSocketManager:
+    def __init__(self):
+        self.connected = False
+        self.ws = None
+        
+    def start_connection(self):
+        try:
+            self.ws = websocket.WebSocketApp(
+                WS_URL,
+                on_open=self._on_open,
+                on_message=self._on_message,
+                on_error=self._on_error,
+                on_close=self._on_close
+            )
+            threading.Thread(target=self.ws.run_forever, daemon=True).start()
+        except Exception as e:
+            st.error(f"WebSocket connection error: {e}")
+    
+    def _on_open(self, ws):
+        self.connected = True
+        st.session_state.websocket_connected = True
+    
+    def _on_message(self, ws, message):
+        try:
+            data = json.loads(message)
+            if data.get('type') in ['initial', 'update']:
+                st.session_state.realtime_metrics = data.get('data', {})
+        except:
+            pass
+    
+    def _on_error(self, ws, error):
+        self.connected = False
+        st.session_state.websocket_connected = False
+    
+    def _on_close(self, ws, close_status_code, close_msg):
+        self.connected = False
+        st.session_state.websocket_connected = False
+
+websocket_manager = RealTimeWebSocketManager()
+
+# ================================
+# CORE FUNCTIONS (UNCHANGED)
+# ================================
+
+def search_drug(drug_name):
+    """Search for drug and analyze confusion risks"""
+    try:
+        response = requests.get(f"{BACKEND_URL}/api/search/{drug_name}", timeout=30)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return None
+    except Exception as e:
+        return None
+
+def load_examples():
+    """Load example drugs for demonstration"""
+    try:
+        response = requests.post(f"{BACKEND_URL}/api/seed-database", timeout=30)
+        if response.status_code == 200:
+            return True
+        else:
+            return False
+    except Exception as e:
+        return False
+
+def load_dashboard_data():
+    """Load dashboard analytics data"""
+    try:
+        # Load metrics
+        metrics_response = requests.get(f"{BACKEND_URL}/api/metrics")
+        if metrics_response.status_code == 200:
+            st.session_state.dashboard_data['metrics'] = metrics_response.json()
+        
+        # Load top risks
+        risks_response = requests.get(f"{BACKEND_URL}/api/top-risks?limit=10")
+        if risks_response.status_code == 200:
+            st.session_state.dashboard_data['top_risks'] = risks_response.json()
+        
+        # Load risk breakdown
+        breakdown_response = requests.get(f"{BACKEND_URL}/api/risk-breakdown")
+        if breakdown_response.status_code == 200:
+            st.session_state.dashboard_data['breakdown'] = breakdown_response.json()
+        
+        # Load heatmap data
+        heatmap_response = requests.get(f"{BACKEND_URL}/api/heatmap?limit=15")
+        if heatmap_response.status_code == 200:
+            st.session_state.dashboard_data['heatmap'] = heatmap_response.json()
+            
+        return True
+    except Exception as e:
+        return False
+
+def create_heatmap_chart():
+    """Create interactive drug confusion heatmap"""
+    if 'heatmap' not in st.session_state.dashboard_data:
+        return None
+    
+    heatmap_data = st.session_state.dashboard_data['heatmap']
+    drug_names = heatmap_data.get("drug_names", [])
+    risk_matrix = heatmap_data.get("risk_matrix", [])
+    
+    if not drug_names or not risk_matrix:
+        return None
+    
+    fig = go.Figure(data=go.Heatmap(
+        z=risk_matrix,
+        x=drug_names,
+        y=drug_names,
+        colorscale=[
+            [0, COLORS['success']],
+            [0.25, COLORS['purple']],
+            [0.5, COLORS['warning']],
+            [0.75, COLORS['danger']],
+            [1, COLORS['primary']]
+        ],
+        zmin=0,
+        zmax=100,
+        hovertemplate="<b>%{y}</b> ↔ <b>%{x}</b><br>Risk: %{z:.1f}%<extra></extra>",
+    ))
+    
+    fig.update_layout(
+        title="🎨 Drug Confusion Risk Matrix",
+        height=600,
+        xaxis_title="Drug Names",
+        yaxis_title="Drug Names",
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font_color=COLORS['dark'],
+        title_font_size=24,
+        title_font_color=COLORS['primary']
+    )
+    
+    return fig
+
+def create_risk_breakdown_chart():
+    """Create risk breakdown chart"""
+    if 'breakdown' not in st.session_state.dashboard_data:
+        return None
+    
+    breakdown = st.session_state.dashboard_data['breakdown']
+    if not breakdown:
+        return None
+    
+    categories = [item['category'].title() for item in breakdown]
+    counts = [item['count'] for item in breakdown]
+    
+    fig = go.Figure(data=[go.Pie(
+        labels=categories,
+        values=counts,
+        hole=0.6,
+        marker_colors=[COLORS['danger'], COLORS['warning'], COLORS['purple'], COLORS['success']],
+        textinfo='label+percent',
+        textposition='inside',
+        hoverinfo='label+value+percent',
+        textfont_size=16,
+        textfont_color='white',
+        textfont_family='Poppins'
+    )])
+    
+    fig.update_layout(
+        title="📊 Risk Distribution",
+        height=450,
+        showlegend=True,
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font_color=COLORS['dark'],
+        title_font_size=20,
+        title_font_color=COLORS['primary'],
+        legend=dict(
+            font=dict(size=14, color=COLORS['dark'], family='Poppins')
+        )
+    )
+    
+    return fig
+
+def create_top_risks_chart():
+    """Create top risks chart"""
+    if 'top_risks' not in st.session_state.dashboard_data:
+        return None
+    
+    top_risks = st.session_state.dashboard_data['top_risks']
+    if not top_risks:
+        return None
+    
+    pairs = [f"💊 {item['drug1']} ↔ {item['drug2']}" for item in top_risks]
+    scores = [item['risk_score'] for item in top_risks]
+    
+    fig = go.Figure(data=[
+        go.Bar(
+            x=scores,
+            y=pairs,
+            orientation='h',
+            marker_color=COLORS['primary'],
+            text=[f"🔥 {score:.0f}%" for score in scores],
+            textposition='outside',
+            marker_line_color=COLORS['dark'],
+            marker_line_width=2,
+            textfont_size=14,
+            textfont_color=COLORS['dark'],
+            textfont_family='Poppins'
+        )
+    ])
+    
+    fig.update_layout(
+        title="🚨 Top 10 High-Risk Drug Pairs",
+        xaxis_title="Risk Score (%)",
+        yaxis_title="Drug Pairs",
+        height=500,
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font_color=COLORS['dark'],
+        title_font_size=22,
+        title_font_color=COLORS['danger'],
+        xaxis=dict(
+            gridcolor=COLORS['border'],
+            gridwidth=2
+        ),
+        yaxis=dict(
+            gridcolor=COLORS['border'],
+            gridwidth=2
+        )
+    )
+    
+    return fig
+
+# ================================
+# PREMIUM UI COMPONENTS
+# ================================
+
+def render_neon_alert(message, alert_type="info"):
+    """Render a neon styled alert message"""
+    
+    if alert_type == "success":
+        icon = "✅"
+        alert_class = "alert-success"
+        title = "Success!"
+    elif alert_type == "warning":
+        icon = "⚠️"
+        alert_class = "alert-warning"
+        title = "Warning!"
+    elif alert_type == "danger":
+        icon = "❌"
+        alert_class = "alert-danger"
+        title = "Error!"
+    else:
+        icon = "ℹ️"
+        alert_class = "alert-info"
+        title = "Info"
+    
+    st.markdown(f"""
+    <div class="neon-alert {alert_class}">
+        <div class="neon-alert-content">
+            <div class="neon-alert-icon">{icon}</div>
+            <div class="neon-alert-text">
+                <div class="neon-alert-title">{title}</div>
+                <div class="neon-alert-desc">{message}</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+def render_stat_card(icon, value, label, col):
+    """Render a statistic card"""
+    with col:
+        st.markdown(f"""
+        <div class="stat-card">
+            <div class="stat-icon">{icon}</div>
+            <div class="stat-number">{value}</div>
+            <div class="stat-label">{label}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+def render_feature_card(icon, title, description, col):
+    """Render a feature card"""
+    with col:
+        st.markdown(f"""
+        <div class="feature-card">
+            <div class="feature-icon">{icon}</div>
+            <div class="feature-title">{title}</div>
+            <div class="feature-desc">{description}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+def render_metric_box(label, value, col):
+    """Render a metric box"""
+    with col:
+        st.markdown(f"""
+        <div class="metric-box">
+            <div class="metric-label">{label}</div>
+            <div class="metric-value">{value}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+def render_glass_card(title, content=None, col=None):
+    """Render a glassmorphism card"""
+    if col:
+        with col:
+            st.markdown(f"""
+            <div class="glass-card">
+                <div class="glass-card-header">
+                    <h2>{title}</h2>
+                </div>
+                <div style="color: {COLORS['text_primary']};">{content if content else ""}</div>
+            </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div class="glass-card">
+            <div class="glass-card-header">
+                <h2>{title}</h2>
+            </div>
+            <div style="color: {COLORS['text_primary']};">{content if content else ""}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+# ================================
+# HOMEPAGE COMPONENTS
+# ================================
+
+def render_hero_section():
+    """Render hero/jumbotron section"""
+    
+    st.markdown(f"""
+    <div class="hero-section">
+        <h1 class="hero-title">💊 MediNomix AI</h1>
+        <p class="hero-subtitle">Advanced AI-powered system that analyzes drug names for potential confusion risks, helping healthcare professionals prevent medication errors and improve patient safety.</p>
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 40px;">
+            <button class="neon-btn" onclick="window.location.href='#analysis'">
+                🚀 Start Analysis
+            </button>
+            <button class="neon-btn neon-btn-secondary" onclick="window.location.href='#features'">
+                📖 Learn More
+            </button>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ================================
+# DRUG ANALYSIS TAB
+# ================================
+
+def render_drug_analysis_tab():
+    """Render Drug Analysis tab with premium styling"""
+    
+    render_glass_card(
+        "🔍 Drug Confusion Risk Analysis",
+        "Search any medication to analyze confusion risks with similar drugs"
+    )
+    
+    # Search Section
+    st.markdown("""
+    <div class="search-container">
+        <div class="search-title">Search Medication</div>
+        <div class="search-subtitle">Enter any drug name to analyze potential confusion risks</div>
+    """, unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([2, 1, 1])
+    
+    with col1:
+        drug_name = st.text_input(
+            "",
+            placeholder="Enter drug name (e.g., metformin, lamictal, celebrex...)",
+            key="search_input",
+            label_visibility="collapsed"
+        )
+    
+    with col2:
+        search_clicked = st.button("🔍 Analyze Drug", type="primary", use_container_width=True)
+    
+    with col3:
+        if st.button("📚 Load Examples", type="secondary", use_container_width=True):
+            with st.spinner("Loading examples..."):
+                if load_examples():
+                    render_neon_alert("Examples loaded successfully! Try searching: lamictal, celebrex, metformin", "success")
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # Quick Examples
+    st.markdown("""
+    <div style="margin: 24px 0;">
+        <h3 style="color: #2D3436; margin-bottom: 16px; font-weight: 900;">✨ Quick Examples:</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    examples = ["Lamictal", "Metformin", "Celebrex", "Clonidine"]
+    cols = st.columns(4)
+    for idx, (col, example) in enumerate(zip(cols, examples)):
+        with col:
+            if st.button(f"💊 {example}", use_container_width=True, key=f"ex_{idx}"):
+                with st.spinner(f"🔬 Analyzing {example}..."):
+                    result = search_drug(example)
+                    if result:
+                        st.session_state.search_results = result.get('similar_drugs', [])
+                        render_neon_alert(f"Analysis complete! Found {len(st.session_state.search_results)} similar drugs.", "success")
+                        st.rerun()
+    
+    # Handle Search
+    if search_clicked and drug_name:
+        with st.spinner(f"🧠 Analyzing '{drug_name}'..."):
+            result = search_drug(drug_name)
+            if result:
+                st.session_state.search_results = result.get('similar_drugs', [])
+                render_neon_alert(f"✅ Analysis complete! Found {len(st.session_state.search_results)} similar drugs.", "success")
+                st.rerun()
+            else:
+                render_neon_alert("❌ Could not analyze drug. Please check backend connection.", "danger")
+    
+    # Results Section
+    if st.session_state.search_results:
+        st.markdown("""
+        <div style="margin-top: 40px;">
+            <h2 style="color: #2D3436; margin-bottom: 24px; font-weight: 900;">📊 Analysis Results</h2>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Risk Filters
+        risk_filters = st.radio(
+            "🎯 Filter by risk level:",
+            ["All Risks", "Critical (≥75%)", "High (50-74%)", "Medium (25-49%)", "Low (<25%)"],
+            horizontal=True,
+            key="risk_filter"
+        )
+        
+        # Filter results
+        if risk_filters == "All Risks":
+            filtered_results = st.session_state.search_results
+        else:
+            risk_map = {
+                "Critical (≥75%)": "critical",
+                "High (50-74%)": "high",
+                "Medium (25-49%)": "medium",
+                "Low (<25%)": "low"
+            }
+            risk_level = risk_map[risk_filters]
+            filtered_results = [
+                r for r in st.session_state.search_results 
+                if r['risk_category'] == risk_level
+            ]
+        
+        # Display Results
+        for result in filtered_results[:20]:
+            risk_color_class = f"badge-{result['risk_category']}"
+            
+            st.markdown(f"""
+            <div class="glass-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <div>
+                        <h3 style="margin: 0; color: {COLORS['text_primary']}; font-weight: 900;">{result['target_drug']['brand_name']}</h3>
+                        {f"<p style='margin: 8px 0 0 0; color: {COLORS['text_secondary']}; font-size: 16px; font-weight: 500;'>Generic: {result['target_drug']['generic_name']}</p>" if result['target_drug']['generic_name'] else ""}
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="metric-value" style="font-size: 42px;">
+                            {result['combined_risk']:.0f}%
+                        </div>
+                        <span class="risk-badge {risk_color_class}">{result['risk_category'].upper()}</span>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
+            
+            # Metrics Grid
+            cols = st.columns(4)
+            metrics = [
+                ("Spelling Similarity", f"{result['spelling_similarity']:.1f}%"),
+                ("Phonetic Similarity", f"{result['phonetic_similarity']:.1f}%"),
+                ("Therapeutic Context", f"{result['therapeutic_context_risk']:.1f}%"),
+                ("Overall Risk", f"{result['combined_risk']:.1f}%")
+            ]
+            
+            for col, (label, value) in zip(cols, metrics):
+                with col:
+                    render_metric_box(label, value, col)
+            
+            st.markdown("</div>")
+
+# ================================
+# ANALYTICS DASHBOARD TAB
+# ================================
+
+def render_analytics_tab():
+    """Render Analytics Dashboard tab"""
+    
+    render_glass_card(
+        "📊 Medication Safety Analytics Dashboard",
+        "Real-time insights and analytics for medication safety monitoring"
+    )
+    
+    # Load data if needed
+    if 'metrics' not in st.session_state.dashboard_data:
+        with st.spinner("📡 Loading analytics data..."):
+            load_dashboard_data()
+    
+    # KPI Cards
+    if 'metrics' in st.session_state.dashboard_data:
+        metrics = st.session_state.dashboard_data['metrics']
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            render_stat_card("💊", metrics.get('total_drugs', 0), "Total Drugs", col1)
+        
+        with col2:
+            render_stat_card("🔥", metrics.get('critical_risk_pairs', 0), "Critical Pairs", col2)
+        
+        with col3:
+            render_stat_card("⚠️", metrics.get('high_risk_pairs', 0), "High Risk Pairs", col3)
+        
+        with col4:
+            avg_score = metrics.get('avg_risk_score', 0)
+            render_stat_card("📈", f"{avg_score:.1f}%", "Avg Risk Score", col4)
+    
+    # Charts Section
+    st.markdown("""
+    <div style="margin: 40px 0;">
+        <h2 style="color: #2D3436; margin-bottom: 24px; font-weight: 900;">🎨 Analytics Charts</h2>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        render_glass_card("📊 Risk Distribution")
+        breakdown_chart = create_risk_breakdown_chart()
+        if breakdown_chart:
+            st.plotly_chart(breakdown_chart, use_container_width=True)
+        else:
+            st.info("No risk breakdown data available")
+    
+    with col2:
+        render_glass_card("🚨 Top Risk Pairs")
+        risks_chart = create_top_risks_chart()
+        if risks_chart:
+            st.plotly_chart(risks_chart, use_container_width=True)
+        else:
+            st.info("No top risk data available")
+    
+    # Heatmap Section
+    render_glass_card("🎯 Drug Confusion Risk Heatmap")
+    heatmap_chart = create_heatmap_chart()
+    if heatmap_chart:
+        st.plotly_chart(heatmap_chart, use_container_width=True)
+        st.markdown(f"""
+        <div style="text-align: center; margin-top: 20px; color: {COLORS['text_secondary']}; font-size: 16px; font-weight: 600;">
+            🟢 Low Risk &nbsp;&nbsp; 🟣 Medium Risk &nbsp;&nbsp; 🟠 High Risk &nbsp;&nbsp; 🔴 Critical Risk
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.info("No heatmap data available. Search for drugs first.")
+    
+    # FDA Alerts Section
+    render_glass_card("🚨 FDA High Alert Drug Pairs", "Most commonly confused drug pairs according to FDA")
+    
+    risky_pairs = pd.DataFrame([
+        {"Drug 1": "Lamictal", "Drug 2": "Lamisil", "Risk Level": "Critical", "Reason": "Epilepsy medication vs Antifungal", "Severity": "🔴"},
+        {"Drug 1": "Celebrex", "Drug 2": "Celexa", "Risk Level": "Critical", "Reason": "Arthritis vs Depression medication", "Severity": "🔴"},
+        {"Drug 1": "Metformin", "Drug 2": "Metronidazole", "Risk Level": "High", "Reason": "Diabetes vs Antibiotic", "Severity": "🟠"},
+        {"Drug 1": "Clonidine", "Drug 2": "Klonopin", "Risk Level": "High", "Reason": "Blood Pressure vs Anxiety medication", "Severity": "🟠"},
+        {"Drug 1": "Zyprexa", "Drug 2": "Zyrtec", "Risk Level": "Medium", "Reason": "Antipsychotic vs Allergy medication", "Severity": "🟣"},
+    ])
+    
+    st.dataframe(
+        risky_pairs,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Severity": st.column_config.TextColumn("⚠️ Severity", width="small")
+        }
+    )
+
+# ================================
+# REAL-TIME DASHBOARD TAB
+# ================================
+
+def render_realtime_tab():
+    """Render Real-Time Dashboard tab"""
+    
+    render_glass_card(
+        "⚡ Real-Time Medication Safety Dashboard",
+        "Live monitoring and real-time analytics for medication safety"
+    )
+    
+    # Connection Status
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        if st.session_state.websocket_connected:
+            render_neon_alert("✅ Real-time Connection Active - Live data streaming enabled", "success")
+        else:
+            render_neon_alert("🔌 Connecting to Real-Time Server - Live updates will appear here", "info")
+    
+    with col2:
+        if st.button("🔄 Refresh Connection", type="primary", use_container_width=True):
+            websocket_manager.start_connection()
+            st.rerun()
+    
+    # Auto-start WebSocket if not connected
+    if not st.session_state.websocket_connected:
+        websocket_manager.start_connection()
+    
+    # Display Real-time Metrics
+    metrics = st.session_state.realtime_metrics or {}
+    
+    if metrics:
+        # Real-time KPI Cards
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            render_stat_card("📊", metrics.get('total_drugs', 0), "Live Drugs", col1)
+        
+        with col2:
+            render_stat_card("🔥", metrics.get('critical_risk_pairs', 0), "Critical Now", col2)
+        
+        with col3:
+            avg_score = metrics.get('avg_risk_score', 0)
+            render_stat_card("📈", f"{avg_score:.1f}%", "Avg Risk", col3)
+        
+        with col4:
+            clients = metrics.get('connected_clients', 0)
+            render_stat_card("👥", clients, "Connected", col4)
+        
+        # Recent Activity Section
+        render_glass_card("🕒 Recent Activity Timeline", "Latest drug analysis activities")
+        
+        if metrics.get('recent_searches'):
+            for idx, search in enumerate(metrics['recent_searches'][:5]):
+                timestamp = search.get('timestamp', '')
+                drug_name = search.get('drug_name', 'Unknown')
+                similar_drugs = search.get('similar_drugs_found', 0)
+                highest_risk = search.get('highest_risk', 0)
+                
+                st.markdown(f"""
+                <div style="display: flex; align-items: center; padding: 20px; background: linear-gradient(135deg, {COLORS['gradient_primary']}20, transparent); border-radius: 20px; margin-bottom: 16px; border: 2px solid {COLORS['gradient_primary']}40">
+                    <div style="margin-right: 20px;">
+                        <div style="width: 48px; height: 48px; background: {COLORS['gradient_primary']}; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 20px;">{idx+1}</div>
+                    </div>
+                    <div style="flex-grow: 1;">
+                        <div style="font-weight: 900; color: {COLORS['text_primary']}; font-size: 18px;">💊 {drug_name}</div>
+                        <div style="color: {COLORS['text_secondary']}; font-size: 16px; font-weight: 500;">Found {similar_drugs} similar drugs • Highest risk: {highest_risk:.1f}%</div>
+                    </div>
+                    <div style="color: {COLORS['text_muted']}; font-size: 14px; font-weight: 600;">{timestamp[:19] if timestamp else 'Just now'}</div>
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            st.info("No recent activity data available")
+        
+        # System Status
+        render_glass_card("⚙️ System Status", "Current system health and status")
+        
+        status = metrics.get('system_status', 'unknown')
+        if status == 'healthy':
+            status_color = COLORS['success']
+            status_icon = "✅"
+            status_text = "All Systems Operational"
+        else:
+            status_color = COLORS['warning']
+            status_icon = "⚠️"
+            status_text = "System Issues Detected"
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(f"""
+            <div class="glass-card">
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 16px; color: {status_color};">{status_icon}</div>
+                    <div style="font-weight: 900; color: {COLORS['text_primary']}; font-size: 20px;">{status_text}</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col2:
+            st.markdown(f"""
+            <div class="glass-card">
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 16px; color: {COLORS['info']};">🕐</div>
+                    <div style="font-weight: 900; color: {COLORS['text_primary']}; font-size: 20px;">{metrics.get('last_updated', '')[:19]}</div>
+                    <div style="color: {COLORS['text_secondary']}; margin-top: 8px;">Last Updated</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div class="glass-card" style="text-align: center; padding: 80px 40px;">
+            <div style="font-size: 96px; margin-bottom: 32px; color: {COLORS['primary']}">⏳</div>
+            <h2 style="color: {COLORS['text_primary']}; margin-bottom: 20px; font-weight: 900;">Waiting for Real-Time Data</h2>
+            <p style="color: {COLORS['text_secondary']}; max-width: 500px; margin: 0 auto; font-size: 18px; font-weight: 500;">Live updates will appear here once connection is established.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+# ================================
+# SIDEBAR
+# ================================
+
+def render_sidebar():
+    """Render sidebar with system status"""
+    
+    with st.sidebar:
+        st.markdown(f"""
+        <div style="text-align: center; margin-bottom: 40px; padding: 32px 20px; background: {COLORS['gradient_primary']}; border-radius: 30px; box-shadow: 0 12px 40px {COLORS['shadow_hover']};">
+            <div style="font-size: 72px; margin-bottom: 16px; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));">💊</div>
+            <h2 style="margin: 0; color: white !important; font-weight: 900; font-size: 32px; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">MediNomix</h2>
+            <p style="color: rgba(255, 255, 255, 0.9); margin: 12px 0 0 0; font-size: 16px; font-weight: 600;">AI Medication Safety</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # System Status Card
+        render_glass_card("📡 System Status")
+        
+        try:
+            response = requests.get(f"{BACKEND_URL}/health", timeout=5)
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('status') == 'healthy':
+                    render_neon_alert("✅ Backend Connected", "success")
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.metric("💊 Drugs", data.get('metrics', {}).get('drugs_in_database', 0))
+                    with col2:
+                        st.metric("📊 Analyses", data.get('metrics', {}).get('total_analyses', 0))
+                else:
+                    render_neon_alert("⚠️ Backend Issues", "warning")
+            else:
+                render_neon_alert("❌ Cannot Connect", "danger")
+        except:
+            render_neon_alert("🔌 Backend Not Running", "danger")
+            st.code("python backend.py", language="bash")
+        
+        # Quick Links
+        render_glass_card("🔗 Quick Links")
+        
+        if st.button("📚 Documentation", use_container_width=True):
+            render_neon_alert("Documentation coming soon!", "info")
+        
+        if st.button("🐛 Report Bug", use_container_width=True):
+            render_neon_alert("Bug reporting coming soon!", "info")
+        
+        if st.button("🔄 Clear Cache", use_container_width=True):
+            st.session_state.search_results = []
+            st.session_state.dashboard_data = {}
+            render_neon_alert("Cache cleared successfully!", "success")
+            st.rerun()
+        
+        # Risk Categories Guide
+        render_glass_card("⚠️ Risk Categories")
+        
+        risk_levels = [
+            ("Critical", "≥75%", "Immediate attention required", "badge-critical"),
+            ("High", "50-74%", "Review and verify", "badge-high"),
+            ("Medium", "25-49%", "Monitor closely", "badge-medium"),
+            ("Low", "<25%", "Low priority", "badge-low")
+        ]
+        
+        for name, score, desc, badge_class in risk_levels:
+            st.markdown(f"""
+            <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid {COLORS['border']};">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="risk-badge {badge_class}" style="font-size: 12px; padding: 8px 20px;">{name}</span>
+                    <span style="font-weight: 900; color: {COLORS['text_primary']}; font-size: 16px;">{score}</span>
+                </div>
+                <div style="color: {COLORS['text_secondary']}; font-size: 14px; font-weight: 500;">{desc}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+# ================================
+# FOOTER
+# ================================
+
+def render_footer():
+    """Render footer"""
+    
+    st.markdown(f"""
+    <div class="neon-footer">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+            <div style="margin-bottom: 40px;">
+                <div style="font-size: 48px; margin-bottom: 24px;">💊</div>
+                <h3 style="color: white !important; margin-bottom: 16px; font-weight: 900;">MediNomix AI</h3>
+                <p style="color: rgba(255, 255, 255, 0.9) !important; font-size: 18px; max-width: 600px; margin: 0 auto;">
+                    Preventing medication errors with artificial intelligence
+                </p>
+            </div>
+            <div style="border-top: 2px solid rgba(255, 255, 255, 0.2); padding-top: 32px; color: rgba(255, 255, 255, 0.7) !important; font-size: 16px;">
+                <div style="margin-bottom: 16px; font-weight: 600;">© 2024 MediNomix AI. All rights reserved.</div>
+                <div>Disclaimer: This tool is for educational purposes and should not replace professional medical advice.</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ================================
+# MAIN APPLICATION RENDERER
+# ================================
+
+def main():
+    """Main application renderer"""
+    
+    # Navigation Tabs
+    tab1, tab2, tab3, tab4 = st.tabs(["🏠 Home", "🔍 Drug Analysis", "📊 Analytics", "⚡ Real-Time"])
+    
+    with tab1:
+        render_hero_section()
+        
+        # Stats Counter
+        col1, col2, col3, col4 = st.columns(4)
+        render_stat_card("👥", "1.5M+", "Patients Protected", col1)
+        render_stat_card("💰", "$42B", "Cost Saved", col2)
+        render_stat_card("🎯", "99.8%", "Accuracy Rate", col3)
+        render_stat_card("💊", "50K+", "Drugs Analyzed", col4)
+        
+        # Features Section
+        st.markdown("""
+        <div style="margin: 60px 0;">
+            <h2 style="text-align: center; margin-bottom: 40px; color: #2D3436; font-weight: 900;">✨ How MediNomix Works</h2>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        features_cols = st.columns(3)
+        features = [
+            {"icon": "🔍", "title": "Search Medication", "desc": "Enter any drug name to analyze potential confusion risks"},
+            {"icon": "🧠", "title": "AI Analysis", "desc": "Our AI analyzes spelling, phonetic, and therapeutic similarities"},
+            {"icon": "🛡️", "title": "Risk Prevention", "desc": "Get detailed risk assessments and prevention recommendations"}
+        ]
+        
+        for idx, col in enumerate(features_cols):
+            with col:
+                feature = features[idx]
+                render_feature_card(feature['icon'], feature['title'], feature['desc'], col)
+        
+        # User Guide
+        render_glass_card("📚 User Guide & Quick Start")
+        with st.expander("🚀 Step 1: Search for a Medication", expanded=True):
+            st.markdown("""
+            ### 🔍 How to Search:
+            1. Navigate to the **Drug Analysis** tab
+            2. Enter any medication name (brand or generic)
+            3. Click **Analyze Drug** to start the AI analysis
+            """)
+        
+        with st.expander("📊 Step 2: Review Risk Assessment"):
+            st.markdown("""
+            ### 📈 Understanding Results:
+            1. View all similar drugs with confusion risks
+            2. Filter by risk level (Critical, High, Medium, Low)
+            3. Examine detailed similarity metrics
+            """)
+        
+        with st.expander("🛡️ Step 3: Take Preventive Action"):
+            st.markdown("""
+            ### ✅ Preventive Measures:
+            1. Check **Analytics** tab for overall statistics
+            2. Monitor **Real-Time** dashboard for live updates
+            3. Use quick examples for demonstration
+            """)
+    
+    with tab2:
+        render_drug_analysis_tab()
+    
+    with tab3:
+        render_analytics_tab()
+    
+    with tab4:
+        render_realtime_tab()
+    
+    # Render Sidebar
+    render_sidebar()
+    
+    # Render Footer
+    render_footer()
+
+# ================================
+# START APPLICATION
+# ================================
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium UI Collection - Cards, Inputs, Images</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            background: linear-gradient(90deg, #60a5fa, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin: 4rem 0 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .ui-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .ui-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ui-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(99, 102, 241, 0.3);
+            background: rgba(41, 55, 78, 0.9);
+        }
+
+        .ui-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .ui-desc {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            min-height: 3rem;
+        }
+
+        .demo-area {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+            width: 100%;
+        }
+
+        .code-container {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            width: 100%;
+            margin-top: 1.5rem;
+            border: 1px solid #334155;
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: #334155;
+            color: #cbd5e1;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: #475569;
+            transform: scale(1.05);
+        }
+
+        .copy-success {
+            position: absolute;
+            top: 15px;
+            right: 100px;
+            background: var(--accent);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        pre {
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .footer-link {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== PREMIUM CARDS ========== */
+
+        /* Card 1: Glass Profile Card */
+        .glass-profile-card {
+            width: 320px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .glass-profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-profile-card:hover .profile-img {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .profile-role {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .glass-profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Card 2: Product Card with 3D Flip */
+        .product-card {
+            width: 300px;
+            height: 380px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .product-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            border-radius: 1.5rem;
+        }
+
+        .product-card:hover .product-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-front, .product-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+
+        .product-front {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-back {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transform: rotateY(180deg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .product-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-features i {
+            color: var(--accent);
+        }
+
+        /* Card 3: Stats Card with Hover Glow */
+        .stats-card {
+            width: 320px;
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899, #f59e0b);
+            z-index: -1;
+            border-radius: 1.6rem;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stats-card:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .stats-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stats-label {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Card 4: Service Card with Icon Hover */
+        .service-card {
+            width: 320px;
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(to top, rgba(99, 102, 241, 0.2), transparent);
+            transition: height 0.4s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover::after {
+            height: 100%;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(10deg);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-desc {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+
+        .service-link:hover {
+            color: #60a5fa;
+            gap: 0.8rem;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ========== PREMIUM INPUT BOXES ========== */
+
+        /* Input 1: Floating Label Input */
+        .floating-input-group {
+            position: relative;
+            width: 300px;
+            margin: 1rem 0;
+        }
+
+        .floating-input {
+            width: 100%;
+            padding: 1.2rem 1rem 0.8rem;
+            font-size: 1rem;
+            border: 2px solid #334155;
+            border-radius: 0.75rem;
+            background: rgba(30, 41, 59, 0.8);
+            color: white;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .floating-label {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            padding: 0 0.2rem;
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .floating-input:focus,
+        .floating-input:not(:placeholder-shown) {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .floating-input:focus + .floating-label,
+        .floating-input:not(:placeholder-shown) + .floating-label {
+            top: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--primary);
+            background: #0f172a;
+        }
+
+        /* Input 2: Gradient Border Input */
+        .gradient-input-group {
+            position: relative;
+            width: 300px;
+            margin: 1rem 0;
+        }
+
+        .gradient-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            background: rgba(30, 41, 59, 0.8);
+            color: white;
+            transition: all 0.3s ease;
+            outline: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gradient-input-group::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.8rem;
+            padding: 2px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 0;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .gradient-input-group:hover::before,
+        .gradient-input:focus + .gradient-input-group::before {
+            opacity: 1;
+        }
+
+        .gradient-input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            z-index: 2;
+            transition: color 0.3s;
+        }
+
+        .gradient-input:focus + .gradient-input-group .gradient-input-icon {
+            color: var(--primary);
+        }
+
+        .gradient-input:focus {
+            background: rgba(41, 55, 78, 0.9);
+        }
+
+        /* Input 3: Search Input with Animation */
+        .search-container {
+            width: 300px;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.5rem;
+            font-size: 1rem;
+            border: 2px solid #334155;
+            border-radius: 2rem;
+            background: rgba(30, 41, 59, 0.8);
+            color: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            transition: all 0.4s;
+            z-index: 2;
+        }
+
+        .search-input:focus {
+            width: 320px;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            padding-right: 3.5rem;
+        }
+
+        .search-input:focus + .search-icon {
+            color: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+        }
+
+        .search-input:focus ~ .search-btn {
+            transform: translateY(-50%) scale(1);
+            opacity: 1;
+        }
+
+        /* Input 4: Animated Underline Input */
+        .underline-input-group {
+            position: relative;
+            width: 300px;
+            margin: 2rem 0 1rem;
+        }
+
+        .underline-input {
+            width: 100%;
+            padding: 1rem 0;
+            font-size: 1rem;
+            border: none;
+            border-bottom: 2px solid #334155;
+            background: transparent;
+            color: white;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .underline-label {
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            color: #94a3b8;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .underline-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            transition: width 0.4s ease;
+        }
+
+        .underline-input:focus,
+        .underline-input:not(:placeholder-shown) {
+            border-bottom-color: transparent;
+        }
+
+        .underline-input:focus ~ .underline-bar {
+            width: 100%;
+        }
+
+        .underline-input:focus ~ .underline-label,
+        .underline-input:not(:placeholder-shown) ~ .underline-label {
+            top: -0.8rem;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        /* ========== PREMIUM IMAGE STYLES ========== */
+
+        /* Image 1: Hover Zoom with Overlay */
+        .image-zoom-container {
+            width: 300px;
+            height: 200px;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .zoom-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .image-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .image-subtitle {
+            color: #cbd5e1;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .image-zoom-container:hover .zoom-image {
+            transform: scale(1.1);
+        }
+
+        .image-zoom-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .image-zoom-container:hover .image-title,
+        .image-zoom-container:hover .image-subtitle {
+            transform: translateY(0);
+        }
+
+        /* Image 2: Glassmorphism Image Card */
+        .glass-image-card {
+            width: 300px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .glass-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-image-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-image-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-image-card:hover .glass-image {
+            transform: scale(1.05);
+        }
+
+        .glass-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #c084fc;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .glass-image-title {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .glass-image-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Image 3: Parallax Tilt Effect */
+        .tilt-image-container {
+            width: 300px;
+            height: 200px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .tilt-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .tilt-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 30%, rgba(15, 23, 42, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .tilt-icon {
+            font-size: 2.5rem;
+            color: white;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .tilt-image-container:hover .tilt-image {
+            transform: scale(1.1) rotateX(5deg) rotateY(5deg);
+        }
+
+        .tilt-image-container:hover .tilt-overlay {
+            opacity: 1;
+        }
+
+        .tilt-image-container:hover .tilt-icon {
+            transform: scale(1);
+        }
+
+        /* Image 4: Gradient Border Image */
+        .gradient-border-image {
+            width: 280px;
+            height: 180px;
+            padding: 10px;
+            border-radius: 1.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gradient-border-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 1.6rem;
+            padding: 3px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899, #f59e0b);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.7;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .gradient-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1.2rem;
+            filter: brightness(0.9);
+            transition: all 0.4s ease;
+        }
+
+        .gradient-border-image:hover::before {
+            opacity: 1;
+            transform: scale(1.02);
+            animation: rotate 4s linear infinite;
+        }
+
+        .gradient-border-image:hover .gradient-img {
+            filter: brightness(1);
+            transform: scale(1.03);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .ui-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+            
+            .demo-area {
+                min-height: 150px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Premium UI Collection</h1>
+            <p class="subtitle">Uiverse.io inspired premium cards, input boxes, and image styles with stunning hover effects. Copy any component with HTML & CSS code.</p>
+        </header>
+
+        <!-- PREMIUM CARDS SECTION -->
+        <h2 class="section-title"><i class="fas fa-id-card"></i> Premium Cards</h2>
+        <div class="ui-grid">
+            <!-- Card 1 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-user-circle"></i> Glass Profile Card</h3>
+                <p class="ui-desc">Glassmorphism effect with gradient border and hover animation</p>
+                <div class="demo-area">
+                    <div class="glass-profile-card">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=100" alt="Profile" class="profile-img">
+                        <h3 class="profile-name">Alex Morgan</h3>
+                        <p class="profile-role">UI/UX Designer</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value">127</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">4.9</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">2.5k</div>
+                                <div class="stat-label">Followers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code1')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success1">Copied!</div>
+                    <pre id="code1">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-shopping-bag"></i> 3D Flip Product Card</h3>
+                <p class="ui-desc">3D flip effect with product details on back side</p>
+                <div class="demo-area">
+                    <div class="product-card">
+                        <div class="product-inner">
+                            <div class="product-front">
+                                <div class="product-badge">SALE</div>
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Headphones" class="product-img">
+                                <h3 class="product-title">Premium Headphones</h3>
+                                <div class="product-price">$199.99</div>
+                                <p>Hover to see details</p>
+                            </div>
+                            <div class="product-back">
+                                <h3>Product Features</h3>
+                                <ul class="product-features">
+                                    <li><i class="fas fa-check"></i> Noise Cancellation</li>
+                                    <li><i class="fas fa-check"></i> 30hr Battery</li>
+                                    <li><i class="fas fa-check"></i> Wireless</li>
+                                    <li><i class="fas fa-check"></i> Voice Assistant</li>
+                                </ul>
+                                <button style="background:white;color:#6366f1;border:none;padding:0.8rem 1.5rem;border-radius:0.5rem;font-weight:600;cursor:pointer;">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code2')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success2">Copied!</div>
+                    <pre id="code2">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-chart-line"></i> Animated Stats Card</h3>
+                <p class="ui-desc">Gradient border animation with glowing hover effect</p>
+                <div class="demo-area">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stats-value">89.2%</div>
+                        <div class="stats-label">Customer Satisfaction</div>
+                        <div class="stats-change">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5% from last month</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code3')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success3">Copied!</div>
+                    <pre id="code3">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-cogs"></i> Service Card with Icon Hover</h3>
+                <p class="ui-desc">Icon rotation and gradient fill on hover</p>
+                <div class="demo-area">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="service-title">Security</h3>
+                        <p class="service-desc">Enterprise-grade security with end-to-end encryption</p>
+                        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code4')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success4">Copied!</div>
+                    <pre id="code4">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREMIUM INPUT BOXES SECTION -->
+        <h2 class="section-title"><i class="fas fa-keyboard"></i> Premium Input Boxes</h2>
+        <div class="ui-grid">
+            <!-- Input 1 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-text-height"></i> Floating Label Input</h3>
+                <p class="ui-desc">Label animates to top when input is focused</p>
+                <div class="demo-area">
+                    <div class="floating-input-group">
+                        <input type="text" class="floating-input" placeholder=" " id="floatingName">
+                        <label for="floatingName" class="floating-label">Full Name</label>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code5')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success5">Copied!</div>
+                    <pre id="code5">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Input 2 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-border-style"></i> Gradient Border Input</h3>
+                <p class="ui-desc">Animated gradient border with icon</p>
+                <div class="demo-area">
+                    <div class="gradient-input-group">
+                        <input type="email" class="gradient-input" placeholder="Email address">
+                        <div class="gradient-input-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code6')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success6">Copied!</div>
+                    <pre id="code6">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Input 3 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-search"></i> Animated Search Input</h3>
+                <p class="ui-desc">Expands on focus with search button</p>
+                <div class="demo-area">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <div class="search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <button class="search-btn">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code7')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success7">Copied!</div>
+                    <pre id="code7">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Input 4 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-underline"></i> Animated Underline Input</h3>
+                <p class="ui-desc">Gradient underline expands on focus</p>
+                <div class="demo-area">
+                    <div class="underline-input-group">
+                        <input type="password" class="underline-input" placeholder=" " id="underlinePass">
+                        <label for="underlinePass" class="underline-label">Password</label>
+                        <span class="underline-bar"></span>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code8')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success8">Copied!</div>
+                    <pre id="code8">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREMIUM IMAGE STYLES SECTION -->
+        <h2 class="section-title"><i class="fas fa-image"></i> Premium Image Styles</h2>
+        <div class="ui-grid">
+            <!-- Image 1 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-search-plus"></i> Hover Zoom with Overlay</h3>
+                <p class="ui-desc">Image zooms with text overlay animation</p>
+                <div class="demo-area">
+                    <div class="image-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mountain" class="zoom-image">
+                        <div class="image-overlay">
+                            <h4 class="image-title">Mountain Landscape</h4>
+                            <p class="image-subtitle">Beautiful nature photography</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code9')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success9">Copied!</div>
+                    <pre id="code9">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-glass-whiskey"></i> Glassmorphism Image Card</h3>
+                <p class="ui-desc">Frosted glass effect with content</p>
+                <div class="demo-area">
+                    <div class="glass-image-card">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Night Sky" class="glass-image">
+                        <div class="glass-content">
+                            <span class="glass-tag">PHOTOGRAPHY</span>
+                            <h4 class="glass-image-title">Night Sky</h4>
+                            <p class="glass-image-desc">Starry night with beautiful galaxy view</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code10')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success10">Copied!</div>
+                    <pre id="code10">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Image 3 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-expand-alt"></i> Parallax Tilt Effect</h3>
+                <p class="ui-desc">3D tilt effect with center icon</p>
+                <div class="demo-area">
+                    <div class="tilt-image-container">
+                        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="City" class="tilt-image">
+                        <div class="tilt-overlay">
+                            <div class="tilt-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code11')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success11">Copied!</div>
+                    <pre id="code11">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+
+            <!-- Image 4 -->
+            <div class="ui-card">
+                <h3 class="ui-title"><i class="fas fa-border-all"></i> Gradient Border Image</h3>
+                <p class="ui-desc">Rotating gradient border animation</p>
+                <div class="demo-area">
+                    <div class="gradient-border-image">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=280&q=80" alt="Galaxy" class="gradient-img">
+                    </div>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code12')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                    <div class="copy-success" id="success12">Copied!</div>
+                    <pre id="code12">[Full code available - too long for display]</pre>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Premium UI Collection inspired by <a href="https://uiverse.io" class="footer-link" target="_blank">Uiverse.io</a> • All components are ready to use</p>
+            <p style="margin-top: 0.5rem;">Copy the code for any component and customize as needed</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyCode(codeId) {
+            const codeElement = document.getElementById(codeId);
+            const uiCard = codeElement.closest('.ui-card');
+            const demoElement = uiCard.querySelector('.demo-area').innerHTML;
+            const styleElement = getComputedStyle(document.documentElement);
+            
+            // Get CSS for this specific component
+            let cssCode = '';
+            const componentClasses = [];
+            
+            // Find all unique class names in the demo
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = demoElement;
+            const allElements = tempDiv.querySelectorAll('*');
+            
+            allElements.forEach(el => {
+                el.classList.forEach(cls => {
+                    if (!componentClasses.includes(cls) && cls !== 'demo-area') {
+                        componentClasses.push(cls);
+                    }
+                });
+            });
+            
+            // Extract CSS for these classes from style tag
+            const styleTag = document.querySelector('style');
+            const cssText = styleTag.textContent;
+            
+            componentClasses.forEach(cls => {
+                const regex = new RegExp(`\\.${cls}[\\s\\r\\n\\{]*(?:[^{}]*\\{[^}]*\\})*`, 'g');
+                const matches = cssText.match(regex);
+                if (matches) {
+                    matches.forEach(match => {
+                        cssCode += match + '\n\n';
+                    });
+                }
+            });
+            
+            // Create complete code
+            const completeCode = `<!-- HTML -->\n${demoElement}\n\n<!-- CSS -->\n<style>\n${cssCode}\n</style>`;
+            
+            // Copy to clipboard
+            const textArea = document.createElement('textarea');
+            textArea.value = completeCode;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            // Show success message
+            const successId = 'success' + codeId.replace('code', '');
+            const successElement = document.getElementById(successId);
+            successElement.style.opacity = '1';
+            
+            // Hide success message after 2 seconds
+            setTimeout(() => {
+                successElement.style.opacity = '0';
+            }, 2000);
+        }
+        
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to all demo elements
+            const demos = document.querySelectorAll('.demo-area');
+            demos.forEach(demo => {
+                demo.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                demo.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Initialize all inputs
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.05)';
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

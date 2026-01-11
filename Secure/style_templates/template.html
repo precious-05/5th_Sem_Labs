@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Premium Button Templates - Uiverse Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .button-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            background: rgba(41, 55, 78, 0.9);
+        }
+
+        .button-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+            text-align: center;
+        }
+
+        .button-desc {
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            min-height: 2.8rem;
+        }
+
+        .button-demo {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70px;
+            width: 100%;
+        }
+
+        .code-container {
+            background: #0f172a;
+            border-radius: 0.75rem;
+            padding: 1.2rem;
+            width: 100%;
+            margin-top: 1rem;
+            border: 1px solid #334155;
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: #334155;
+            color: #cbd5e1;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #475569;
+        }
+
+        .copy-success {
+            position: absolute;
+            top: 10px;
+            right: 70px;
+            background: #10b981;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.4rem;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        pre {
+            color: #e2e8f0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        .footer-link {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            body {
+                padding: 1rem;
+            }
+        }
+
+        /* Button 1: Gradient Glow */
+        .gradient-glow-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 20px 0 rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .gradient-glow-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px 0 rgba(102, 126, 234, 0.75);
+        }
+
+        /* Button 2: Neomorphic Soft */
+        .neomorphic-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 1rem;
+            background: #e0e5ec;
+            color: #4a5568;
+            cursor: pointer;
+            box-shadow: 10px 10px 20px #bec3c9, -10px -10px 20px #ffffff;
+            transition: all 0.2s ease;
+        }
+        .neomorphic-button:hover {
+            box-shadow: inset 6px 6px 12px #bec3c9, inset -6px -6px 12px #ffffff;
+            color: #2d3748;
+        }
+
+        /* Button 3: Border Gradient */
+        .border-gradient-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 0.75rem;
+            background: #0f172a;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            color: #e2e8f0;
+        }
+        .border-gradient-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.75rem;
+            padding: 3px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+        .border-gradient-button:hover {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        /* Button 4: 3D Press Effect */
+        .button-3d {
+            padding: 1.2rem 2.4rem 1rem 2.4rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.75rem;
+            background: linear-gradient(145deg, #6a11cb, #2575fc);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #4a00e0, 0 12px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.1s ease;
+            position: relative;
+            top: 0;
+        }
+        .button-3d:hover {
+            top: 3px;
+            box-shadow: 0 5px 0 #4a00e0, 0 9px 12px rgba(0, 0, 0, 0.2);
+        }
+        .button-3d:active {
+            top: 8px;
+            box-shadow: 0 0px 0 #4a00e0, 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button 5: Shiny Metallic */
+        .metallic-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.75rem;
+            background: linear-gradient(145deg, #d6d6d6, #ffffff);
+            color: #333;
+            cursor: pointer;
+            box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        .metallic-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.7) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: all 0.7s ease;
+        }
+        .metallic-button:hover::after {
+            left: 100%;
+        }
+
+        /* Button 6: Animated Fill */
+        .fill-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #4299e1;
+            border-radius: 0.75rem;
+            background: transparent;
+            color: #4299e1;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .fill-button span {
+            position: relative;
+            z-index: 2;
+        }
+        .fill-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: #4299e1;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+        .fill-button:hover::before {
+            width: 100%;
+        }
+        .fill-button:hover {
+            color: white;
+        }
+
+        /* Button 7: Glassmorphism */
+        .glass-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Button 8: Icon with Pulse */
+        .pulse-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+        }
+        .pulse-button .icon {
+            width: 1.3rem;
+            height: 1.3rem;
+        }
+        .pulse-button:hover {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(245, 87, 108, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0); }
+        }
+
+        /* Button 9: Split Color Hover */
+        .split-button {
+            padding: 1.1rem 2.2rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 0.75rem;
+            background: linear-gradient(to right, #667eea 50%, #764ba2 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .split-button:hover {
+            background-position: left bottom;
+        }
+        .split-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        .split-button:hover::before {
+            left: 100%;
+        }
+
+        /* Button 10: Modern Rounded */
+        .modern-rounded-button {
+            padding: 1.2rem 2.8rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 2.5rem;
+            background: #10b981;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        .modern-rounded-button:hover {
+            background: #0da271;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px 0 rgba(16, 185, 129, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>10 Premium Button Templates</h1>
+            <p class="subtitle">Uiverse.io style - Copy any button with HTML & CSS code. All buttons are interactive with hover effects.</p>
+        </header>
+
+        <div class="button-grid">
+            <!-- Button 1 -->
+            <div class="button-card">
+                <h3 class="button-title">Gradient Glow Button</h3>
+                <p class="button-desc">Smooth gradient with glowing shadow effect</p>
+                <div class="button-demo">
+                    <button class="gradient-glow-button">Get Premium</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code1')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success1">Copied!</div>
+                    <pre id="code1"><button class="gradient-glow-button">Get Premium</button>
+
+/* CSS */
+.gradient-glow-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 20px 0 rgba(102, 126, 234, 0.5);
+  transition: all 0.3s ease;
+}
+.gradient-glow-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px 0 rgba(102, 126, 234, 0.75);
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 2 -->
+            <div class="button-card">
+                <h3 class="button-title">Neomorphic Soft Button</h3>
+                <p class="button-desc">Modern soft shadow design with inset effect</p>
+                <div class="button-demo">
+                    <button class="neomorphic-button">Upgrade Now</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code2')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success2">Copied!</div>
+                    <pre id="code2"><button class="neomorphic-button">Upgrade Now</button>
+
+/* CSS */
+.neomorphic-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 1rem;
+  background: #e0e5ec;
+  color: #4a5568;
+  cursor: pointer;
+  box-shadow: 10px 10px 20px #bec3c9, -10px -10px 20px #ffffff;
+  transition: all 0.2s ease;
+}
+.neomorphic-button:hover {
+  box-shadow: inset 6px 6px 12px #bec3c9, inset -6px -6px 12px #ffffff;
+  color: #2d3748;
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 3 -->
+            <div class="button-card">
+                <h3 class="button-title">Border Gradient Button</h3>
+                <p class="button-desc">Gradient border with solid fill on hover</p>
+                <div class="button-demo">
+                    <button class="border-gradient-button">Premium Access</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code3')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success3">Copied!</div>
+                    <pre id="code3"><button class="border-gradient-button">Premium Access</button>
+
+/* CSS */
+.border-gradient-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 0.75rem;
+  background: #0f172a;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  color: #e2e8f0;
+}
+.border-gradient-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.75rem;
+  padding: 3px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+.border-gradient-button:hover {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 4 -->
+            <div class="button-card">
+                <h3 class="button-title">3D Press Effect Button</h3>
+                <p class="button-desc">Realistic 3D button that presses down on hover</p>
+                <div class="button-demo">
+                    <button class="button-3d">Buy Now</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code4')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success4">Copied!</div>
+                    <pre id="code4"><button class="button-3d">Buy Now</button>
+
+/* CSS */
+.button-3d {
+  padding: 1.2rem 2.4rem 1rem 2.4rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(145deg, #6a11cb, #2575fc);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #4a00e0, 0 12px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+  position: relative;
+  top: 0;
+}
+.button-3d:hover {
+  top: 3px;
+  box-shadow: 0 5px 0 #4a00e0, 0 9px 12px rgba(0, 0, 0, 0.2);
+}
+.button-3d:active {
+  top: 8px;
+  box-shadow: 0 0px 0 #4a00e0, 0 3px 6px rgba(0, 0, 0, 0.2);
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 5 -->
+            <div class="button-card">
+                <h3 class="button-title">Shiny Metallic Button</h3>
+                <p class="button-desc">Metallic shine effect with moving light reflection</p>
+                <div class="button-demo">
+                    <button class="metallic-button">Exclusive Offer</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code5')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success5">Copied!</div>
+                    <pre id="code5"><button class="metallic-button">Exclusive Offer</button>
+
+/* CSS */
+.metallic-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(145deg, #d6d6d6, #ffffff);
+  color: #333;
+  cursor: pointer;
+  box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.metallic-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: all 0.7s ease;
+}
+.metallic-button:hover::after {
+  left: 100%;
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 6 -->
+            <div class="button-card">
+                <h3 class="button-title">Animated Fill Button</h3>
+                <p class="button-desc">Background fills from left to right on hover</p>
+                <div class="button-demo">
+                    <button class="fill-button"><span>Join Pro</span></button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code6')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success6">Copied!</div>
+                    <pre id="code6"><button class="fill-button"><span>Join Pro</span></button>
+
+/* CSS */
+.fill-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 2px solid #4299e1;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: #4299e1;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.fill-button span {
+  position: relative;
+  z-index: 2;
+}
+.fill-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #4299e1;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+.fill-button:hover::before {
+  width: 100%;
+}
+.fill-button:hover {
+  color: white;
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 7 -->
+            <div class="button-card">
+                <h3 class="button-title">Glassmorphism Button</h3>
+                <p class="button-desc">Frosted glass effect with backdrop blur</p>
+                <div class="button-demo">
+                    <button class="glass-button">Try Premium</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code7')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success7">Copied!</div>
+                    <pre id="code7"><button class="glass-button">Try Premium</button>
+
+/* CSS */
+.glass-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 8 -->
+            <div class="button-card">
+                <h3 class="button-title">Icon with Pulse Animation</h3>
+                <p class="button-desc">Pulsing shadow effect with download icon</p>
+                <div class="button-demo">
+                    <button class="pulse-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/>
+                        </svg>
+                        Download Pro
+                    </button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code8')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success8">Copied!</div>
+                    <pre id="code8"><button class="pulse-button">
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/>
+  </svg>
+  Download Pro
+</button>
+
+/* CSS */
+.pulse-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+}
+.pulse-button .icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+.pulse-button:hover {
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(245, 87, 108, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0); }
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 9 -->
+            <div class="button-card">
+                <h3 class="button-title">Split Color Hover Button</h3>
+                <p class="button-desc">Two-color background that swaps on hover</p>
+                <div class="button-demo">
+                    <button class="split-button">Go Premium</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code9')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success9">Copied!</div>
+                    <pre id="code9"><button class="split-button">Go Premium</button>
+
+/* CSS */
+.split-button {
+  padding: 1.1rem 2.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, #667eea 50%, #764ba2 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  color: white;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+.split-button:hover {
+  background-position: left bottom;
+}
+.split-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+.split-button:hover::before {
+  left: 100%;
+}</pre>
+                </div>
+            </div>
+
+            <!-- Button 10 -->
+            <div class="button-card">
+                <h3 class="button-title">Modern Rounded with Shadow</h3>
+                <p class="button-desc">Elegant rounded button with smooth hover lift</p>
+                <div class="button-demo">
+                    <button class="modern-rounded-button">Subscribe</button>
+                </div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>HTML & CSS Code</span>
+                        <button class="copy-btn" onclick="copyCode('code10')">Copy Code</button>
+                    </div>
+                    <div class="copy-success" id="success10">Copied!</div>
+                    <pre id="code10"><button class="modern-rounded-button">Subscribe</button>
+
+/* CSS */
+.modern-rounded-button {
+  padding: 1.2rem 2.8rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 2.5rem;
+  background: #10b981;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.4);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+.modern-rounded-button:hover {
+  background: #0da271;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px 0 rgba(16, 185, 129, 0.5);
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>All buttons are inspired by <a href="https://uiverse.io" class="footer-link" target="_blank">Uiverse.io</a> style - Free for personal and commercial use</p>
+            <p style="margin-top: 0.5rem;">Simply copy the HTML & CSS code to use in your projects</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyCode(codeId) {
+            const codeElement = document.getElementById(codeId);
+            const codeText = codeElement.textContent;
+            
+            // Create temporary textarea for copying
+            const textArea = document.createElement('textarea');
+            textArea.value = codeText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            // Show success message
+            const successId = 'success' + codeId.replace('code', '');
+            const successElement = document.getElementById(successId);
+            successElement.style.opacity = '1';
+            
+            // Hide success message after 2 seconds
+            setTimeout(() => {
+                successElement.style.opacity = '0';
+            }, 2000);
+        }
+        
+        // Add hover effect to all demo buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.button-demo button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
