@@ -88,3 +88,4 @@
 2026-01-11 17:39:26,315 - __main__ - INFO - Found 2 results for pattern: openfda.brand_name:"Zovirax"
 2026-01-11 17:39:26,349 - __main__ - INFO - Stored new drug: Zovirax (Antiviral)
 2026-01-11 17:39:26,455 - __main__ - INFO - Analyzed Zovirax against 27 drugs, found 0 risks
+2026-01-14 18:18:35,281 - __main__ - INFO - Database tables created/verified successfully

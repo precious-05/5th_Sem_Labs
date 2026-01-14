@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays,Objects,Strings</title>
+</head>
+<body>
+    <h2>student information</h2>
+    <p id="output"></p>
+    <button onclick="showStudent()">Show student data</button>
+</body>
+
+
+<script>
+    let subjects=["ADBMS","AP","WEB TECH"]
+    //Array methods
+    subjects.push("Networking");
+    subjects.pop()  // removing last element
+    
+
+
+
+    //Objects
+    let student=
+    {
+        name: "Ali",
+        marks: [10,20,30],
+        greet: function(){
+            return "Hello"+this.name;
+        }
+
+    }
+
+
+
+    function showStudent()
+    {
+        let total=0;
+        for(let i=1; i<student.marks.length; i++)
+        {
+            total=total+students.marks[i];
+        }
+
+
+        let course = "Web Technologies";
+        
+    }
+
+    
+</script>
+</html>

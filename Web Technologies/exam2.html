@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result System</title>
+</head>
+<body>
+    <h2>Student Information</h2>
+    <p id="output">Result will appear here </p>
+</body>
+
+
+<script>
+    /*Variables and Data Types*/
+    const university = "University of Layyah";
+    let studentName = "Ali";
+    let marks=75;
+    let age=18;
+    var city ="Layyah";
+    let hasID = true;
+    let grades;
+    let remarks=null;
+    
+//Function Non-Primitive Data Type
+function checkResult()
+{
+    let BonusMarks=15;
+    marks = marks+BonusMarks;
+    marks+=0;
+
+    //Control Structures
+    // Logical + Comparison operators
+    if (marks >= 50 && hasID === true) {
+
+        // if-else ladder
+        if (marks >= 80) {
+            grade = "A";
+        } 
+        else if (marks >= 60) {
+            grade = "B";
+        } 
+        else {
+            grade = "C";
+        }
+
+        remarks = "Pass";
+
+    } else {
+        grade = "F";
+        remarks = "Fail";
+    }
+
+
+    //DOM MANIPULATION
+    document.getElementById("Output").innerHTML=
+     "University: " + university + "<br>" +
+        "Name: " + studentName + "<br>" +
+        "City: " + city + "<br>" +
+        "Age: " + age + "<br>" +
+        "Marks: " + marks + "<br>" +
+        "Grade: " + grade + "<br>" +
+        "Status: " + remarks;
+}
+
+// for loop syntax
+for(let i=1; i<=10; i++)
+{
+
+}
+
+// while loop
+while(i<10)
+{
+    i++;
+}
+
+do{
+
+}
+while(i<10);
+
+
+
+
+
+
+
+
+</script>
+</html>

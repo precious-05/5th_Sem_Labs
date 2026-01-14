@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Styles & Events Practice</title>
+    <style>
+        .active {
+            color: white;
+            background-color: green;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+        #box {
+            width: 200px;
+            height: 100px;
+            background-color: lightgray;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">Box</div>
+
+<button id="styleBtn">Change Style</button>
+<button id="classBtn">Toggle Active Class</button>
+<button id="addParaBtn">Add Paragraph</button>
+<button id="removeParaBtn">Remove Paragraph</button>
+
+<br><br>
+
+<form id="myForm">
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+// 1. Change CSS styles dynamically
+document.getElementById("styleBtn").addEventListener("click", function() {
+    let box = document.getElementById("box");
+    box.style.color = "white";
+    box.style.backgroundColor = "blue";
+    box.style.padding = "20px";
+    box.style.fontSize = "24px";
+});
+
+
+
+
+
+
+
+// 2. Toggle CSS class
+document.getElementById("classBtn").addEventListener("click", function() {
+    let box = document.getElementById("box");
+    box.classList.toggle("active");
+});
+
+// 3. Create and append a paragraph
+let para;
+document.getElementById("addParaBtn").addEventListener("click", function() {
+    if (!para) {
+        para = document.createElement("p");
+        para.innerText = "This paragraph was created dynamically!";
+        document.body.appendChild(para);
+    }
+});
+
+// 4. Remove paragraph
+document.getElementById("removeParaBtn").addEventListener("click", function() {
+    if (para) {
+        para.remove();
+        para = null;
+    }
+});
+
+// 5. Form validation on submit
+document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent form submission to server
+
+    let input = document.getElementById("username");
+    if (input.value.trim() === "") {
+        alert("Field is required");
+        input.focus();
+    } else {
+        alert("Welcome, " + input.value + "!");
+        input.value = ""; // reset field
+    }
+});
+</script>
+
+</body>
+</html>

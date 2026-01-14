@@ -1,8 +1,4 @@
-"""
-MediNomix - Backend API v2.1
-FULL VERSION with ALL required APIs for frontend
-Added: /api/top-risks, /api/risk-breakdown, /api/heatmap, /api/realtime-events
-"""
+
 
 from fastapi import FastAPI, HTTPException, Depends, Query, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,6 +17,8 @@ import aiohttp
 import time
 import random
 from collections import defaultdict
+import warnings
+warnings.filterwarnings("ignore")
 
 # ==================== DATABASE CONFIGURATION ====================
 DATABASE_URL = "postgresql://postgres:PRO_CODER#1@localhost:5432/confusionguard"
@@ -32,28 +30,14 @@ app = FastAPI(
     version="2.1.0"
 )
 
-# Middlewear ka kam ha har request par common kaam automatically karna
 # CORS middleware
-# Middleware = To check if the user is logged in or not
-# To modify the requests
-# Ek asa function hta ha middleware jo har request or response se phly run hta ha 
-# Request headers ko check kr k ye authentication krwa skta ha 
-# Order is important in middleware
-# -------------------- Types of middleware ---------------------------------
-# 1. Application Level 2. Router Level 3. Error hanlding  4. Built-in  5. Third-Party middleware
-
-# Here Server is saying
-# Koi bhi website, kisi bhi method (POST/DELETE etc) se, kisi bhi headers ke sath, meri API call kar sakti hai
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # allow_origins=["http://localhost:3000"],
-    allow_credentials=True, 
-    allow_methods=["*"],       #allow_methods=["GET"],
-    allow_headers=["*"],  #allow_headers=["Content-Type"],   # Headers = request ke sath bheji jane wali extra information  
-                                                            # Body = actual data  , Headers = data ka label / instructions
-
-    )
-
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Database setup
 try:

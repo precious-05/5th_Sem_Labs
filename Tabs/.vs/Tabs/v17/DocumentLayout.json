@@ -7,11 +7,11 @@
       "RelativeMoniker": "D:0:0:{0F98F58E-8A8E-4483-BC82-FDE057F59654}|Tabs.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F98F58E-8A8E-4483-BC82-FDE057F59654}|Tabs.csproj|i:\\5th_sem_labs\\tabs\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0F98F58E-8A8E-4483-BC82-FDE057F59654}|Tabs.csproj|I:\\5th_Sem_Labs\\Tabs\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0F98F58E-8A8E-4483-BC82-FDE057F59654}|Tabs.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F98F58E-8A8E-4483-BC82-FDE057F59654}|Tabs.csproj|i:\\5th_sem_labs\\tabs\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0F98F58E-8A8E-4483-BC82-FDE057F59654}|Tabs.csproj|I:\\5th_Sem_Labs\\Tabs\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F98F58E-8A8E-4483-BC82-FDE057F59654}|Tabs.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -47,8 +47,7 @@
               "RelativeToolTip": "Form1.Designer.cs",
               "ViewState": "AgIAAO0AAAAAAAAAAAAAwPUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-22T05:14:59.566Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-22T05:14:59.566Z"
             },
             {
               "$type": "Document",
@@ -58,7 +57,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "I:\\5th_Sem_Labs\\Tabs\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAAAIUAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-22T04:22:30.257Z",
               "EditorCaption": ""

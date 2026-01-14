@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Functions Practice</title>
+</head>
+<body>
+
+<button onclick="startProgram()">Run Program</button>
+
+<script>
+
+/* =================================
+   1. FUNCTION DECLARATION
+================================= */
+
+// Simple function (no parameters)
+function greetStudent() {
+    console.log("Welcome to JavaScript Functions");
+}
+
+
+
+/* =================================
+   2. FUNCTION WITH PARAMETERS
+================================= */
+
+function addMarks(marks1, marks2) {
+    console.log("Total Marks:", marks1 + marks2);
+}
+
+
+/* =================================
+   3. FUNCTION WITH RETURN VALUE
+================================= */
+
+function calculatePercentage(obtained, total) {
+    return (obtained / total) * 100;
+}
+
+
+
+/* =================================
+   4. FUNCTION EXPRESSION
+================================= */
+
+let checkPass = function (percentage) {
+    if (percentage >= 50) {
+        return "Pass";
+    } else {
+        return "Fail";
+    }
+};
+
+
+/* =================================
+   MAIN CONTROLLER FUNCTION
+================================= */
+
+function startProgram() {
+
+    greetStudent();   // Function call
+
+    addMarks(40, 35); // Parameters
+
+    let percent = calculatePercentage(75, 100); // Return value
+    console.log("Percentage:", percent);
+
+    let result = checkPass(percent); // Function expression
+    console.log("Result:", result);
+}
+
+</script>
+
+</body>
+</html>
