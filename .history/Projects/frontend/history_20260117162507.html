@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History - ThyroAssess AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- API Configuration -->
+    <script>
+        window.API_BASE_URL = 'http://localhost:8000';
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h1>ThyroAssess <span class="ai-text">AI</span></h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="predict.html"><i class="fas fa-brain"></i> Predict</a>
+                <a href="history.html" class="active"><i class="fas fa-history"></i> History</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">
+                    <span class="gradient-text">Prediction</span> History
+                </h1>
+                <p class="page-subtitle">
+                    Track and manage all your previous thyroid risk assessments
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main History Section -->
+    <section class="history-main">
+        <div class="container">
+            <!-- Controls & Filters -->
+            <div class="history-controls">
+                <div class="controls-left">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="historySearch" placeholder="Search predictions...">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="filterRisk" class="filter-select">
+                            <option value="">All Risk Levels</option>
+                            <option value="low">Low Risk (0-30%)</option>
+                            <option value="medium">Medium Risk (31-69%)</option>
+                            <option value="high">High Risk (70-100%)</option>
+                        </select>
+                        
+                        <select id="filterPrediction" class="filter-select">
+                            <option value="">All Predictions</option>
+                            <option value="benign">Benign Only</option>
+                            <option value="malignant">Malignant Only</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="controls-right">
+                    <button id="refreshHistory" class="btn-secondary btn-icon">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                    
+                    <button id="exportHistory" class="btn-secondary btn-icon">
+                        <i class="fas fa-file-export"></i>
+                        Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="history-summary">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-chart-column"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="totalCount">0</h3>
+                        <p>Total Predictions</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="benignCount">0</h3>
+                        <p>Benign Cases</p>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="malignantCount">0</h3>
+                        <p>Malignant Cases</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="history-table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Patient Info</th>
+                            <th>Risk Score</th>
+                            <th>Prediction</th>
+                            <th>Key Factors</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- Loading State -->
+                        <tr id="historyLoading" class="loading-row">
+                            <td colspan="6">
+                                <div class="loading-state">
+                                    <div class="loading-spinner">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                    </div>
+                                    <p>Loading prediction history...</p>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Empty State (Hidden initially) -->
+                        <tr id="historyEmpty" class="empty-row hidden">
+                            <td colspan="6">
+                                <div class="empty-state">
+                                    <div class="empty-icon">
+                                        <i class="fas fa-history"></i>
+                                    </div>
+                                    <h3>No Prediction History</h3>
+                                    <p>Make your first prediction to see history here</p>
+                                    <a href="predict.html" class="btn-primary">
+                                        <i class="fas fa-brain"></i>
+                                        Make First Prediction
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- No Data Message (for filtered results) -->
+            <div class="no-data-message hidden" id="noDataMessage">
+                <i class="fas fa-search"></i>
+                <h4>No matching records found</h4>
+                <p>Try adjusting your filters</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Detail Modal (updated to match JS alert) -->
+    <div class="simple-modal hidden" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Prediction Details</h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent">
+                    <!-- Details will be shown here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>ThyroAssess <span class="ai-text">AI</span></h3>
+                    </div>
+                    <p class="footer-tagline">
+                        Advanced AI-Powered Thyroid Disease Prediction System
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="predict.html"><i class="fas fa-chevron-right"></i> Predict</a></li>
+                        <li><a href="history.html"><i class="fas fa-chevron-right"></i> History</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2024 ThyroAssess AI - University Semester Project</p>
+                    <p class="version">Version 2.0</p>
+                </div>
+                
+                <div class="disclaimer-note">
+                    <p>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Disclaimer:</strong> For educational purposes only.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/history.js"></script>
+    <script>
+        // Simple modal close function
+        function closeModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

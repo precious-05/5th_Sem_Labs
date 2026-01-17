@@ -89,3 +89,19 @@
 2026-01-11 17:39:26,349 - __main__ - INFO - Stored new drug: Zovirax (Antiviral)
 2026-01-11 17:39:26,455 - __main__ - INFO - Analyzed Zovirax against 27 drugs, found 0 risks
 2026-01-14 18:18:35,281 - __main__ - INFO - Database tables created/verified successfully
+2026-01-14 23:44:11,044 - __main__ - INFO - Database tables created/verified successfully
+2026-01-14 23:50:03,046 - __main__ - INFO - Fetching from OpenFDA: Klonopin
+2026-01-14 23:50:05,501 - __main__ - INFO - Found 1 results for pattern: openfda.brand_name:"Klonopin"
+2026-01-14 23:50:05,556 - __main__ - INFO - Stored new drug: Klonopin (Benzodiazepine)
+2026-01-14 23:50:05,733 - __main__ - INFO - Analyzed Klonopin against 28 drugs, found 1 risks
+ 2026-01-15 11:44:46,657 - __main__ - INFO - Database tables created/verified successfully
+2026-01-15 11:45:31,847 - __main__ - INFO - Database tables created/verified successfully
+2026-01-15 12:28:42,282 - __main__ - INFO - Fetching from OpenFDA: Adderall
+2026-01-15 12:28:45,812 - __main__ - INFO - Found 2 results for pattern: openfda.brand_name:"Adderall"
+2026-01-15 12:28:45,886 - __main__ - INFO - Stored new drug: Adderall XR ()
+2026-01-15 12:28:46,067 - __main__ - INFO - Analyzed Adderall XR against 29 drugs, found 1 risks
+2026-01-15 12:33:15,965 - __main__ - INFO - Fetching from OpenFDA: Asad
+2026-01-15 12:33:23,987 - __main__ - WARNING - No results from OpenFDA for: Asad
+2026-01-15 12:33:23,987 - __main__ - WARNING - No results from OpenFDA for: Asad
+2026-01-15 12:33:23,988 - __main__ - WARNING - Drug not found: Asad. Creating placeholder.
+2026-01-15 12:33:24,125 - __main__ - INFO - Analyzed Asad against 30 drugs, found 0 risks

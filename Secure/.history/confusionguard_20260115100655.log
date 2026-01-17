@@ -1,0 +1,97 @@
+2025-12-29 13:45:15,436 - __main__ - INFO - New WebSocket connection. Total: 1
+2025-12-29 13:45:41,971 - __main__ - INFO - New WebSocket connection. Total: 2
+2025-12-29 13:45:42,235 - __main__ - INFO - New WebSocket connection. Total: 3
+2025-12-29 13:45:53,164 - __main__ - INFO - New WebSocket connection. Total: 4
+2025-12-29 13:45:57,347 - __main__ - INFO - New WebSocket connection. Total: 5
+2025-12-29 13:46:18,540 - __main__ - INFO - New WebSocket connection. Total: 6
+2025-12-29 13:46:21,401 - __main__ - INFO - New WebSocket connection. Total: 7
+2025-12-29 13:46:51,137 - __main__ - INFO - New WebSocket connection. Total: 8
+2025-12-29 13:47:06,423 - __main__ - INFO - New WebSocket connection. Total: 9
+2025-12-29 13:47:06,649 - __main__ - INFO - New WebSocket connection. Total: 10
+2025-12-29 13:47:18,635 - __main__ - INFO - New WebSocket connection. Total: 11
+2025-12-29 13:47:18,904 - __main__ - INFO - Fetching from OpenFDA: Alprazolam
+2025-12-29 13:47:23,237 - __main__ - INFO - Found 5 results for pattern: openfda.brand_name:"Alprazolam"
+2025-12-29 13:47:25,912 - __main__ - INFO - New WebSocket connection. Total: 12
+2025-12-29 13:47:36,107 - __main__ - INFO - New WebSocket connection. Total: 13
+2025-12-29 13:47:42,674 - __main__ - INFO - New WebSocket connection. Total: 14
+2025-12-29 13:49:40,239 - __main__ - INFO - WebSocket disconnected. Total: 13
+2025-12-29 13:49:40,263 - __main__ - INFO - WebSocket disconnected. Total: 12
+2025-12-29 13:49:40,274 - __main__ - INFO - WebSocket disconnected. Total: 11
+2025-12-29 13:49:40,277 - __main__ - INFO - WebSocket disconnected. Total: 10
+2025-12-29 13:49:40,280 - __main__ - INFO - WebSocket disconnected. Total: 9
+2025-12-29 13:49:40,288 - __main__ - INFO - WebSocket disconnected. Total: 8
+2025-12-29 13:49:40,289 - __main__ - INFO - WebSocket disconnected. Total: 7
+2025-12-29 13:49:40,291 - __main__ - INFO - WebSocket disconnected. Total: 6
+2025-12-29 13:49:40,291 - __main__ - INFO - WebSocket disconnected. Total: 5
+2025-12-29 13:49:40,293 - __main__ - INFO - WebSocket disconnected. Total: 4
+2025-12-29 13:49:40,294 - __main__ - INFO - WebSocket disconnected. Total: 3
+2025-12-29 13:49:40,296 - __main__ - INFO - WebSocket disconnected. Total: 2
+2025-12-29 13:49:40,298 - __main__ - INFO - WebSocket disconnected. Total: 1
+2025-12-29 13:49:40,299 - __main__ - INFO - WebSocket disconnected. Total: 0
+2025-12-29 13:59:51,524 - __main__ - INFO - New WebSocket connection. Total: 1
+2025-12-29 14:01:06,485 - __main__ - INFO - New WebSocket connection. Total: 2
+2025-12-29 14:01:06,835 - __main__ - INFO - Fetching from OpenFDA: Baccy
+2025-12-29 14:01:16,331 - __main__ - WARNING - No results from OpenFDA for: Baccy
+2025-12-29 14:01:16,333 - __main__ - WARNING - No results from OpenFDA for: Baccy
+2025-12-29 14:01:16,340 - __main__ - WARNING - Drug not found: Baccy. Creating placeholder.
+2025-12-29 14:01:19,023 - __main__ - INFO - New WebSocket connection. Total: 3
+2025-12-29 14:01:28,823 - __main__ - INFO - New WebSocket connection. Total: 4
+2025-12-29 14:01:31,509 - __main__ - INFO - New WebSocket connection. Total: 5
+2025-12-29 14:01:41,508 - __main__ - INFO - New WebSocket connection. Total: 6
+2025-12-29 14:01:48,677 - __main__ - INFO - New WebSocket connection. Total: 7
+2025-12-29 14:01:59,780 - __main__ - INFO - New WebSocket connection. Total: 8
+2025-12-29 14:01:59,896 - __main__ - INFO - New WebSocket connection. Total: 9
+2025-12-29 14:02:00,124 - __main__ - INFO - New WebSocket connection. Total: 10
+2025-12-29 14:02:13,744 - __main__ - INFO - New WebSocket connection. Total: 11
+2025-12-29 14:02:13,793 - __main__ - INFO - New WebSocket connection. Total: 12
+2025-12-29 14:02:13,943 - __main__ - INFO - New WebSocket connection. Total: 13
+2026-01-10 12:21:45,776 - __main__ - INFO - Database tables created/verified successfully
+2026-01-10 12:40:26,046 - __main__ - INFO - New WebSocket connection. Total: 1
+2026-01-10 12:44:14,398 - __main__ - INFO - Database tables created/verified successfully
+2026-01-10 12:44:51,974 - __main__ - INFO - New WebSocket connection. Total: 1
+2026-01-10 13:00:21,505 - __main__ - INFO - WebSocket disconnected. Total: 0
+2026-01-10 13:10:11,144 - __main__ - INFO - Database tables created/verified successfully
+2026-01-10 13:11:40,909 - __main__ - INFO - Fetching from OpenFDA: ciprofloxacin
+2026-01-10 13:11:56,276 - __main__ - INFO - Found 5 results for pattern: openfda.brand_name:"ciprofloxacin"
+2026-01-10 13:11:56,337 - __main__ - INFO - Stored new drug: ciprofloxacin (Antibiotic)
+2026-01-10 13:11:56,464 - __main__ - INFO - Analyzed ciprofloxacin against 20 drugs, found 0 risks
+2026-01-10 13:12:49,622 - __main__ - INFO - Fetching from OpenFDA: Sumatriptan
+2026-01-10 13:12:59,430 - __main__ - INFO - Found 5 results for pattern: openfda.brand_name:"Sumatriptan"
+2026-01-10 13:12:59,456 - __main__ - INFO - Stored new drug: Sumatriptan ()
+2026-01-10 13:12:59,573 - __main__ - INFO - Analyzed Sumatriptan against 21 drugs, found 0 risks
+2026-01-10 13:14:45,632 - __main__ - INFO - Fetching from OpenFDA: Calamox
+2026-01-10 13:15:15,317 - __main__ - WARNING - OpenFDA API request timed out
+2026-01-10 13:15:15,318 - __main__ - WARNING - No results from OpenFDA for: Calamox
+2026-01-10 13:15:15,320 - __main__ - WARNING - Drug not found: Calamox. Creating placeholder.
+2026-01-10 13:15:15,513 - __main__ - INFO - Analyzed Calamox against 22 drugs, found 1 risks
+2026-01-10 13:18:58,911 - __main__ - INFO - Fetching from OpenFDA: Clopidogrel
+2026-01-10 13:19:10,398 - __main__ - ERROR - Error searching OpenFDA: Cannot connect to host api.fda.gov:443 ssl:default [getaddrinfo failed]
+2026-01-10 13:19:10,407 - __main__ - WARNING - No results from OpenFDA for: Clopidogrel
+2026-01-10 13:19:10,409 - __main__ - WARNING - Drug not found: Clopidogrel. Creating placeholder.
+2026-01-10 13:19:10,587 - __main__ - INFO - Analyzed Clopidogrel against 23 drugs, found 2 risks2026-01-10 15:16:51,355 - __main__ - INFO - Database tables created/verified successfully
+2026-01-10 21:18:11,333 - __main__ - INFO - Fetching from OpenFDA: Inderal
+2026-01-10 21:18:15,963 - __main__ - INFO - Found 2 results for pattern: openfda.brand_name:"Inderal"
+2026-01-10 21:18:16,044 - __main__ - INFO - Stored new drug: INDERAL LA ()
+2026-01-10 21:18:16,128 - __main__ - INFO - Analyzed INDERAL LA against 24 drugs, found 0 risks
+2026-01-10 21:18:55,861 - __main__ - INFO - Fetching from OpenFDA: propanalol
+2026-01-10 21:19:04,081 - __main__ - WARNING - No results from OpenFDA for: propanalol
+2026-01-10 21:19:04,081 - __main__ - WARNING - No results from OpenFDA for: propanalol
+2026-01-10 21:19:04,082 - __main__ - WARNING - Drug not found: propanalol. Creating placeholder.
+2026-01-10 21:19:04,209 - __main__ - INFO - Analyzed Propanalol against 25 drugs, found 0 risks
+2026-01-10 21:26:25,517 - __main__ - INFO - Fetching from OpenFDA: Imodium
+2026-01-10 21:26:29,626 - __main__ - INFO - Found 4 results for pattern: openfda.brand_name:"Imodium"
+2026-01-10 21:26:29,657 - __main__ - INFO - Stored new drug: Imodium A-D ()
+2026-01-10 21:26:29,834 - __main__ - INFO - Analyzed Imodium A-D against 26 drugs, found 1 risks
+2026-01-11 17:12:03,470 - __main__ - INFO - Database tables created/verified successfully
+2026-01-11 17:38:37,233 - __main__ - INFO - Database tables created/verified successfully
+2026-01-11 17:39:23,139 - __main__ - INFO - Fetching from OpenFDA: Zovirax
+2026-01-11 17:39:26,315 - __main__ - INFO - Found 2 results for pattern: openfda.brand_name:"Zovirax"
+2026-01-11 17:39:26,349 - __main__ - INFO - Stored new drug: Zovirax (Antiviral)
+2026-01-11 17:39:26,455 - __main__ - INFO - Analyzed Zovirax against 27 drugs, found 0 risks
+2026-01-14 18:18:35,281 - __main__ - INFO - Database tables created/verified successfully
+2026-01-14 23:44:11,044 - __main__ - INFO - Database tables created/verified successfully
+2026-01-14 23:50:03,046 - __main__ - INFO - Fetching from OpenFDA: Klonopin
+2026-01-14 23:50:05,501 - __main__ - INFO - Found 1 results for pattern: openfda.brand_name:"Klonopin"
+2026-01-14 23:50:05,556 - __main__ - INFO - Stored new drug: Klonopin (Benzodiazepine)
+2026-01-14 23:50:05,733 - __main__ - INFO - Analyzed Klonopin against 28 drugs, found 1 risks
+ 
